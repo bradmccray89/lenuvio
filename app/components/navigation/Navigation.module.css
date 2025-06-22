@@ -1,0 +1,325 @@
+@reference "tailwindcss";
+/* Main Navigation Container */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navScrolled {
+  margin: 16px;
+}
+
+.navDefault {
+  margin: 0;
+}
+
+/* Navigation Background */
+.navBackground {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.backgroundScrolled {
+  border-radius: 16px;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.1);
+}
+
+.backgroundDefault {
+  border-radius: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+/* Animated Background Pattern */
+.animatedBackground {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 182, 212, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(59, 130, 246, 0.1) 100%
+  );
+}
+
+.mouseGlow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Navigation Content */
+.navContent {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.navInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Section */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  position: relative;
+}
+
+.logoIconInner {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+  padding: 8px;
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.25);
+}
+
+.logoIconContent {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIconDot {
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.logoPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  opacity: 0.2;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTitle {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.025em;
+}
+
+.logoUnderline {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #22d3ee 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* Desktop Navigation */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: block;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: #cbd5e1;
+  background-color: transparent;
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.navLinkActive {
+  color: #a5f3fc;
+  background-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.25);
+}
+
+.navLinkText {
+  position: relative;
+  z-index: 10;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: #22d3ee;
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* CTA Button */
+.ctaContainer {
+  margin-left: 32px;
+  position: relative;
+}
+
+.ctaButton {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%);
+  color: white;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.4);
+  background: linear-gradient(90deg, #22d3ee 0%, #3b82f6 100%);
+}
+
+.ctaButtonText {
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+  position: relative;
+  padding: 12px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.mobileMenuButton:hover {
+  background-color: rgba(51, 65, 85, 0.5);
+  color: #ffffff;
+}
+
+.hamburgerIcon {
+  @apply h-10 w-10 flex flex-col justify-center items-center;
+}
+
+.hamburgerLine {
+  @apply block h-1 w-8 bg-current rounded-sm;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburgerLine:nth-child(2) {
+  margin-top: 4px;
+}
+
+.hamburgerLine:nth-child(3) {
+  margin-top: 4px;
+}
+
+.hamburgerLineOpen:nth-child(1) {
+  @apply rotate-[45deg] translate-y-[8px];
+}
+
+.hamburgerLineOpen:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerLineOpen:nth-child(3) {
+  @apply rotate-[-45deg] translate-y-[-8px];
+}
+
+/* Bottom Border */
+.bottomBorder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+/* Responsive Styles */
+@media (max-width: 1023px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktopNav {
+    display: flex;
+  }
+
+  .mobileMenuButton {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

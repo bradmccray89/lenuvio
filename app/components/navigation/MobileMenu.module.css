@@ -1,0 +1,412 @@
+/* MobileMenu.module.css */
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  z-index: 40;
+  animation: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdropOpen {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Mobile Menu Container */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 320px;
+  z-index: 50;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.mobileMenuOpen {
+  transform: translateX(0);
+}
+
+/* Menu Background */
+.menuBackground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(71, 85, 105, 0.3);
+  overflow: hidden;
+}
+
+/* Animated Background Pattern */
+.menuBackgroundPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.2) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(59, 130, 246, 0.2) 100%
+  );
+}
+
+.menuBackgroundOrbs {
+  position: absolute;
+  inset: 0;
+}
+
+.orb1 {
+  position: absolute;
+  top: 20%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(6, 182, 212, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.orb2 {
+  position: absolute;
+  bottom: 30%;
+  left: -30%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite reverse;
+}
+
+/* Menu Content */
+.menuContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px 24px;
+  z-index: 10;
+  transform: translateX(30px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.1s;
+}
+
+.menuContentOpen {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Header Section */
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+  padding-top: 24px;
+}
+
+.menuLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuLogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.menuLogoIcon::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 2px;
+}
+
+.menuLogoIcon::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+  opacity: 0.3;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: -1;
+}
+
+.menuLogoText {
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.closeButton {
+  position: relative;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.closeButton:hover {
+  background: rgba(51, 65, 85, 0.7);
+  color: #ffffff;
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+.closeButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.5);
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.closeButton:hover .closeIcon {
+  transform: rotate(90deg);
+}
+
+/* Navigation Section */
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.menuNavItem {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: var(--delay, 0s);
+}
+
+.menuNavItemOpen {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.menuNavLink {
+  display: block;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.menuNavLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px 0 0 12px;
+}
+
+.menuNavLink:hover {
+  background: rgba(6, 182, 212, 0.1);
+  color: #22d3ee;
+  border-color: rgba(6, 182, 212, 0.2);
+  transform: translateX(8px);
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1);
+}
+
+.menuNavLink:hover::before {
+  width: 4px;
+}
+
+.menuNavText {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuNavText::after {
+  content: '→';
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+.menuNavLink:hover .menuNavText::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Footer Section */
+.menuFooter {
+  margin-top: auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(71, 85, 105, 0.2);
+}
+
+.menuCta {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menuCta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menuCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+}
+
+.menuCta:hover::before {
+  left: 100%;
+}
+
+.menuCtaText {
+  position: relative;
+  z-index: 2;
+}
+
+.menuContentAnimated {
+  transform: translateX(20px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.1s;
+}
+
+.menuContentAnimatedOpen {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Add staggered animation for nav items: */
+.menuNavItemAnimated {
+  transform: translateX(30px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menuNavItemAnimated:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.menuNavItemAnimated:nth-child(2) {
+  transition-delay: 0.25s;
+}
+.menuNavItemAnimated:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.menuNavItemAnimated:nth-child(4) {
+  transition-delay: 0.35s;
+}
+.menuNavItemAnimated:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.menuNavItemAnimatedOpen {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .backdrop,
+  .mobileMenu {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}

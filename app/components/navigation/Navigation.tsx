@@ -3,10 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
-import { NavLink } from './NavLink';
 import { MobileMenu } from './MobileMenu';
-import { Button } from '@/app/components/ui/Button';
-import { cn } from '@/app/lib/utils';
+import styles from './Navigation.module.css';
 
 const navigationItems: NavItem[] = [
   { label: 'Home', href: '#home', id: 'home' },
@@ -18,7 +16,18 @@ const navigationItems: NavItem[] = [
 export const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScrollPosition();
+
+  // Track mouse position for glow effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const sections = navigationItems.map((item) => item.id);
@@ -54,62 +63,124 @@ export const Navigation: React.FC = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isMobileMenuOpen]);
 
-  const isScrolled = scrollY > 50;
+  const isScrolled = scrollY > 20;
+
+  const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
 
   return (
     <>
+      {/* Floating Navigation Bar */}
       <nav
-        className={cn(
-          'fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-custom border-b border-theme',
-          isScrolled ? 'nav-scrolled py-3 shadow-lg' : 'nav-default py-4'
-        )}
-        role='navigation'
-        aria-label='Main navigation'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <div className='flex justify-between items-center'>
-            {/* Logo */}
-            <div className='text-2xl font-bold gradient-text'>Lenuvio</div>
-
-            {/* Desktop Navigation */}
-            <div className='hidden md:flex items-center space-x-8'>
-              {navigationItems.map((item) => (
-                <NavLink
-                  key={item.id}
-                  href={item.href}
-                  isActive={activeSection === item.id}>
-                  {item.label}
-                </NavLink>
-              ))}
-
-              <Button variant='primary' size='sm'>
-                Get Started
-              </Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className='md:hidden text-theme-secondary hover:text-theme-primary p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/50 rounded'
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label='Toggle mobile menu'
-              aria-expanded={isMobileMenuOpen}>
-              <svg
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d={
-                    isMobileMenuOpen
-                      ? 'M6 18L18 6M6 6l12 12'
-                      : 'M4 6h16M4 12h16M4 18h16'
-                  }
-                />
-              </svg>
-            </button>
+        className={`${styles.nav} ${
+          isScrolled ? styles.navScrolled : styles.navDefault
+        }`}>
+        {/* Background with glassmorphism effect */}
+        <div
+          className={`${styles.navBackground} ${
+            isScrolled ? styles.backgroundScrolled : styles.backgroundDefault
+          }`}>
+          {/* Animated background pattern */}
+          <div className={styles.animatedBackground}>
+            <div className={styles.gradientOverlay} />
+            <div
+              className={styles.mouseGlow}
+              style={{
+                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(14, 165, 233, 0.05), transparent 40%)`,
+              }}
+            />
           </div>
+
+          {/* Navigation content */}
+          <div className={styles.navContent}>
+            <div className={styles.navInner}>
+              {/* Logo with tech effect */}
+              <div className={styles.logoContainer}>
+                <div className={styles.logoIcon}>
+                  {/* Logo icon */}
+                  <div className={styles.logoIconInner}>
+                    <div className={styles.logoIconContent}>
+                      <div className={styles.logoIconDot} />
+                    </div>
+                  </div>
+                  {/* Pulsing ring effect */}
+                  <div className={styles.logoPulse} />
+                </div>
+
+                <div className={styles.logoText}>
+                  <span className={styles.logoTitle}>Lenuvio</span>
+                  <div className={styles.logoUnderline} />
+                </div>
+              </div>
+
+              {/* Desktop Navigation */}
+              <div className={styles.desktopNav}>
+                {navigationItems.map((item) => (
+                  <div key={item.id} className={styles.navItem}>
+                    <a
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(item.id);
+                      }}
+                      className={`${styles.navLink} ${
+                        activeSection === item.id ? styles.navLinkActive : ''
+                      }`}>
+                      <span className={styles.navLinkText}>{item.label}</span>
+
+                      {/* Active indicator */}
+                      {activeSection === item.id && (
+                        <div className={styles.activeIndicator} />
+                      )}
+                    </a>
+                  </div>
+                ))}
+
+                {/* CTA Button */}
+                <div className={styles.ctaContainer}>
+                  <button className={styles.ctaButton}>
+                    <span className={styles.ctaButtonText}>Get Started</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                className={styles.mobileMenuButton}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label='Toggle mobile menu'
+                aria-expanded={isMobileMenuOpen}>
+                {/* Animated hamburger icon */}
+                <div className={styles.hamburgerIcon}>
+                  <span
+                    className={`${styles.hamburgerLine} ${
+                      isMobileMenuOpen ? styles.hamburgerLineOpen : ''
+                    }`}
+                  />
+                  <span
+                    className={`${styles.hamburgerLine} ${
+                      isMobileMenuOpen ? styles.hamburgerLineOpen : ''
+                    }`}
+                  />
+                  <span
+                    className={`${styles.hamburgerLine} ${
+                      isMobileMenuOpen ? styles.hamburgerLineOpen : ''
+                    }`}
+                  />
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom gradient border */}
+          <div className={styles.bottomBorder} />
         </div>
       </nav>
 

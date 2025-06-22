@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavItem } from '@/app/types/navigation';
-import { NavLink } from './NavLink';
-import { cn } from '@/app/lib/utils';
+import styles from './MobileMenu.module.css';
 
 interface MobileMenuProps {
   items: NavItem[];
@@ -16,56 +15,138 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   isOpen,
   onClose,
 }) => {
+  const [shouldRender, setShouldRender] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Handle mounting/unmounting with animation
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      // Small delay to ensure DOM is updated before animation
+      setTimeout(() => setIsAnimating(true), 10);
+    } else {
+      setIsAnimating(false);
+      // Wait for animation to complete before unmounting
+      setTimeout(() => setShouldRender(false), 400);
+    }
+  }, [isOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  // Handle navigation click
+  const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+    onClose();
+  };
+
+  // Don't render if shouldn't be shown
+  if (!shouldRender) return null;
+
   return (
     <>
       {/* Backdrop */}
-      {isOpen && (
-        <div
-          className='fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden animate-fade-in'
-          onClick={onClose}
-        />
-      )}
+      <div
+        className={`${styles.backdrop} ${
+          isAnimating ? styles.backdropOpen : ''
+        }`}
+        onClick={onClose}
+        aria-hidden='true'
+      />
 
       {/* Mobile Menu */}
       <div
-        className={cn(
-          'fixed top-0 right-0 h-full w-80 mobile-menu backdrop-blur-custom border-l border-theme z-50 md:hidden',
-          'transform transition-transform duration-300 ease-in-out',
-          isOpen ? 'translate-x-0 animate-slide-in' : 'translate-x-full'
-        )}>
-        <div className='flex flex-col p-6 pt-20'>
-          <div className='flex justify-between items-center mb-8'>
-            <span className='text-2xl font-bold gradient-text'>Lenuvio</span>
-            <button
-              onClick={onClose}
-              className='text-theme-secondary hover:text-theme-primary p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/50 rounded'
-              aria-label='Close menu'>
-              <svg
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
+        className={`${styles.mobileMenu} ${
+          isAnimating ? styles.mobileMenuOpen : ''
+        }`}>
+        <div className={styles.menuBackground}>
+          {/* Animated Background Pattern */}
+          <div className={styles.menuBackgroundPattern} />
+          <div className={styles.menuBackgroundOrbs}>
+            <div className={styles.orb1} />
+            <div className={styles.orb2} />
           </div>
 
-          <nav className='flex flex-col space-y-6' role='navigation'>
-            {items.map((item) => (
-              <NavLink
-                key={item.id}
-                href={item.href}
+          {/* Menu Content */}
+          <div
+            className={`${styles.menuContent} ${
+              isAnimating ? styles.menuContentOpen : ''
+            }`}>
+            {/* Header Section */}
+            <div className={styles.menuHeader}>
+              <div className={styles.menuLogo}>
+                <div className={styles.menuLogoIcon} />
+                <span className={styles.menuLogoText}>Lenuvio</span>
+              </div>
+
+              <button
                 onClick={onClose}
-                className='text-lg py-2'>
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
+                className={styles.closeButton}
+                aria-label='Close menu'>
+                <svg
+                  className={styles.closeIcon}
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Navigation Section */}
+            <nav className={styles.menuNav} role='navigation'>
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`${styles.menuNavItem} ${
+                    isAnimating ? styles.menuNavItemOpen : ''
+                  }`}
+                  style={
+                    { '--delay': `${index * 0.1}s` } as React.CSSProperties
+                  }>
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.id);
+                    }}
+                    className={styles.menuNavLink}>
+                    <span className={styles.menuNavText}>{item.label}</span>
+                  </a>
+                </div>
+              ))}
+            </nav>
+
+            {/* Footer Section */}
+            <div className={styles.menuFooter}>
+              <button
+                className={styles.menuCta}
+                onClick={() => handleNavClick('contact')}>
+                <span className={styles.menuCtaText}>Get Started</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>
