@@ -4,32 +4,23 @@ import React from 'react';
 import { Navigation } from '@/app/components';
 import { Hero } from './components/hero/Hero';
 import { About } from './components/about/About';
+import { Services } from './components/services/Services';
 
 export default function Home() {
   return (
     <main className='min-h-screen bg-theme-primary text-theme-primary'>
       <Navigation />
 
-      <Hero />
+      <section id='home'>
+        <Hero />
+      </section>
 
-      <About />
+      <section id='about'>
+        <About />
+      </section>
 
-      {/* Services Section */}
-      <section
-        id='services'
-        className='py-20 bg-theme-primary min-h-screen w-full flex items-center justify-center'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <div className='text-center'>
-            <div className='bg-theme-accent backdrop-blur-sm rounded-2xl p-12 border border-theme'>
-              <h2 className='text-3xl font-bold mb-4 text-cyan-400'>
-                SERVICES SECTION
-              </h2>
-              <p className='text-theme-secondary'>
-                Service offerings, features, and benefits will go here
-              </p>
-            </div>
-          </div>
-        </div>
+      <section id='services'>
+        <Services />
       </section>
 
       {/* Contact Section */}

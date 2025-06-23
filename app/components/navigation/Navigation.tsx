@@ -29,26 +29,60 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Scroll-based active section detection
   useEffect(() => {
-    const sections = navigationItems.map((item) => item.id);
+    const handleScroll = () => {
+      const sections = navigationItems.map((item) => item.id);
+      const scrollPosition = window.scrollY + 120; // Offset for navbar height
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+      // Find which section we're currently in
+      let currentSection = 'home'; // Default to home
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+
+          // Check if we're in this section
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            currentSection = sectionId;
+            break;
           }
+
+          // Special case: if we're past the last section, keep it active
+          if (
+            sectionId === sections[sections.length - 1] &&
+            scrollPosition >= offsetTop
+          ) {
+            currentSection = sectionId;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    // Debounce scroll events for better performance
+    let ticking = false;
+    const debouncedScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
         });
-      },
-      { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
-    );
+        ticking = true;
+      }
+    };
 
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
+    window.addEventListener('scroll', debouncedScroll, { passive: true });
 
-    return () => observer.disconnect();
+    // Call once on mount to set initial state
+    setTimeout(handleScroll, 100);
+
+    return () => window.removeEventListener('scroll', debouncedScroll);
   }, []);
 
   // Close mobile menu on escape key
@@ -68,10 +102,17 @@ export const Navigation: React.FC = () => {
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
+      // Calculate offset to account for fixed navbar
+      const navbarHeight = 80; // Adjust this to match your actual navbar height
+      const elementPosition = element.offsetTop - navbarHeight;
+
+      window.scrollTo({
+        top: elementPosition,
         behavior: 'smooth',
-        block: 'start',
       });
+
+      // Immediately update active section for better UX
+      setActiveSection(id);
     }
   };
 
@@ -145,7 +186,9 @@ export const Navigation: React.FC = () => {
 
                 {/* CTA Button */}
                 <div className={styles.ctaContainer}>
-                  <button className={styles.ctaButton}>
+                  <button
+                    className={styles.ctaButton}
+                    onClick={() => handleNavClick('contact')}>
                     <span className={styles.ctaButtonText}>Get Started</span>
                   </button>
                 </div>

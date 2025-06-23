@@ -103,7 +103,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id='home' className={styles.hero}>
+    <div className={styles.hero}>
       {/* Animated Background */}
       <div className={styles.heroBackground}>
         {/* Floating Particles - Only render on client */}
@@ -127,14 +127,6 @@ export const Hero: React.FC = () => {
           <div className={styles.networkLine} />
           <div className={styles.networkLine} />
         </div>
-
-        {/* Floating Tech Icons
-        <div className={styles.techIcons}>
-          <div className={styles.techIcon}>⚡</div>
-          <div className={styles.techIcon}>🚀</div>
-          <div className={styles.techIcon}>💡</div>
-          <div className={styles.techIcon}>🎯</div>
-        </div> */}
       </div>
 
       {/* Main Content */}
@@ -214,6 +206,6 @@ export const Hero: React.FC = () => {
           />
         </svg>
       </div>
-    </section>
+    </div>
   );
 };

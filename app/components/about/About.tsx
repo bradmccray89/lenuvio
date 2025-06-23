@@ -23,22 +23,24 @@ export const About: React.FC = () => {
     {
       icon: '⚡',
       title: 'Frontend',
-      technologies: 'React, Next.js, TypeScript, Tailwind CSS, Three.js',
+      technologies:
+        'Angular, React, Next.js, JavaScript, TypeScript, HTML, SCSS, Tailwind CSS, RxJS',
     },
     {
       icon: '🚀',
       title: 'Backend',
-      technologies: 'Node.js, Python, PostgreSQL, MongoDB, Redis',
+      technologies: '.NET, Node.js, Supabase, PostgreSQL, MySQL',
     },
     {
       icon: '☁️',
       title: 'Cloud & DevOps',
-      technologies: 'AWS, Docker, Kubernetes, CI/CD, Terraform',
+      technologies: 'Vercel, Azure, AWS, Docker, GitHub Actions',
     },
     {
-      icon: '📱',
-      title: 'Mobile & Design',
-      technologies: 'React Native, Figma, UI/UX, Progressive Web Apps',
+      icon: '🎨',
+      title: 'UI/UX & Frontend Architecture',
+      technologies:
+        'Responsive Design, Tailwind CSS, Theming, Component Architecture, User-Centered Debugging',
     },
   ];
 
@@ -48,14 +50,14 @@ export const About: React.FC = () => {
       year: '2017',
       title: 'The Spark',
       description:
-        'Discovered the magic of turning creative ideas into digital reality through code. The journey of endless learning began.',
+        'Discovered the magic of turning creative ideas into digital reality through code. The journey of endless exploration began.',
     },
     {
-      icon: '🚀',
-      year: '2018-2024',
-      title: 'Exploring & Engineering',
+      icon: '🔍',
+      year: '2017-Present',
+      title: 'Continuous Exploration',
       description:
-        'Dove deep into 15+ tech stacks, crafting solutions and discovering the art of blending creativity with technology.',
+        'Never-ending discovery of new technologies, frameworks, and creative solutions. Always learning, always evolving.',
     },
     {
       icon: '💡',
@@ -66,15 +68,15 @@ export const About: React.FC = () => {
     },
     {
       icon: '∞',
-      year: 'Present',
-      title: 'Your Creative Catalyst',
+      year: 'Forever',
+      title: 'The Journey Continues',
       description:
-        'Ready to engineer your next bold idea into an impactful digital experience that inspires and delivers results.',
+        'Ready to engineer your next bold idea while continuously exploring new frontiers in technology and creativity.',
     },
   ];
 
   return (
-    <section id='about' className={styles.about}>
+    <div className={styles.about}>
       {/* Animated Background */}
       <div className={styles.aboutBackground}>
         {/* Floating Code Elements */}
@@ -140,9 +142,13 @@ export const About: React.FC = () => {
                   8+ years of crafting code
                 </span>
                 , I&apos;ve discovered that the most impactful digital products
-                are born when creative vision meets technical excellence. Every
-                project is an opportunity to push creative boundaries and
-                engineer solutions that truly inspire.
+                are born when creative vision meets technical excellence. What
+                drives me is the{' '}
+                <span className={styles.storyHighlight}>
+                  continuous exploration
+                </span>{' '}
+                of new technologies and the endless engineering of innovative
+                solutions.
               </p>
               <p className={styles.storyText}>
                 I believe in the power of{' '}
@@ -154,12 +160,13 @@ export const About: React.FC = () => {
                 engage users on an emotional level.
               </p>
               <p className={styles.storyText}>
-                Through exploring{' '}
-                <span className={styles.storyHighlight}>15+ tech stacks</span>{' '}
-                and engineering countless ideas, I&apos;ve developed an
-                intuitive understanding of how to blend creativity with
-                cutting-edge technology to deliver results that exceed
-                expectations.
+                This journey of exploration never truly ends. Every project,
+                every new technology, every challenge is an opportunity to{' '}
+                <span className={styles.storyHighlight}>
+                  push creative boundaries
+                </span>{' '}
+                and engineer solutions that inspire and deliver exceptional
+                results.
               </p>
             </div>
           </div>
@@ -207,6 +214,6 @@ export const About: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

@@ -1,0 +1,626 @@
+/* Services.module.css */
+
+/* Main Services Container */
+.services {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  overflow: hidden;
+}
+
+/* Animated Background */
+.servicesBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Floating Tech Icons - Optimized */
+.floatingIcons {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.floatingIcon {
+  position: absolute;
+  font-size: 20px;
+  color: #22d3ee;
+  animation: float-icon 15s linear infinite;
+  will-change: transform;
+}
+
+.floatingIcon:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.floatingIcon:nth-child(2) {
+  top: 20%;
+  right: 10%;
+  animation-delay: -2s;
+}
+
+.floatingIcon:nth-child(3) {
+  top: 40%;
+  left: 15%;
+  animation-delay: -4s;
+}
+
+.floatingIcon:nth-child(4) {
+  top: 60%;
+  right: 20%;
+  animation-delay: -6s;
+}
+
+.floatingIcon:nth-child(5) {
+  bottom: 30%;
+  left: 10%;
+  animation-delay: -8s;
+}
+
+.floatingIcon:nth-child(6) {
+  bottom: 20%;
+  right: 15%;
+  animation-delay: -10s;
+}
+
+/* Hexagonal Grid Pattern - Optimized */
+.hexagonalGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(6, 182, 212, 0.02) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(139, 92, 246, 0.02) 1px,
+      transparent 1px
+    );
+  background-size: 60px 60px;
+  animation: grid-float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Data Flow Lines - Optimized */
+.dataFlow {
+  position: absolute;
+  inset: 0;
+}
+
+.dataLine {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.3),
+    transparent
+  );
+  animation: data-pulse 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.dataLine:nth-child(1) {
+  top: 25%;
+  left: 0;
+  right: 0;
+  animation-delay: 0s;
+}
+
+.dataLine:nth-child(2) {
+  top: 50%;
+  left: 0;
+  right: 0;
+  animation-delay: -1s;
+}
+
+.dataLine:nth-child(3) {
+  top: 75%;
+  left: 0;
+  right: 0;
+  animation-delay: -2s;
+}
+
+/* Main Content Container */
+.servicesContent {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Section Header */
+.servicesHeader {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: fade-in-up 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.servicesTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.servicesTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #8b5cf6);
+  border-radius: 2px;
+}
+
+.servicesSubtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  color: #cbd5e1;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Services Grid */
+.servicesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+/* Service Card - Optimized */
+.serviceCard {
+  position: relative;
+  flex: 1 1 calc(25% - 40px);
+  min-width: 300px;
+  max-width: 500px;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 24px;
+  padding: 40px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: fade-in-up 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  will-change: transform;
+}
+
+.serviceCard:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.serviceCard:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.serviceCard:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.serviceCard:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.5),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-12px);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 25px 50px rgba(6, 182, 212, 0.15);
+}
+
+.serviceCard:hover::before {
+  transform: translateX(100%);
+}
+
+/* Service Icon - Optimized */
+.serviceIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3);
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.serviceIcon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.serviceCard:hover .serviceIcon {
+  transform: scale(1.05);
+}
+
+.serviceCard:hover .serviceIcon::after {
+  opacity: 0.2;
+}
+
+/* Service Content */
+.serviceTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.serviceDescription {
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  font-size: 1rem;
+}
+
+/* Service Features */
+.serviceFeatures {
+  list-style: none;
+  margin-bottom: 32px;
+}
+
+.serviceFeature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.serviceFeature::before {
+  content: '✓';
+  color: #22d3ee;
+  font-weight: bold;
+  margin-right: 12px;
+  font-size: 1rem;
+}
+
+/* Service CTA */
+.serviceCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #22d3ee;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.serviceCta:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.serviceCta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.serviceCta:hover svg {
+  transform: translateX(4px);
+}
+
+/* Process Section */
+.processSection {
+  margin-top: 120px;
+  animation: fade-in-up 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.processHeader {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.processTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.processSubtitle {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Process Steps */
+.processSteps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  gap: 32px;
+  position: relative;
+}
+
+.processStep {
+  text-align: center;
+  position: relative;
+  padding: 32px 24px;
+  flex: 1 1 calc(25% - 32px);
+  min-width: 250px;
+  max-width: 400px;
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.processStep:hover {
+  transform: translateY(-8px);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+}
+
+.processNumber {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 auto 24px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+}
+
+.processStepTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.processStepDescription {
+  color: #94a3b8;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* CTA Section */
+.ctaSection {
+  margin-top: 120px;
+  text-align: center;
+  animation: fade-in-up 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.ctaCard {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 24px;
+  padding: 60px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+}
+
+.ctaTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.ctaDescription {
+  color: #cbd5e1;
+  font-size: 1.125rem;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+  color: white;
+  border: 2px solid rgba(34, 211, 238, 0.3);
+  border-radius: 16px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ctaButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+  border-color: rgba(34, 211, 238, 0.6);
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}
+
+.ctaIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .ctaIcon {
+  transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services {
+    padding: 80px 0;
+  }
+
+  .servicesContent {
+    padding: 0 24px;
+  }
+
+  .servicesHeader {
+    margin-bottom: 60px;
+  }
+
+  .serviceCard {
+    padding: 32px 24px;
+  }
+
+  .processSection,
+  .ctaSection {
+    margin-top: 80px;
+  }
+
+  .ctaCard {
+    padding: 40px 24px;
+  }
+
+  .floatingIcons {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-icon {
+  0% {
+    transform: translateY(100vh) translateX(0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes grid-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+@keyframes data-pulse {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scaleX(0.9);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scaleX(1.1);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}

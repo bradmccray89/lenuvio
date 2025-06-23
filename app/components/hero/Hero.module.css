@@ -195,8 +195,9 @@
 .typingCursor {
   display: inline-block;
   background: #22d3ee;
-  width: 4px;
+  width: 0.08em;
   height: 1em;
+  vertical-align: -0.15em;
   margin-left: 8px;
   animation: blink 1s infinite;
 }
