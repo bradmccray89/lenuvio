@@ -120,7 +120,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={styles.services}>
       {/* Main Content */}
       <div className={styles.servicesContent}>
         {/* Section Header */}
@@ -218,6 +218,6 @@ export const Services: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

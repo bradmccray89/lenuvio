@@ -7,10 +7,11 @@ import { About } from './components/about/About';
 import { Services } from './components/services/Services';
 import { Contact } from './components/contact/Contact';
 import { Footer } from './components/footer/Footer';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className='min-h-screen bg-theme-primary text-theme-primary flex flex-col gap-8'>
+    <main className={styles.mainContainer}>
       <Navigation />
 
       <section id='home'>

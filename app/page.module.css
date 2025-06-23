@@ -1,0 +1,8 @@
+.mainContainer {
+  min-height: 100vh;
+  background-color: var(--theme-primary);
+  color: var(--theme-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}

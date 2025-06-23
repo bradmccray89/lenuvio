@@ -1,5 +1,3 @@
-/* About.module.css */
-
 /* Main About Container */
 .about {
   position: relative;
@@ -468,6 +466,10 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .about {
+    padding: 120px 0;
+  }
+
   .aboutGrid {
     grid-template-columns: 1fr;
     gap: 60px;
