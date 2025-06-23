@@ -3,6 +3,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  padding: 120px 0;
 }
 
 /* Contact Content */
@@ -378,10 +379,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .contact {
-    padding: 120px 0;
-  }
-
   .contactGrid {
     grid-template-columns: 1fr;
     gap: 40px;

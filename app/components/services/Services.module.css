@@ -3,6 +3,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  padding: 120px 0;
 }
 
 /* Animated Background */
@@ -527,17 +528,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .services {
-    padding: 120px 0;
-  }
-}
-
 @media (max-width: 768px) {
-  .services {
-    padding: 80px 0;
-  }
-
   .servicesContent {
     padding: 0 24px;
   }

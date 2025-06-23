@@ -3,6 +3,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  padding: 120px 0;
 }
 
 /* Animated Background */
@@ -466,10 +467,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .about {
-    padding: 120px 0;
-  }
-
   .aboutGrid {
     grid-template-columns: 1fr;
     gap: 60px;
