@@ -262,7 +262,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                 </a>
 
                 <a
-                  href='https://linkedin.com/in/yourprofile'
+                  href='https://www.linkedin.com/company/lenuvio'
                   target='_blank'
                   rel='noopener noreferrer'
                   className={styles.contactMethod}>
@@ -278,7 +278,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                 </a>
 
                 <a
-                  href='https://github.com/yourusername'
+                  href='https://github.com/bradmccray89'
                   target='_blank'
                   rel='noopener noreferrer'
                   className={styles.contactMethod}>
