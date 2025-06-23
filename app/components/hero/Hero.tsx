@@ -6,6 +6,8 @@ import styles from './Hero.module.css';
 export const Hero: React.FC = () => {
   const [typedText, setTypedText] = useState('');
   const [isClient, setIsClient] = useState(false);
+  type Particle = { id: number; left: number; delay: number; duration: number };
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   const phrases = React.useMemo(
     () => ['Innovation', 'Technology', 'Excellence', 'Vision'],
@@ -17,6 +19,13 @@ export const Hero: React.FC = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    // Generate particles only once on client mount
+    if (isClient) {
+      setParticles(generateParticles());
+    }
+  }, [isClient]);
 
   // Typing animation effect
   useEffect(() => {
@@ -57,30 +66,19 @@ export const Hero: React.FC = () => {
     return () => clearInterval(typeInterval);
   }, [currentPhraseIndex, isClient, phrases]);
 
-  // Generate static particles (deterministic)
   const generateParticles = () => {
-    if (!isClient) return [];
-
-    // Use seeded random for consistent results
     const particles = [];
     for (let i = 0; i < 50; i++) {
-      // Create deterministic "random" values based on index
-      const seed = i * 137.5; // Golden ratio for good distribution
-      const left = seed % 100;
-      const delay = (seed * 0.7) % 8;
-      const duration = 8 + ((seed * 0.3) % 4);
+      const left = Math.random() * 100;
+      const delay = Math.random() * 8;
+      const duration = 8 + Math.random() * 4;
 
-      particles.push(
-        <div
-          key={i}
-          className={styles.particle}
-          style={{
-            left: `${left}%`,
-            animationDelay: `${delay}s`,
-            animationDuration: `${duration}s`,
-          }}
-        />
-      );
+      particles.push({
+        id: i,
+        left,
+        delay,
+        duration,
+      });
     }
     return particles;
   };
@@ -108,7 +106,19 @@ export const Hero: React.FC = () => {
       <div className={styles.heroBackground}>
         {/* Floating Particles - Only render on client */}
         {isClient && (
-          <div className={styles.particles}>{generateParticles()}</div>
+          <div className={styles.particles}>
+            {particles.map((particle) => (
+              <div
+                key={particle.id}
+                className={styles.particle}
+                style={{
+                  left: `${particle.left}%`,
+                  animationDelay: `${particle.delay}s`,
+                  animationDuration: `${particle.duration}s`,
+                }}
+              />
+            ))}
+          </div>
         )}
 
         {/* Geometric Grid */}

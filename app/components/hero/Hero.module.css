@@ -25,28 +25,45 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .particle {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: #22d3ee;
+  width: 1px;
+  height: 1px;
+  background: #00ff88;
   border-radius: 50%;
-  opacity: 0.6;
+  opacity: 0.8;
   animation: float-particle 8s linear infinite;
+  box-shadow: 0 0 6px #00ff88, 0 0 12px #00ff88;
 }
 
 .particle:nth-child(2n) {
-  background: #8b5cf6;
+  background: #00d4ff;
+  box-shadow: 0 0 6px #00d4ff, 0 0 12px #00d4ff;
   animation-duration: 12s;
   animation-delay: -2s;
+  width: 1.5px;
+  height: 1.5px;
 }
 
 .particle:nth-child(3n) {
-  background: #3b82f6;
+  background: #ff0080;
+  box-shadow: 0 0 6px #ff0080, 0 0 12px #ff0080;
   animation-duration: 10s;
   animation-delay: -4s;
+  width: 0.5px;
+  height: 0.5px;
+}
+
+.particle:nth-child(4n) {
+  background: #ffffff;
+  box-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+  animation-duration: 15s;
+  opacity: 0.4;
+  width: 2px;
+  height: 2px;
 }
 
 /* Geometric Grid */
@@ -473,17 +490,19 @@
 
 @keyframes float-particle {
   0% {
-    transform: translateY(100vh) translateX(0px);
+    transform: translateY(100vh) translateX(0px) scale(0);
     opacity: 0;
   }
-  10% {
+  5% {
     opacity: 1;
+    transform: translateY(95vh) translateX(10px) scale(1);
   }
-  90% {
+  95% {
     opacity: 1;
+    transform: translateY(-5vh) translateX(90px) scale(1);
   }
   100% {
-    transform: translateY(-100px) translateX(100px);
+    transform: translateY(-10vh) translateX(100px) scale(0);
     opacity: 0;
   }
 }
