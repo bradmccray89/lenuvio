@@ -102,8 +102,8 @@ export const Navigation: React.FC = () => {
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Calculate offset to account for fixed navbar
-      const navbarHeight = 0; // Adjust this to match your actual navbar height
+      // Calculate offset to account for fixed navbar only on smaller screens
+      const navbarHeight = 80;
       const elementPosition = element.offsetTop - navbarHeight;
 
       window.scrollTo({

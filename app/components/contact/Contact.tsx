@@ -116,7 +116,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
     : null;
 
   return (
-    <section id='contact' className={styles.contact}>
+    <div className={styles.contact}>
       <div className={styles.contactContent}>
         {/* Section Header */}
         <div className={styles.contactHeader}>
@@ -296,6 +296,6 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

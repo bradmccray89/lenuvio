@@ -101,7 +101,7 @@ export const Services: React.FC = () => {
     // Scroll to contact section with service parameter
     const element = document.getElementById('contact');
     if (element) {
-      const navbarHeight = 80;
+      const navbarHeight = 0;
       const elementPosition = element.offsetTop - navbarHeight;
 
       // Add service parameter to URL
@@ -120,7 +120,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id='services' className={styles.services}>
+    <>
       {/* Main Content */}
       <div className={styles.servicesContent}>
         {/* Section Header */}
@@ -218,6 +218,6 @@ export const Services: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
