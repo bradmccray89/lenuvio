@@ -1,5 +1,3 @@
-/* Hero.module.css */
-
 /* Main Hero Container */
 .hero {
   padding-top: 120px;
@@ -9,14 +7,17 @@
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
 
-/* Animated Background */
+/* Fixed Animated Background - Stays in place while scrolling */
 .heroBackground {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
 
 /* Floating Particles */
@@ -195,7 +196,7 @@
 .typingCursor {
   display: inline-block;
   background: #22d3ee;
-  width: 0.08em;
+  width: 0.05em;
   height: 1em;
   vertical-align: -0.15em;
   margin-left: 8px;
@@ -228,7 +229,7 @@
 
 .primaryCta {
   position: relative;
-  padding: 12px 20px;
+  padding: 20px 40px;
   border-radius: 16px;
   font-size: 18px;
   font-weight: 600;
@@ -281,7 +282,7 @@
 }
 
 .secondaryCta {
-  padding: 12px 20px;
+  padding: 20px 40px;
   border-radius: 16px;
   font-size: 18px;
   font-weight: 600;

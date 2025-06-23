@@ -1,24 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import styles from './About.module.css';
 
 export const About: React.FC = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Code snippets for floating animation
-  const codeSnippets = [
-    'const innovation = await buildSolution();',
-    'function transformIdeas() { return reality; }',
-    'export default { passion, precision, performance };',
-    'useEffect(() => { createImpact(); }, [vision]);',
-    'class Developer extends Innovator { solve() }',
-  ];
-
   const techCategories = [
     {
       icon: '⚡',
@@ -77,31 +61,6 @@ export const About: React.FC = () => {
 
   return (
     <div className={styles.about}>
-      {/* Animated Background */}
-      <div className={styles.aboutBackground}>
-        {/* Floating Code Elements */}
-        {isClient && (
-          <div className={styles.codeElements}>
-            {codeSnippets.map((snippet, index) => (
-              <div key={index} className={styles.codeSnippet}>
-                {snippet}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Grid Pattern */}
-        <div className={styles.gridPattern} />
-
-        {/* Circuit Lines */}
-        <div className={styles.circuitLines}>
-          <div className={styles.circuitLine} />
-          <div className={styles.circuitLine} />
-          <div className={styles.circuitVertical} />
-          <div className={styles.circuitVertical} />
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className={styles.aboutContent}>
         {/* Section Header */}

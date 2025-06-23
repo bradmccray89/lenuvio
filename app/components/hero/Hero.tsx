@@ -120,13 +120,6 @@ export const Hero: React.FC = () => {
           <div className={styles.orb2} />
           <div className={styles.orb3} />
         </div>
-
-        {/* Neural Network Lines */}
-        <div className={styles.neuralNetwork}>
-          <div className={styles.networkLine} />
-          <div className={styles.networkLine} />
-          <div className={styles.networkLine} />
-        </div>
       </div>
 
       {/* Main Content */}

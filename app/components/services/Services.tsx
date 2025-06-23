@@ -1,18 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import styles from './Services.module.css';
 
 export const Services: React.FC = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Floating tech icons
-  const techIcons = ['⚛️', '🚀', '💻', '⚡', '🎨', '🔧'];
-
   const services = [
     {
       icon: '🚀',
@@ -96,15 +86,28 @@ export const Services: React.FC = () => {
   ];
 
   const handleCtaClick = (service: string) => {
-    // You can add specific logic based on the service parameter here
     console.log('CTA clicked for:', service);
 
-    // For now, all CTAs scroll to contact section
-    // But you could route to different pages or sections based on the service
+    // Map service names to URL-friendly values
+    const serviceMap: { [key: string]: string } = {
+      'Explore Development': 'full-stack',
+      'Learn About Cloud': 'cloud',
+      'See Design Work': 'ui-ux',
+      'Start Transformation': 'transformation',
+    };
+
+    const serviceParam = serviceMap[service] || 'other';
+
+    // Scroll to contact section with service parameter
     const element = document.getElementById('contact');
     if (element) {
       const navbarHeight = 80;
       const elementPosition = element.offsetTop - navbarHeight;
+
+      // Add service parameter to URL
+      const url = new URL(window.location.href);
+      url.searchParams.set('service', serviceParam);
+      window.history.pushState({}, '', url.toString());
 
       window.scrollTo({
         top: elementPosition,
@@ -118,36 +121,6 @@ export const Services: React.FC = () => {
 
   return (
     <section id='services' className={styles.services}>
-      {/* Animated Background */}
-      <div className={styles.servicesBackground}>
-        {/* Floating Tech Icons - Reduced count for performance */}
-        {isClient && (
-          <div className={styles.floatingIcons}>
-            {techIcons.slice(0, 4).map((icon, index) => (
-              <div
-                key={index}
-                className={styles.floatingIcon}
-                style={{
-                  animationDelay: `${index * -3}s`,
-                  animationDuration: `${15 + index * 2}s`,
-                }}>
-                {icon}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Hexagonal Grid */}
-        <div className={styles.hexagonalGrid} />
-
-        {/* Data Flow Lines */}
-        <div className={styles.dataFlow}>
-          <div className={styles.dataLine} />
-          <div className={styles.dataLine} />
-          <div className={styles.dataLine} />
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className={styles.servicesContent}>
         {/* Section Header */}

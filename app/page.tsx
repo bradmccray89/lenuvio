@@ -5,6 +5,7 @@ import { Navigation } from '@/app/components';
 import { Hero } from './components/hero/Hero';
 import { About } from './components/about/About';
 import { Services } from './components/services/Services';
+import { Contact } from './components/contact/Contact';
 
 export default function Home() {
   return (
@@ -23,22 +24,8 @@ export default function Home() {
         <Services />
       </section>
 
-      {/* Contact Section */}
-      <section
-        id='contact'
-        className='py-20 bg-theme-secondary min-h-screen w-full flex items-center justify-center'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <div className='text-center'>
-            <div className='bg-theme-accent backdrop-blur-sm rounded-2xl p-12 border border-theme'>
-              <h2 className='text-3xl font-bold mb-4 text-cyan-400'>
-                CONTACT SECTION
-              </h2>
-              <p className='text-theme-secondary'>
-                Contact form, information, and social links will go here
-              </p>
-            </div>
-          </div>
-        </div>
+      <section id='contact'>
+        <Contact />
       </section>
 
       {/* Footer */}
