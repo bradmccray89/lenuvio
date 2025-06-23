@@ -201,8 +201,6 @@
 }
 
 .profileAvatar {
-  width: 120px;
-  height: 120px;
   border-radius: 20px;
   background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
   margin: 0 auto 32px;
@@ -493,8 +491,6 @@
   }
 
   .profileAvatar {
-    width: 100px;
-    height: 100px;
     font-size: 40px;
   }
 

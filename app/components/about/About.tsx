@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import styles from './About.module.css';
 
 export const About: React.FC = () => {
@@ -77,18 +78,26 @@ export const About: React.FC = () => {
           {/* Profile Section */}
           <div className={styles.profileSection}>
             <div className={styles.profileCard}>
-              <div className={styles.profileAvatar}>L</div>
-              <h3 className={styles.profileName}>Your Creative Catalyst</h3>
-              <p className={styles.profileRole}>
-                Full-Stack Developer & Digital Visionary
-              </p>
-              <p className={styles.profileDescription}>
-                Passionate about empowering bold visions through cutting-edge
-                technology. I specialize in transforming ambitious ideas into
-                impactful digital products that not only deliver results but
-                inspire and captivate users.
-              </p>
+              {/* // Use this image from this location /public/images/cartoon_brandon.png */}
+              <Image
+                src='/images/cartoon_brandon.png'
+                alt='Your Creative Catalyst'
+                width={350}
+                height={350}
+                className={styles.profileAvatar}
+                priority
+              />
             </div>
+            <h3 className={styles.profileName}>Your Creative Catalyst</h3>
+            <p className={styles.profileRole}>
+              Full-Stack Developer & Digital Visionary
+            </p>
+            <p className={styles.profileDescription}>
+              Passionate about empowering bold visions through cutting-edge
+              technology. I specialize in transforming ambitious ideas into
+              impactful digital products that not only deliver results but
+              inspire and captivate users.
+            </p>
           </div>
 
           {/* Story Section */}
