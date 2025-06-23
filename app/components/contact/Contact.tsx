@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './Contact.module.css';
+import { MdEmail } from 'react-icons/md';
+import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
+import { GithubLogo } from '@/public/icons/GithubLogo';
 
 interface ContactProps {
   selectedService?: string;
@@ -249,7 +252,9 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                 <a
                   href='mailto:hello@lenuvio.com'
                   className={styles.contactMethod}>
-                  <div className={styles.methodIcon}>📧</div>
+                  <div className={styles.methodIcon}>
+                    <MdEmail />
+                  </div>
                   <div className={styles.methodContent}>
                     <div className={styles.methodLabel}>Email</div>
                     <div className={styles.methodValue}>hello@lenuvio.com</div>
@@ -261,7 +266,9 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   target='_blank'
                   rel='noopener noreferrer'
                   className={styles.contactMethod}>
-                  <div className={styles.methodIcon}>💼</div>
+                  <div className={styles.methodIcon}>
+                    <LinkedInLogo />
+                  </div>
                   <div className={styles.methodContent}>
                     <div className={styles.methodLabel}>LinkedIn</div>
                     <div className={styles.methodValue}>
@@ -275,7 +282,9 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   target='_blank'
                   rel='noopener noreferrer'
                   className={styles.contactMethod}>
-                  <div className={styles.methodIcon}>💻</div>
+                  <div className={styles.methodIcon}>
+                    <GithubLogo />
+                  </div>
                   <div className={styles.methodContent}>
                     <div className={styles.methodLabel}>GitHub</div>
                     <div className={styles.methodValue}>View My Code</div>

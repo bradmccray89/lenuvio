@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import styles from './Footer.module.css';
+import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
+import { GithubLogo } from '@/public/icons/GithubLogo';
+import { MdEmail } from 'react-icons/md';
+import { TwitterLogo } from '@/public/icons/TwitterLogo';
 
 export const Footer: React.FC = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -57,34 +61,34 @@ export const Footer: React.FC = () => {
             {/* Social Links */}
             <div className={styles.socialLinks}>
               <a
-                href='https://linkedin.com/in/yourprofile'
+                href='https://www.linkedin.com/company/lenuvio'
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.socialLink}
                 aria-label='LinkedIn'>
-                💼
+                <LinkedInLogo />
               </a>
               <a
-                href='https://github.com/yourusername'
+                href='https://github.com/bradmccray89'
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.socialLink}
                 aria-label='GitHub'>
-                💻
+                <GithubLogo fill='white' />
               </a>
               <a
-                href='https://twitter.com/yourusername'
+                href='https://x.com/lenuvio19335'
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.socialLink}
                 aria-label='Twitter'>
-                🐦
+                <TwitterLogo fill='white' />
               </a>
               <a
                 href='mailto:hello@lenuvio.com'
                 className={styles.socialLink}
                 aria-label='Email'>
-                📧
+                <MdEmail fill='white' size={24} />
               </a>
             </div>
           </div>
