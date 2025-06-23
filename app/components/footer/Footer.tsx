@@ -86,6 +86,8 @@ export const Footer: React.FC = () => {
               </a>
               <a
                 href='mailto:hello@lenuvio.com'
+                target='_blank'
+                rel='noopener noreferrer'
                 className={styles.socialLink}
                 aria-label='Email'>
                 <MdEmail fill='white' size={24} />

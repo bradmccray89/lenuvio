@@ -251,6 +251,8 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
               <div className={styles.contactMethods}>
                 <a
                   href='mailto:hello@lenuvio.com'
+                  target='_blank'
+                  rel='noopener noreferrer'
                   className={styles.contactMethod}>
                   <div className={styles.methodIcon}>
                     <MdEmail />
