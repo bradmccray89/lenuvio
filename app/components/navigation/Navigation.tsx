@@ -5,6 +5,7 @@ import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 import { MobileMenu } from './MobileMenu';
 import styles from './Navigation.module.css';
+import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 
 const navigationItems: NavItem[] = [
   { label: 'Home', href: '#home', id: 'home' },
@@ -144,14 +145,7 @@ export const Navigation: React.FC = () => {
               {/* Logo with tech effect */}
               <div className={styles.logoContainer}>
                 <div className={styles.logoIcon}>
-                  {/* Logo icon */}
-                  <div className={styles.logoIconInner}>
-                    <div className={styles.logoIconContent}>
-                      <div className={styles.logoIconDot} />
-                    </div>
-                  </div>
-                  {/* Pulsing ring effect */}
-                  <div className={styles.logoPulse} />
+                  <LenuvioLogo />
                 </div>
 
                 <div className={styles.logoText}>

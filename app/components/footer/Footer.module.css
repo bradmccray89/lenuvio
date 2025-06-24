@@ -42,7 +42,7 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,6 +101,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .socialLink::before {
@@ -177,6 +178,7 @@
   padding-left: 0;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .footerLink::before {

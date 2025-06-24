@@ -6,6 +6,7 @@ import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { GithubLogo } from '@/public/icons/GithubLogo';
 import { MdEmail } from 'react-icons/md';
 import { TwitterLogo } from '@/public/icons/TwitterLogo';
+import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 
 export const Footer: React.FC = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -48,7 +49,7 @@ export const Footer: React.FC = () => {
           {/* Brand Section */}
           <div className={styles.brandSection}>
             <div className={styles.brandLogo}>
-              <div className={styles.logoIcon}>L</div>
+              <LenuvioLogo size={48} className={styles.logoIcon} />
               <div className={styles.logoText}>Lenuvio</div>
             </div>
 
@@ -204,7 +205,7 @@ export const Footer: React.FC = () => {
                     d='M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
                   />
                 </svg>
-                <span>hello@lenuvio.com</span>
+                <span>hello@lenuv.io</span>
               </div>
 
               <div className={styles.contactItem}>
