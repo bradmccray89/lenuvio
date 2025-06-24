@@ -18,6 +18,9 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
     message: '',
   });
 
+  // Track if service was pre-selected vs manually changed
+  const [isServicePreSelected, setIsServicePreSelected] = useState(false);
+
   // Check for service parameter in URL or passed prop
   useEffect(() => {
     const updateServiceFromUrl = () => {
@@ -29,6 +32,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
           ...prev,
           service: serviceParam || selectedService || '',
         }));
+        setIsServicePreSelected(true); // Mark as pre-selected
       }
     };
 
@@ -90,33 +94,57 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
     >
   ) => {
     const { name, value } = e.target;
+
+    // If user manually changes the service dropdown, hide the alert
+    if (name === 'service') {
+      setIsServicePreSelected(false);
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    // For now, just show an alert
-    alert("Thank you for your message! I'll get back to you within 48 hours.");
+      if (!res.ok) throw new Error('Failed to send');
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      service: formData.service, // Keep the service selected
-      message: '',
-    });
+      const result = await res.json();
+      console.log('Email sent:', result);
+
+      alert(
+        "Thank you for your message! I'll get back to you within 48 hours."
+      );
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        service: formData.service,
+        message: '',
+      });
+    } catch (err) {
+      console.error('Error sending message:', err);
+      alert('Something went wrong. Please try again later.');
+    }
   };
 
   const selectedServiceDetails = formData.service
     ? getServiceDetails(formData.service)
     : null;
+
+  // Only show alert if service is pre-selected AND user hasn't manually changed it
+  const showServiceAlert =
+    isServicePreSelected && formData.service && selectedServiceDetails;
 
   return (
     <div className={styles.contact}>
@@ -131,7 +159,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
         </div>
 
         {/* Service Interest Alert */}
-        {selectedServiceDetails && (
+        {showServiceAlert && (
           <div className={styles.serviceAlert}>
             <div className={styles.serviceIcon}>
               {selectedServiceDetails.icon}

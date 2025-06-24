@@ -263,13 +263,13 @@ export const Footer: React.FC = () => {
           </div>
 
           <nav className={styles.footerNav}>
-            <a href='/privacy' className={styles.footerNavLink}>
-              Privacy
+            <a href='/privacy-policy' className={styles.footerNavLink}>
+              Privacy Policy
             </a>
-            <a href='/terms' className={styles.footerNavLink}>
-              Terms
+            <a href='/terms-of-service' className={styles.footerNavLink}>
+              Terms of Service
             </a>
-            <a href='/sitemap' className={styles.footerNavLink}>
+            <a href='/sitemap.xml' className={styles.footerNavLink}>
               Sitemap
             </a>
           </nav>
