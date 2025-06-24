@@ -375,6 +375,30 @@
   opacity: 0.95;
 }
 
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none;
+    opacity: 0.3;
+  }
+
+  .particle:nth-child(5n + 1) {
+    transform: translateY(10vh);
+  }
+  .particle:nth-child(5n + 2) {
+    transform: translateY(30vh);
+  }
+  .particle:nth-child(5n + 3) {
+    transform: translateY(70vh);
+  }
+  .particle:nth-child(5n + 4) {
+    transform: translateY(80vh);
+  }
+  .particle:nth-child(5n) {
+    transform: translateY(50vh);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .heroActions {

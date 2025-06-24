@@ -4,6 +4,17 @@ import Image from 'next/image';
 import styles from './About.module.css';
 
 export const About: React.FC = () => {
+  const yearsOfExperience = () => {
+    const startMonth = 6;
+    const startYear = 2017;
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // Months are zero-based
+    let experience = currentYear - startYear;
+    if (currentMonth < startMonth) {
+      experience--;
+    }
+    return experience;
+  };
   const techCategories = [
     {
       icon: '⚡',
@@ -107,7 +118,7 @@ export const About: React.FC = () => {
               <p className={styles.storyText}>
                 With{' '}
                 <span className={styles.storyHighlight}>
-                  8+ years of crafting code
+                  {yearsOfExperience()}+ years of crafting code
                 </span>
                 , I&apos;ve discovered that the most impactful digital products
                 are born when creative vision meets technical excellence. What
