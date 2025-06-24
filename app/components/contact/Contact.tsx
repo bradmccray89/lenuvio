@@ -250,7 +250,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
 
               <div className={styles.contactMethods}>
                 <a
-                  href='mailto:hello@lenuvio.com'
+                  href='mailto:hello@lenuv.io'
                   target='_blank'
                   rel='noopener noreferrer'
                   className={styles.contactMethod}>
@@ -259,7 +259,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   </div>
                   <div className={styles.methodContent}>
                     <div className={styles.methodLabel}>Email</div>
-                    <div className={styles.methodValue}>hello@lenuvio.com</div>
+                    <div className={styles.methodValue}>hello@lenuv.io</div>
                   </div>
                 </a>
 
