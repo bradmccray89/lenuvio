@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavItem } from '@/app/types/navigation';
 import styles from './MobileMenu.module.css';
+import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 
 interface MobileMenuProps {
   items: NavItem[];
@@ -91,7 +92,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             {/* Header Section */}
             <div className={styles.menuHeader}>
               <div className={styles.menuLogo}>
-                <div className={styles.menuLogoIcon} />
+                <LenuvioLogo className={styles.menuLogoIcon} />
                 <span className={styles.menuLogoText}>Lenuvio</span>
               </div>
 
