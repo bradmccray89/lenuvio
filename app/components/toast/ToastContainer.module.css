@@ -1,0 +1,73 @@
+.toastContainer {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toastContainer > * {
+  pointer-events: all;
+}
+
+/* Position variants */
+.topRight {
+  top: 20px;
+  right: 20px;
+}
+
+.topLeft {
+  top: 20px;
+  left: 20px;
+}
+
+.bottomRight {
+  bottom: 20px;
+  right: 20px;
+}
+
+.bottomLeft {
+  bottom: 20px;
+  left: 20px;
+}
+
+.topCenter {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomCenter {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .topRight,
+  .topLeft {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .bottomRight,
+  .bottomLeft {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .topCenter {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+  }
+
+  .bottomCenter {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+  }
+}

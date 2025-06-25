@@ -5,6 +5,7 @@ import styles from './Contact.module.css';
 import { MdEmail } from 'react-icons/md';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { GithubLogo } from '@/public/icons/GithubLogo';
+import { useToast } from '@/app/hooks/useToast';
 
 interface ContactProps {
   selectedService?: string;
@@ -20,6 +21,9 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
 
   // Track if service was pre-selected vs manually changed
   const [isServicePreSelected, setIsServicePreSelected] = useState(false);
+  const { success, error } = useToast();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Check for service parameter in URL or passed prop
   useEffect(() => {
@@ -108,6 +112,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const res = await fetch('/api/send', {
@@ -119,11 +124,14 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
       if (!res.ok) throw new Error('Failed to send');
 
       const result = await res.json();
-      console.log('Email sent:', result);
 
-      alert(
-        "Thank you for your message! I'll get back to you within 48 hours."
-      );
+      if (result.success) {
+        success(
+          'Message Sent Successfully!',
+          "Thanks for reaching out! I'll get back to you within 48 hours.",
+          6000
+        );
+      }
 
       // Reset form
       setFormData({
@@ -134,7 +142,14 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
       });
     } catch (err) {
       console.error('Error sending message:', err);
-      alert('Something went wrong. Please try again later.');
+
+      error(
+        'Failed to Send Message',
+        'Something went wrong. Please try again or contact me directly.',
+        8000
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -196,6 +211,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   className={styles.formInput}
                   placeholder='Enter your full name'
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -212,6 +228,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   className={styles.formInput}
                   placeholder='your.email@example.com'
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -224,7 +241,8 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   name='service'
                   value={formData.service}
                   onChange={handleInputChange}
-                  className={styles.formSelect}>
+                  className={styles.formSelect}
+                  disabled={isSubmitting}>
                   {serviceOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -245,11 +263,15 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
                   className={styles.formTextarea}
                   placeholder='Tell me about your project, goals, timeline, or any questions you have...'
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
-              <button type='submit' className={styles.submitButton}>
-                Send Message
+              <button
+                type='submit'
+                className={styles.submitButton}
+                disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <svg
                   className={styles.submitIcon}
                   fill='none'
