@@ -118,6 +118,8 @@ export const Contact: React.FC<ContactProps> = ({
     }));
   };
 
+  // Update your Contact component to handle the new response format
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -129,18 +131,23 @@ export const Contact: React.FC<ContactProps> = ({
         body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error('Failed to send');
-
       const result = await res.json();
 
-      if (result.success) {
-        if (onShowToast) {
-          onShowToast.success(
-            'Message Sent Successfully!',
-            "Thanks for reaching out! I'll get back to you within 48 hours.",
-            6000
-          );
-        }
+      if (!res.ok) {
+        throw new Error(
+          result.details || result.error || 'Failed to send message'
+        );
+      }
+
+      console.log('Contact form result:', result);
+
+      // Show success toast with tracking info
+      if (onShowToast && result.success) {
+        onShowToast.success(
+          'Message Sent Successfully!',
+          `Thanks for reaching out! I'll get back to you within 48 hours. Reference: ${result.tracking?.notificationId?.slice(-6) || 'N/A'}`,
+          6000
+        );
       }
 
       // Reset form
@@ -151,14 +158,18 @@ export const Contact: React.FC<ContactProps> = ({
         message: '',
       });
     } catch (err) {
-      console.error('Error sending message:', err);
+      console.error('Contact form error:', err);
 
-      if (onShowToast)
+      // Show error toast
+      if (onShowToast) {
         onShowToast.error(
           'Failed to Send Message',
-          'Something went wrong. Please try again or contact me directly.',
+          err instanceof Error
+            ? err.message
+            : 'Something went wrong. Please try again or contact me directly.',
           8000
         );
+      }
     } finally {
       setIsSubmitting(false);
     }
