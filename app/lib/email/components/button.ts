@@ -4,20 +4,19 @@ export const createButton = (
   text: string,
   href: string,
   type: ButtonType = 'primary'
-): string => `
-  <a href="${href}" class="btn btn-${type}" style="
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-align: center;
-    margin: 5px;
-    ${
-      type === 'primary'
-        ? 'background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%); color: white; border: 1px solid rgba(34, 211, 238, 0.3);'
-        : 'background: rgba(30, 41, 59, 0.6); color: #e2e8f0; border: 1px solid rgba(71, 85, 105, 0.5);'
-    }
-  ">${text}</a>
-`;
+): string => {
+  const buttonClass =
+    type === 'primary' ? 'email-button' : 'email-button email-button-secondary';
+
+  return `
+    <!--[if mso]>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${href}" style="height:42px;v-text-anchor:middle;width:200px;" arcsize="14%" stroke="f" fillcolor="${type === 'primary' ? '#06b6d4' : '#475569'}">
+      <w:anchorlock/>
+      <center style="color:#ffffff;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;">${text}</center>
+    </v:roundrect>
+    <![endif]-->
+    <!--[if !mso]><!-->
+    <a href="${href}" class="${buttonClass}" style="display: inline-block; padding: 14px 28px; background: ${type === 'primary' ? 'linear-gradient(135deg, #06b6d4 0%, #2563eb 100%)' : '#475569'}; color: #ffffff !important; text-decoration: none !important; border-radius: 6px; font-weight: bold; font-size: 14px; text-align: center; margin: 10px 10px 10px 0; border: none;">${text}</a>
+    <!--<![endif]-->
+  `;
+};

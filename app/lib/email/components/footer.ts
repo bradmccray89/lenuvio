@@ -11,39 +11,29 @@ export const createFooter = (type: FooterType = 'default'): string => {
   };
 
   return `
-    <div class="footer" style="
-      background: rgba(0, 0, 0, 0.3);
-      padding: 25px 30px;
-      text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    ">
-      <div style="
-        color: #94a3b8;
-        font-size: 0.8rem;
-        margin-bottom: 15px;
-      ">${footerText[type]}</div>
-      
-      <div style="
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-bottom: 15px;
-      ">
-        <a href="https://lenuv.io" style="color: #06b6d4; text-decoration: none; font-size: 0.8rem;">Website</a>
-        <a href="https://linkedin.com/company/lenuvio" style="color: #06b6d4; text-decoration: none; font-size: 0.8rem;">LinkedIn</a>
-        <a href="https://github.com/bradmccray89" style="color: #06b6d4; text-decoration: none; font-size: 0.8rem;">GitHub</a>
-        <a href="mailto:hello@lenuv.io" style="color: #06b6d4; text-decoration: none; font-size: 0.8rem;">Contact</a>
-      </div>
-      
-      <div style="
-        color: #71717a;
-        font-size: 0.75rem;
-        padding-top: 15px;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      ">
-        Email sent on ${new Date().toISOString()}
-      </div>
-    </div>
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+      <tr>
+        <td class="email-footer">
+          <p class="email-footer-text">${footerText[type]}</p>
+          
+          <div class="email-footer-links">
+            <a href="https://lenuv.io" class="email-footer-link">Website</a>
+            <a href="https://linkedin.com/company/lenuvio" class="email-footer-link">LinkedIn</a>
+            <a href="https://github.com/bradmccray89" class="email-footer-link">GitHub</a>
+            <a href="mailto:hello@lenuv.io" class="email-footer-link">Contact</a>
+          </div>
+          
+          <p class="email-timestamp">
+            Email sent on ${new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </p>
+        </td>
+      </tr>
+    </table>
   `;
 };

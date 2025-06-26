@@ -1,4 +1,3 @@
-// lib/email/templates/contact/autoReply.ts
 import {
   emailStyles,
   createHeader,
@@ -26,156 +25,215 @@ export const contactAutoReplyTemplate = (
     subject: `Thanks for reaching out, ${name}! Your message has been received`,
     html: `
       <!DOCTYPE html>
-      <html lang="en">
+      <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="x-apple-disable-message-reformatting">
         <title>Thank You for Your Message</title>
-        <style>${emailStyles}</style>
+        
+        <!--[if mso]>
+        <noscript>
+          <xml>
+            <o:OfficeDocumentSettings>
+              <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+          </xml>
+        </noscript>
+        <![endif]-->
+        
+        <style>
+          ${emailStyles}
+        </style>
       </head>
-      <body>
-        <div class="container">
-          ${createHeader('Message Received Successfully!', "I'll get back to you within 48 hours")}
-          
-          <div class="content">
-            <div style="
-              font-size: 1.1rem;
-              color: #f1f5f9;
-              margin-bottom: 25px;
-              line-height: 1.7;
-            ">
-              Hi ${name},<br><br>
-              Thank you for reaching out! I've received your message about <strong>${serviceDetails.name}</strong> and I'm excited to learn more about your project.
-            </div>
-            
-            ${createAlert(
-              serviceDetails.icon,
-              'Your inquiry is important to me',
-              'I personally review every message and will respond with thoughtful insights tailored to your specific needs.'
-            )}
-            
-            <div style="
-              background: rgba(255, 255, 255, 0.02);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 12px;
-              padding: 25px;
-              margin: 30px 0;
-            ">
-              <div style="
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: #f1f5f9;
-                margin-bottom: 20px;
-                text-align: center;
-              ">What happens next?</div>
+      <body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #0f172a; color: #e5e5e5; line-height: 1.6; width: 100%; min-width: 100%;">
+        
+        <!-- Email Container -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #0f172a;">
+          <tr>
+            <td align="center" style="padding: 20px 0;">
               
-              <div style="display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="
-                  width: 40px; height: 40px;
-                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-                  border-radius: 10px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 18px;
-                  flex-shrink: 0;
-                ">📧</div>
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; color: #f1f5f9; font-size: 0.9rem; margin-bottom: 3px;">Message Review</div>
-                  <div style="color: #cbd5e1; font-size: 0.85rem;">I'll carefully review your requirements and project details</div>
-                </div>
-              </div>
+              <!-- Main Content Table -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container" style="max-width: 600px; background-color: #1e293b; border-radius: 8px; overflow: hidden;">
+                
+                <!-- Header -->
+                ${createHeader('Message Received Successfully!', "I'll get back to you within 48 hours")}
+                
+                <!-- Content -->
+                <tr>
+                  <td class="email-content">
+                    
+                    <!-- Greeting -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td>
+                          <p class="email-text">
+                            Hi ${name},<br><br>
+                            Thank you for reaching out! I've received your message about <strong>${serviceDetails.name}</strong> and I'm excited to learn more about your project.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Alert Section -->
+                    ${createAlert(
+                      serviceDetails.icon,
+                      'Your inquiry is important to me',
+                      'I personally review every message and will respond with thoughtful insights tailored to your specific needs.'
+                    )}
+                    
+                    <!-- Timeline Section -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-timeline">
+                      <tr>
+                        <td>
+                          <h3 class="email-timeline-title">What happens next?</h3>
+                          
+                          <!-- Timeline Item 1 -->
+                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-timeline-item">
+                            <tr>
+                              <td style="width: 50px; vertical-align: top; padding-right: 15px;">
+                                <div style="
+                                  width: 40px; 
+                                  height: 40px; 
+                                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%); 
+                                  border-radius: 8px; 
+                                  text-align: center;
+                                  line-height: 40px;
+                                  font-size: 18px;
+                                ">📧</div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <p class="email-timeline-step">Message Review</p>
+                                <p class="email-timeline-desc">I'll carefully review your requirements and project details</p>
+                              </td>
+                            </tr>
+                          </table>
+                          
+                          <!-- Timeline Item 2 -->
+                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-timeline-item">
+                            <tr>
+                              <td style="width: 50px; vertical-align: top; padding-right: 15px;">
+                                <div style="
+                                  width: 40px; 
+                                  height: 40px; 
+                                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%); 
+                                  border-radius: 8px; 
+                                  text-align: center;
+                                  line-height: 40px;
+                                  font-size: 18px;
+                                ">🤔</div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <p class="email-timeline-step">Solution Planning</p>
+                                <p class="email-timeline-desc">I'll prepare initial thoughts and questions about your project</p>
+                              </td>
+                            </tr>
+                          </table>
+                          
+                          <!-- Timeline Item 3 -->
+                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-timeline-item">
+                            <tr>
+                              <td style="width: 50px; vertical-align: top; padding-right: 15px;">
+                                <div style="
+                                  width: 40px; 
+                                  height: 40px; 
+                                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%); 
+                                  border-radius: 8px; 
+                                  text-align: center;
+                                  line-height: 40px;
+                                  font-size: 18px;
+                                ">💬</div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <p class="email-timeline-step">Personal Response</p>
+                                <p class="email-timeline-desc">You'll receive a detailed, personal response within 48 hours</p>
+                              </td>
+                            </tr>
+                          </table>
+                          
+                          <!-- Timeline Item 4 -->
+                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-timeline-item">
+                            <tr>
+                              <td style="width: 50px; vertical-align: top; padding-right: 15px;">
+                                <div style="
+                                  width: 40px; 
+                                  height: 40px; 
+                                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%); 
+                                  border-radius: 8px; 
+                                  text-align: center;
+                                  line-height: 40px;
+                                  font-size: 18px;
+                                ">🚀</div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <p class="email-timeline-step">Project Discussion</p>
+                                <p class="email-timeline-desc">We'll schedule a call to dive deeper into your vision</p>
+                              </td>
+                            </tr>
+                          </table>
+                          
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Message Summary -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-details">
+                      <tr>
+                        <td colspan="2" style="padding: 20px 20px 10px 20px;">
+                          <h3 style="color: #f1f5f9; font-size: 18px; font-weight: bold; margin: 0;">Your Message Summary</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Service:</p>
+                          <p class="email-detail-value">${serviceDetails.icon} ${serviceDetails.name}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Submitted:</p>
+                          <p class="email-detail-value">${formatDate()}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Reference:</p>
+                          <p class="email-detail-value">${referenceId}</p>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Call to Action -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding: 20px 0;">
+                          <p class="email-text" style="text-align: center;">
+                            In the meantime, feel free to explore my work and learn more about my approach to digital innovation.
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-center">
+                          ${createButton('Visit Portfolio', 'https://lenuv.io', 'primary')}
+                          <br>
+                          ${createButton('View Code', 'https://github.com/bradmccray89', 'primary')}
+                        </td>
+                      </tr>
+                    </table>
+                    
+                  </td>
+                </tr>
+                
+                <!-- Footer -->
+                ${createFooter('contact')}
+                
+              </table>
               
-              <div style="display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="
-                  width: 40px; height: 40px;
-                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-                  border-radius: 10px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 18px;
-                  flex-shrink: 0;
-                ">🤔</div>
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; color: #f1f5f9; font-size: 0.9rem; margin-bottom: 3px;">Solution Planning</div>
-                  <div style="color: #cbd5e1; font-size: 0.85rem;">I'll prepare initial thoughts and questions about your project</div>
-                </div>
-              </div>
-              
-              <div style="display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="
-                  width: 40px; height: 40px;
-                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-                  border-radius: 10px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 18px;
-                  flex-shrink: 0;
-                ">💬</div>
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; color: #f1f5f9; font-size: 0.9rem; margin-bottom: 3px;">Personal Response</div>
-                  <div style="color: #cbd5e1; font-size: 0.85rem;">You'll receive a detailed, personal response within 48 hours</div>
-                </div>
-              </div>
-              
-              <div style="display: flex; align-items: center; gap: 15px; padding: 15px 0;">
-                <div style="
-                  width: 40px; height: 40px;
-                  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-                  border-radius: 10px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 18px;
-                  flex-shrink: 0;
-                ">🚀</div>
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; color: #f1f5f9; font-size: 0.9rem; margin-bottom: 3px;">Project Discussion</div>
-                  <div style="color: #cbd5e1; font-size: 0.85rem;">We'll schedule a call to dive deeper into your vision</div>
-                </div>
-              </div>
-            </div>
-            
-            <div style="
-              background: rgba(255, 255, 255, 0.02);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 12px;
-              padding: 25px;
-              margin: 30px 0;
-            ">
-              <div style="
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: #f1f5f9;
-                margin-bottom: 15px;
-              ">Your Message Summary</div>
-              <div style="display: flex; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 100px; font-size: 0.85rem;">Service:</div>
-                <div style="color: #e2e8f0; flex: 1;">${serviceDetails.icon} ${serviceDetails.name}</div>
-              </div>
-              <div style="display: flex; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 100px; font-size: 0.85rem;">Submitted:</div>
-                <div style="color: #e2e8f0; flex: 1;">${formatDate()}</div>
-              </div>
-              <div style="display: flex; padding: 8px 0;">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 100px; font-size: 0.85rem;">Reference:</div>
-                <div style="color: #e2e8f0; flex: 1;">${referenceId}</div>
-              </div>
-            </div>
-            
-            <div style="text-align: center; margin: 30px 0;">
-              <div style="color: #cbd5e1; margin-bottom: 20px; font-size: 0.95rem;">
-                In the meantime, feel free to explore my work and learn more about my approach to digital innovation.
-              </div>
-              ${createButton('Visit Portfolio', 'https://lenuv.io', 'primary')}
-              ${createButton('View Code', 'https://github.com/bradmccray89', 'primary')}
-            </div>
-          </div>
-          
-          ${createFooter('contact')}
-        </div>
+            </td>
+          </tr>
+        </table>
+        
       </body>
       </html>
     `,

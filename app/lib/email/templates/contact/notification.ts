@@ -20,89 +20,119 @@ export const contactNotificationTemplate = (
     subject: `New Contact Form Submission - ${serviceDetails.name}`,
     html: `
       <!DOCTYPE html>
-      <html lang="en">
+      <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="x-apple-disable-message-reformatting">
         <title>New Contact Form Submission</title>
-        <style>${emailStyles}</style>
+        
+        <!--[if mso]>
+        <noscript>
+          <xml>
+            <o:OfficeDocumentSettings>
+              <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+          </xml>
+        </noscript>
+        <![endif]-->
+        
+        <style>
+          ${emailStyles}
+        </style>
       </head>
-      <body>
-        <div class="container">
-          ${createHeader('New Contact Form Submission')}
-          
-          <div class="content">
-            ${createAlert(
-              serviceDetails.icon,
-              'New Contact Form Submission',
-              `Someone is interested in ${serviceDetails.name}`
-            )}
-            
-            <div style="
-              background: rgba(255, 255, 255, 0.02);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 12px;
-              padding: 25px;
-              margin-bottom: 30px;
-            ">
-              <div style="display: flex; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 120px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Name:</div>
-                <div style="color: #f1f5f9; flex: 1; word-wrap: break-word;">${name}</div>
-              </div>
-              <div style="display: flex; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 120px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Email:</div>
-                <div style="color: #f1f5f9; flex: 1; word-wrap: break-word;">
-                  <a href="mailto:${email}" style="color: #06b6d4; text-decoration: none;">${email}</a>
-                </div>
-              </div>
-              <div style="display: flex; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 120px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Service:</div>
-                <div style="color: #f1f5f9; flex: 1; word-wrap: break-word;">${serviceDetails.icon} ${serviceDetails.name}</div>
-              </div>
-              <div style="display: flex; padding: 12px 0;">
-                <div style="font-weight: 600; color: #94a3b8; min-width: 120px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Submitted:</div>
-                <div style="color: #f1f5f9; flex: 1; word-wrap: break-word;">${formatDate()}</div>
-              </div>
-            </div>
-            
-            <div style="
-              background: rgba(255, 255, 255, 0.02);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 12px;
-              padding: 25px;
-              margin-bottom: 30px;
-            ">
-              <div style="
-                font-weight: 600;
-                color: #94a3b8;
-                font-size: 0.85rem;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                margin-bottom: 12px;
-              ">Message:</div>
-              <div style="
-                color: #e2e8f0;
-                line-height: 1.7;
-                white-space: pre-wrap;
-                background: rgba(0, 0, 0, 0.2);
-                padding: 15px;
-                border-radius: 8px;
-                border-left: 3px solid #06b6d4;
-              ">${message}</div>
-            </div>
-            
-            <div style="text-align: center;">
-              ${createButton(
-                `Reply to ${name}`,
-                `mailto:${email}?subject=Re: Your inquiry about ${serviceDetails.name}&body=Hi ${name},%0D%0A%0D%0AThank you for reaching out! I'd love to discuss your ${serviceDetails.name} needs.%0D%0A%0D%0ABest regards,%0D%0ABrandon`,
-                'primary'
-              )}
-              ${createButton('View Dashboard', 'https://lenuv.io/admin', 'secondary')}
-            </div>
-          </div>
-          
-          ${createFooter('contact')}
-        </div>
+      <body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #0f172a; color: #e5e5e5; line-height: 1.6; width: 100%; min-width: 100%;">
+        
+        <!-- Email Container -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #0f172a;">
+          <tr>
+            <td align="center" style="padding: 20px 0;">
+              
+              <!-- Main Content Table -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container" style="max-width: 600px; background-color: #1e293b; border-radius: 8px; overflow: hidden;">
+                
+                <!-- Header -->
+                ${createHeader('New Contact Form Submission')}
+                
+                <!-- Content -->
+                <tr>
+                  <td class="email-content">
+                    
+                    <!-- Alert Section -->
+                    ${createAlert(
+                      serviceDetails.icon,
+                      'New Contact Form Submission',
+                      `Someone is interested in ${serviceDetails.name}`
+                    )}
+                    
+                    <!-- Contact Details -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-details">
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Name:</p>
+                          <p class="email-detail-value">${name}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Email:</p>
+                          <p class="email-detail-value">
+                            <a href="mailto:${email}" style="color: #06b6d4; text-decoration: none;">${email}</a>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Service:</p>
+                          <p class="email-detail-value">${serviceDetails.icon} ${serviceDetails.name}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="email-detail-row">
+                          <p class="email-detail-label">Submitted:</p>
+                          <p class="email-detail-value">${formatDate()}</p>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Message Section -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding: 20px 0;">
+                          <p class="email-detail-label" style="margin-bottom: 12px;">Message:</p>
+                          <div class="email-message">${message}</div>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Action Buttons -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td class="email-center">
+                          ${createButton(
+                            `Reply to ${name}`,
+                            `mailto:${email}?subject=Re: Your inquiry about ${serviceDetails.name}&body=Hi ${name},%0D%0A%0D%0AThank you for reaching out! I'd love to discuss your ${serviceDetails.name} needs.%0D%0A%0D%0ABest regards,%0D%0ABrandon`,
+                            'primary'
+                          )}
+                          <br>
+                          ${createButton('View Dashboard', 'https://lenuv.io/admin', 'secondary')}
+                        </td>
+                      </tr>
+                    </table>
+                    
+                  </td>
+                </tr>
+                
+                <!-- Footer -->
+                ${createFooter('contact')}
+                
+              </table>
+              
+            </td>
+          </tr>
+        </table>
+        
       </body>
       </html>
     `,
