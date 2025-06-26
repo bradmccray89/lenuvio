@@ -1,4 +1,3 @@
-// hooks/useToast.ts
 'use client';
 
 import { useState, useCallback } from 'react';
@@ -8,7 +7,8 @@ export const useToast = () => {
   const [toasts, setToasts] = useState<ToastData[]>([]);
 
   const addToast = useCallback((toast: Omit<ToastData, 'id'>) => {
-    const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
+    const id =
+      Date.now().toString() + Math.random().toString(36).substring(2, 11);
     const newToast: ToastData = {
       id,
       duration: 5000,

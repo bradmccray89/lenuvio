@@ -5,13 +5,22 @@ import styles from './Contact.module.css';
 import { MdEmail } from 'react-icons/md';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { GithubLogo } from '@/public/icons/GithubLogo';
-import { useToast } from '@/app/hooks/useToast';
 
+interface ToastFunctions {
+  success: (title: string, message?: string, duration?: number) => string;
+  error: (title: string, message?: string, duration?: number) => string;
+  warning: (title: string, message?: string, duration?: number) => string;
+  info: (title: string, message?: string, duration?: number) => string;
+}
 interface ContactProps {
   selectedService?: string;
+  onShowToast?: ToastFunctions;
 }
 
-export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
+export const Contact: React.FC<ContactProps> = ({
+  selectedService,
+  onShowToast,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +30,6 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
 
   // Track if service was pre-selected vs manually changed
   const [isServicePreSelected, setIsServicePreSelected] = useState(false);
-  const { success, error } = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -126,11 +134,13 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
       const result = await res.json();
 
       if (result.success) {
-        success(
-          'Message Sent Successfully!',
-          "Thanks for reaching out! I'll get back to you within 48 hours.",
-          6000
-        );
+        if (onShowToast) {
+          onShowToast.success(
+            'Message Sent Successfully!',
+            "Thanks for reaching out! I'll get back to you within 48 hours.",
+            6000
+          );
+        }
       }
 
       // Reset form
@@ -143,11 +153,12 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
     } catch (err) {
       console.error('Error sending message:', err);
 
-      error(
-        'Failed to Send Message',
-        'Something went wrong. Please try again or contact me directly.',
-        8000
-      );
+      if (onShowToast)
+        onShowToast.error(
+          'Failed to Send Message',
+          'Something went wrong. Please try again or contact me directly.',
+          8000
+        );
     } finally {
       setIsSubmitting(false);
     }

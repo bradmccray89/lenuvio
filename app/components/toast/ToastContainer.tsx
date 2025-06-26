@@ -22,7 +22,7 @@ interface ToastContainerProps {
 const ToastContainer: React.FC<ToastContainerProps> = ({
   toasts,
   onClose,
-  position = 'top-right',
+  position = 'topRight',
 }) => {
   if (toasts.length === 0) return null;
 

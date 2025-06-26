@@ -12,10 +12,15 @@ import ToastContainer from './components/toast/ToastContainer';
 import { useToast } from './hooks/useToast';
 
 export default function Home() {
-  const { toasts, removeToast } = useToast();
+  const { toasts, removeToast, success, error, warning, info } = useToast();
 
   return (
     <main className={styles.mainContainer}>
+      <ToastContainer
+        toasts={toasts}
+        onClose={removeToast}
+        position='bottomRight'
+      />
       <Navigation />
       <section id='home'>
         <Hero />
@@ -27,14 +32,9 @@ export default function Home() {
         <Services />
       </section>
       <section id='contact'>
-        <Contact />
+        <Contact onShowToast={{ success, error, warning, info }} />
       </section>
       <Footer />
-      <ToastContainer
-        toasts={toasts}
-        onClose={removeToast}
-        position='top-right'
-      />{' '}
     </main>
   );
 }

@@ -20,12 +20,12 @@ export interface ToastProps {
   duration?: number;
   onClose: (id: string) => void;
   position?:
-    | 'top-right'
-    | 'top-left'
-    | 'bottom-right'
-    | 'bottom-left'
-    | 'top-center'
-    | 'bottom-center';
+    | 'topRight'
+    | 'topLeft'
+    | 'bottomRight'
+    | 'bottomLeft'
+    | 'topCenter'
+    | 'bottomCenter';
 }
 
 const Toast: React.FC<ToastProps> = ({
@@ -35,7 +35,7 @@ const Toast: React.FC<ToastProps> = ({
   message,
   duration = 5000,
   onClose,
-  position = 'top-right',
+  position = 'topRight',
 }) => {
   useEffect(() => {
     if (duration > 0) {
