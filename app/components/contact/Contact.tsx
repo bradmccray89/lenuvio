@@ -5,13 +5,8 @@ import styles from './Contact.module.css';
 import { MdEmail } from 'react-icons/md';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { GithubLogo } from '@/public/icons/GithubLogo';
+import { ToastFunctions } from '@/app/types/toast';
 
-interface ToastFunctions {
-  success: (title: string, message?: string, duration?: number) => string;
-  error: (title: string, message?: string, duration?: number) => string;
-  warning: (title: string, message?: string, duration?: number) => string;
-  info: (title: string, message?: string, duration?: number) => string;
-}
 interface ContactProps {
   selectedService?: string;
   onShowToast?: ToastFunctions;
@@ -119,7 +114,6 @@ export const Contact: React.FC<ContactProps> = ({
   };
 
   // Update your Contact component to handle the new response format
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);

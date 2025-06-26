@@ -71,7 +71,7 @@ export async function POST(req: Request) {
     const autoReplyResult = await resend.emails.send(autoReplyEmail);
 
     if (autoReplyResult.error) {
-      console.error('⚠️ Auto-reply email failed:', autoReplyResult.error);
+      console.error('Auto-reply email failed:', autoReplyResult.error);
       // Don't throw error - notification was successful
     } else {
       console.log(

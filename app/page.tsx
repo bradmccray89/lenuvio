@@ -34,7 +34,7 @@ export default function Home() {
       <section id='contact'>
         <Contact onShowToast={{ success, error, warning, info }} />
       </section>
-      <Footer />
+      <Footer onShowToast={{ success, error, warning, info }} />
     </main>
   );
 }

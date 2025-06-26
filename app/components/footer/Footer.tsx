@@ -1,3 +1,4 @@
+// app/components/footer/Footer.tsx - Updated with proper newsletter integration
 'use client';
 
 import React, { useState } from 'react';
@@ -7,23 +8,104 @@ import { GithubLogo } from '@/public/icons/GithubLogo';
 import { MdEmail } from 'react-icons/md';
 import { TwitterLogo } from '@/public/icons/TwitterLogo';
 import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
+import { ToastFunctions } from '@/app/types/toast';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onShowToast?: ToastFunctions;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Here you would typically send the email to your newsletter service
-    console.log('Newsletter signup:', newsletterEmail);
+    if (!newsletterEmail.trim()) {
+      if (onShowToast) {
+        onShowToast.error('Email Required', 'Please enter your email address.');
+      } else {
+        alert('Please enter your email address.');
+      }
+      return;
+    }
 
-    // For now, just show an alert
-    alert(
-      "Thanks for subscribing! I'll keep you updated on new projects and insights."
-    );
+    setIsSubmitting(true);
 
-    // Reset form
-    setNewsletterEmail('');
+    try {
+      console.log('Adding email to newsletter:', newsletterEmail);
+
+      const response = await fetch('/api/audience', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: newsletterEmail.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.details || result.error || 'Failed to subscribe'
+        );
+      }
+
+      console.log('Newsletter signup successful:', result);
+
+      if (result.resubscribed) {
+        if (onShowToast) {
+          onShowToast.success(
+            'Welcome Back! 🎉',
+            'You have been successfully resubscribed to our newsletter.',
+            8000
+          );
+        }
+      } else if (result.alreadyExists) {
+        if (onShowToast) {
+          onShowToast.info(
+            'Already Subscribed! ✅',
+            'This email is already actively subscribed to our newsletter.',
+            8000
+          );
+        }
+      } else if (result.newSubscriber) {
+        if (onShowToast) {
+          onShowToast.success(
+            'Successfully Subscribed! 🚀',
+            'Welcome to Lenuvio Updates! Check your email for a welcome message.',
+            8000
+          );
+        }
+      } else {
+        // Fallback for success without specific type
+        if (onShowToast) {
+          onShowToast.success(
+            'Successfully Subscribed!',
+            'Thank you for subscribing to our newsletter.',
+            8000
+          );
+        }
+      }
+
+      setNewsletterEmail('');
+    } catch (err) {
+      console.error('Newsletter signup error:', err);
+
+      if (onShowToast) {
+        onShowToast.error(
+          'Subscription Failed',
+          err instanceof Error
+            ? err.message
+            : 'Something went wrong. Please try again.',
+          8000
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleNavClick = (sectionId: string) => {
@@ -230,7 +312,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            {/* Mini Newsletter */}
+            {/* Newsletter */}
             <div className={styles.newsletterSection}>
               <h5 className={styles.newsletterTitle}>Project Updates</h5>
               <p className={styles.newsletterDescription}>
@@ -246,10 +328,14 @@ export const Footer: React.FC = () => {
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder='your@email.com'
                   className={styles.newsletterInput}
+                  disabled={isSubmitting}
                   required
                 />
-                <button type='submit' className={styles.newsletterButton}>
-                  Subscribe
+                <button
+                  type='submit'
+                  className={styles.newsletterButton}
+                  disabled={isSubmitting || !newsletterEmail.trim()}>
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </form>
             </div>
