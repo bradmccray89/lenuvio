@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation'; // Add this import
 import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 import { MobileMenu } from './MobileMenu';
@@ -10,6 +11,7 @@ import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 const navigationItems: NavItem[] = [
   { label: 'Home', href: '#home', id: 'home' },
   { label: 'About', href: '#about', id: 'about' },
+  { label: 'Blog', href: '/blog', id: 'blog' },
   { label: 'Services', href: '#services', id: 'services' },
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
@@ -19,6 +21,7 @@ export const Navigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScrollPosition();
+  const pathname = usePathname(); // Get current pathname
 
   // Track mouse position for glow effects
   useEffect(() => {
@@ -30,61 +33,62 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Scroll-based active section detection
+  // Set active section based on current page
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navigationItems.map((item) => item.id);
-      const scrollPosition = window.scrollY + 120; // Offset for navbar height
+    if (pathname === '/blog' || pathname.startsWith('/blog/')) {
+      setActiveSection('blog');
+    } else {
+      // Only run scroll detection on home page
+      const handleScroll = () => {
+        const sections = navigationItems
+          .filter((item) => item.href.startsWith('#'))
+          .map((item) => item.id);
+        const scrollPosition = window.scrollY + 120;
 
-      // Find which section we're currently in
-      let currentSection = 'home'; // Default to home
+        let currentSection = 'home';
 
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
+        for (const sectionId of sections) {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
 
-          // Check if we're in this section
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            currentSection = sectionId;
-            break;
-          }
+            if (
+              scrollPosition >= offsetTop &&
+              scrollPosition < offsetTop + offsetHeight
+            ) {
+              currentSection = sectionId;
+              break;
+            }
 
-          // Special case: if we're past the last section, keep it active
-          if (
-            sectionId === sections[sections.length - 1] &&
-            scrollPosition >= offsetTop
-          ) {
-            currentSection = sectionId;
+            if (
+              sectionId === sections[sections.length - 1] &&
+              scrollPosition >= offsetTop
+            ) {
+              currentSection = sectionId;
+            }
           }
         }
-      }
 
-      setActiveSection(currentSection);
-    };
+        setActiveSection(currentSection);
+      };
 
-    // Debounce scroll events for better performance
-    let ticking = false;
-    const debouncedScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+      let ticking = false;
+      const debouncedScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
 
-    window.addEventListener('scroll', debouncedScroll, { passive: true });
+      window.addEventListener('scroll', debouncedScroll, { passive: true });
+      setTimeout(handleScroll, 100);
 
-    // Call once on mount to set initial state
-    setTimeout(handleScroll, 100);
-
-    return () => window.removeEventListener('scroll', debouncedScroll);
-  }, []);
+      return () => window.removeEventListener('scroll', debouncedScroll);
+    }
+  }, [pathname]);
 
   // Close mobile menu on escape key
   useEffect(() => {
@@ -100,19 +104,31 @@ export const Navigation: React.FC = () => {
 
   const isScrolled = scrollY > 20;
 
-  const handleNavClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      // Calculate offset to account for fixed navbar only on smaller screens
-      const elementPosition = element.offsetTop;
+  const handleNavClick = (item: NavItem) => {
+    // Handle external routes (like /blog)
+    if (item.href.startsWith('/')) {
+      window.location.href = item.href;
+      return;
+    }
 
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth',
-      });
+    // Handle section scrolling (like #home, #about)
+    if (item.href.startsWith('#')) {
+      // If we're on blog page, navigate to home first
+      if (pathname !== '/') {
+        window.location.href = `/${item.href}`;
+        return;
+      }
 
-      // Immediately update active section for better UX
-      setActiveSection(id);
+      // If we're on home page, scroll to section
+      const element = document.getElementById(item.id);
+      if (element) {
+        const elementPosition = element.offsetTop;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth',
+        });
+        setActiveSection(item.id);
+      }
     }
   };
 
@@ -158,12 +174,8 @@ export const Navigation: React.FC = () => {
               <div className={styles.desktopNav}>
                 {navigationItems.map((item) => (
                   <div key={item.id} className={styles.navItem}>
-                    <a
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.id);
-                      }}
+                    <button // Changed from <a> to <button>
+                      onClick={() => handleNavClick(item)}
                       className={`${styles.navLink} ${
                         activeSection === item.id ? styles.navLinkActive : ''
                       }`}>
@@ -173,7 +185,7 @@ export const Navigation: React.FC = () => {
                       {activeSection === item.id && (
                         <div className={styles.activeIndicator} />
                       )}
-                    </a>
+                    </button>
                   </div>
                 ))}
 
@@ -181,7 +193,14 @@ export const Navigation: React.FC = () => {
                 <div className={styles.ctaContainer}>
                   <button
                     className={styles.ctaButton}
-                    onClick={() => handleNavClick('contact')}>
+                    onClick={() => {
+                      const contactItem = navigationItems.find(
+                        (item) => item.id === 'contact'
+                      );
+                      if (contactItem) {
+                        handleNavClick(contactItem);
+                      }
+                    }}>
                     <span className={styles.ctaButtonText}>Get Started</span>
                   </button>
                 </div>

@@ -1,0 +1,640 @@
+/* app/components/blog/MDXContent.module.css - Professional MDX Styling */
+
+.mdxWrapper {
+  /* Container for the entire MDX content */
+  max-width: none;
+  color: #e2e8f0;
+  line-height: 1.8;
+  font-size: 1.125rem;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+}
+
+/* Typography Hierarchy */
+.mdxWrapper h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 2rem 0;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.mdxWrapper h1::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #22d3ee, #8b5cf6);
+  border-radius: 2px;
+}
+
+.mdxWrapper h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 3rem 0 1.5rem 0;
+  line-height: 1.3;
+  position: relative;
+  padding-left: 24px;
+  scroll-margin-top: 100px; /* For anchor links */
+}
+
+.mdxWrapper h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 80%;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  border-radius: 2px;
+}
+
+.mdxWrapper h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 24px;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #22d3ee, transparent);
+  opacity: 0.6;
+}
+
+.mdxWrapper h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 2.5rem 0 1rem 0;
+  line-height: 1.4;
+  position: relative;
+  scroll-margin-top: 100px;
+}
+
+.mdxWrapper h3::before {
+  content: '▶';
+  color: #22d3ee;
+  font-size: 0.8em;
+  margin-right: 12px;
+  opacity: 0.7;
+}
+
+.mdxWrapper h4 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 2rem 0 1rem 0;
+  line-height: 1.4;
+  position: relative;
+}
+
+.mdxWrapper h4::before {
+  content: '●';
+  color: #8b5cf6;
+  font-size: 0.7em;
+  margin-right: 10px;
+  opacity: 0.8;
+}
+
+.mdxWrapper h5,
+.mdxWrapper h6 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin: 1.5rem 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+/* Paragraphs and Text */
+.mdxWrapper p {
+  margin: 1.5rem 0;
+  color: #cbd5e1;
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+.mdxWrapper p:first-child {
+  font-size: 1.25rem;
+  color: #e2e8f0;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  padding-left: 4px;
+  border-left: 3px solid rgba(6, 182, 212, 0.3);
+  padding-left: 20px;
+  background: rgba(6, 182, 212, 0.02);
+  padding: 20px;
+  border-radius: 0 12px 12px 0;
+}
+
+.mdxWrapper strong {
+  color: #f1f5f9;
+  font-weight: 600;
+  position: relative;
+}
+
+.mdxWrapper em {
+  color: #22d3ee;
+  font-style: italic;
+}
+
+/* Links */
+.mdxWrapper a {
+  color: #22d3ee;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.3);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.mdxWrapper a:hover {
+  color: #06b6d4;
+  background: rgba(6, 182, 212, 0.1);
+  border-bottom-color: rgba(6, 182, 212, 0.6);
+  transform: translateY(-1px);
+}
+
+.mdxWrapper a::before {
+  content: '🔗';
+  font-size: 0.8em;
+  margin-right: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mdxWrapper a:hover::before {
+  opacity: 1;
+}
+
+/* Lists */
+.mdxWrapper ul,
+.mdxWrapper ol {
+  margin: 1.5rem 0;
+  padding-left: 0;
+}
+
+.mdxWrapper ul {
+  list-style: none;
+}
+
+.mdxWrapper ul li {
+  position: relative;
+  margin: 0.75rem 0;
+  padding-left: 32px;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.mdxWrapper ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.mdxWrapper ul li:hover::before {
+  transform: translateY(-50%) scale(1.2);
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+}
+
+.mdxWrapper ol {
+  counter-reset: custom-counter;
+  list-style: none;
+}
+
+.mdxWrapper ol li {
+  position: relative;
+  margin: 0.75rem 0;
+  padding-left: 40px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  counter-increment: custom-counter;
+}
+
+.mdxWrapper ol li::before {
+  content: counter(custom-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Nested lists */
+.mdxWrapper ul ul,
+.mdxWrapper ol ol,
+.mdxWrapper ul ol,
+.mdxWrapper ol ul {
+  margin: 0.5rem 0;
+  padding-left: 24px;
+}
+
+.mdxWrapper ul ul li::before {
+  width: 6px;
+  height: 6px;
+  background: rgba(34, 211, 238, 0.6);
+}
+
+/* Blockquotes */
+.mdxWrapper blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  background: rgba(6, 182, 212, 0.05);
+  border-left: 4px solid #22d3ee;
+  border-radius: 0 16px 16px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mdxWrapper blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: rgba(34, 211, 238, 0.2);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.mdxWrapper blockquote::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+}
+
+.mdxWrapper blockquote p {
+  margin: 0;
+  font-style: italic;
+  color: #e2e8f0;
+  font-size: 1.125rem;
+  position: relative;
+  z-index: 2;
+}
+
+.mdxWrapper blockquote cite {
+  display: block;
+  margin-top: 1rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.mdxWrapper blockquote cite::before {
+  content: '— ';
+}
+
+/* Code Styling */
+.mdxWrapper code {
+  background: rgba(0, 0, 0, 0.6);
+  color: #22d3ee;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family:
+    'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
+    'Courier New', monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  position: relative;
+}
+
+.mdxWrapper code::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mdxWrapper code:hover::before {
+  opacity: 1;
+}
+
+/* Pre and Code Blocks */
+.mdxWrapper pre {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.mdxWrapper pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+}
+
+.mdxWrapper pre::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow:
+    20px 0 0 #f59e0b,
+    40px 0 0 #22c55e;
+}
+
+.mdxWrapper pre code {
+  background: none;
+  padding: 0;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  border: none;
+  line-height: 1.6;
+  display: block;
+}
+
+/* Syntax highlighting improvements */
+.mdxWrapper pre code .token.comment {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.mdxWrapper pre code .token.keyword {
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
+.mdxWrapper pre code .token.string {
+  color: #22d3ee;
+}
+
+.mdxWrapper pre code .token.number {
+  color: #f59e0b;
+}
+
+.mdxWrapper pre code .token.function {
+  color: #06b6d4;
+}
+
+/* Tables */
+.mdxWrapper table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mdxWrapper thead {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.mdxWrapper th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: #f1f5f9;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+  position: relative;
+}
+
+.mdxWrapper th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+}
+
+.mdxWrapper td {
+  padding: 1rem 1.5rem;
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.mdxWrapper tbody tr:hover td {
+  background: rgba(6, 182, 212, 0.05);
+}
+
+.mdxWrapper tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Images */
+.mdxWrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin: 2rem 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.mdxWrapper img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Horizontal Rule */
+.mdxWrapper hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #22d3ee,
+    #8b5cf6,
+    transparent
+  );
+  margin: 3rem 0;
+  border-radius: 1px;
+}
+
+/* Callout Boxes (for special content) */
+.mdxWrapper .callout {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.mdxWrapper .callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  opacity: 0.6;
+}
+
+.mdxWrapper .callout-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #dbeafe;
+}
+
+.mdxWrapper .callout-info::before {
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+}
+
+.mdxWrapper .callout-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #fef3c7;
+}
+
+.mdxWrapper .callout-warning::before {
+  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+}
+
+.mdxWrapper .callout-success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #dcfce7;
+}
+
+.mdxWrapper .callout-success::before {
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+}
+
+.mdxWrapper .callout-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fee2e2;
+}
+
+.mdxWrapper .callout-error::before {
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mdxWrapper {
+    font-size: 1rem;
+  }
+
+  .mdxWrapper h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mdxWrapper h2 {
+    font-size: 1.875rem;
+    margin: 2rem 0 1rem 0;
+    padding-left: 20px;
+  }
+
+  .mdxWrapper h3 {
+    font-size: 1.5rem;
+  }
+
+  .mdxWrapper h4 {
+    font-size: 1.25rem;
+  }
+
+  .mdxWrapper pre {
+    padding: 1rem;
+    margin: 1.5rem -1rem;
+    border-radius: 0;
+  }
+
+  .mdxWrapper table {
+    font-size: 0.875rem;
+  }
+
+  .mdxWrapper th,
+  .mdxWrapper td {
+    padding: 0.75rem 1rem;
+  }
+
+  .mdxWrapper blockquote {
+    margin: 1.5rem -1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0 12px 12px 0;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .mdxWrapper {
+    color: black;
+    background: white;
+  }
+
+  .mdxWrapper h1,
+  .mdxWrapper h2,
+  .mdxWrapper h3,
+  .mdxWrapper h4,
+  .mdxWrapper h5,
+  .mdxWrapper h6 {
+    color: black;
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+
+  .mdxWrapper a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  .mdxWrapper pre,
+  .mdxWrapper code {
+    background: #f5f5f5;
+    color: black;
+    border: 1px solid #ccc;
+  }
+}

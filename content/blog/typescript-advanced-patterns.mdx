@@ -1,0 +1,148 @@
+---
+title: 'Advanced TypeScript Patterns for Better React Development'
+excerpt: "Explore advanced TypeScript patterns that will improve your React applications' type safety, maintainability, and developer experience."
+publishedAt: '2024-01-25'
+category: 'Development'
+tags: ['TypeScript', 'React', 'Advanced Patterns', 'Type Safety']
+featured: false
+metaTitle: 'Advanced TypeScript Patterns for React - Lenuvio Blog'
+metaDescription: 'Master advanced TypeScript patterns for React development including generics, conditional types, and utility types.'
+---
+
+# Advanced TypeScript Patterns for Better React Development
+
+TypeScript has become essential for building maintainable React applications. Let's explore advanced patterns that will take your TypeScript skills to the next level.
+
+## Generic Components
+
+Create reusable components with strong type safety:
+
+```typescript
+interface ListProps<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+  keyExtractor: (item: T) => string;
+}
+
+function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={keyExtractor(item)}>
+          {renderItem(item)}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// Usage
+<List
+  items={users}
+  renderItem={(user) => <span>{user.name}</span>}
+  keyExtractor={(user) => user.id}
+/>
+```
+
+## Conditional Types
+
+Create types that adapt based on conditions:
+
+```typescript
+type ApiResponse<T> = T extends string
+  ? { message: T }
+  : T extends number
+    ? { count: T }
+    : { data: T };
+
+// Usage
+type StringResponse = ApiResponse<string>; // { message: string }
+type NumberResponse = ApiResponse<number>; // { count: number }
+type UserResponse = ApiResponse<User>; // { data: User }
+```
+
+## Utility Types for Props
+
+Leverage TypeScript's utility types for better component APIs:
+
+```typescript
+interface BaseButtonProps {
+  variant: 'primary' | 'secondary';
+  size: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+}
+
+// Extract only specific props
+type ButtonVariant = Pick<BaseButtonProps, 'variant'>;
+
+// Omit specific props
+type ButtonWithoutVariant = Omit<BaseButtonProps, 'variant'>;
+
+// Make all props optional
+type PartialButton = Partial<BaseButtonProps>;
+
+// Make specific props required
+type RequiredButton = Required<Pick<BaseButtonProps, 'variant'>> &
+  Partial<Omit<BaseButtonProps, 'variant'>>;
+```
+
+## Discriminated Unions
+
+Create type-safe state management:
+
+```typescript
+type LoadingState = {
+  status: 'loading';
+};
+
+type SuccessState = {
+  status: 'success';
+  data: User[];
+};
+
+type ErrorState = {
+  status: 'error';
+  error: string;
+};
+
+type AsyncState = LoadingState | SuccessState | ErrorState;
+
+function UserList({ state }: { state: AsyncState }) {
+  switch (state.status) {
+    case 'loading':
+      return <div>Loading...</div>;
+    case 'success':
+      // TypeScript knows state.data exists here
+      return <div>{state.data.length} users found</div>;
+    case 'error':
+      // TypeScript knows state.error exists here
+      return <div>Error: {state.error}</div>;
+  }
+}
+```
+
+## Higher-Order Component Types
+
+Type-safe HOCs:
+
+```typescript
+function withLoading<P extends object>(
+  Component: React.ComponentType<P>
+) {
+  return (props: P & { isLoading: boolean }) => {
+    if (props.isLoading) {
+      return <div>Loading...</div>;
+    }
+    return <Component {...props} />;
+  };
+}
+
+// Usage
+const UserListWithLoading = withLoading(UserList);
+```
+
+## Conclusion
+
+These advanced TypeScript patterns provide better type safety, improved developer experience, and more maintainable code. Start incorporating them into your React applications to catch errors early and build more robust applications.
+
+Remember: the goal is not to use every advanced feature, but to choose the right patterns that solve real problems in your codebase.

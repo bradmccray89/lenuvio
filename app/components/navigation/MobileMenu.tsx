@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation'; // Add this import
 import { NavItem } from '@/app/types/navigation';
 import styles from './MobileMenu.module.css';
 import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
@@ -18,6 +19,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const pathname = usePathname(); // Get current pathname
 
   // Handle mounting/unmounting with animation
   useEffect(() => {
@@ -45,16 +47,34 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     };
   }, [isOpen]);
 
-  // Handle navigation click
-  const handleNavClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+  // Handle navigation click with support for both internal and external routes
+  const handleNavClick = (item: NavItem) => {
+    // Handle external routes (like /blog)
+    if (item.href.startsWith('/')) {
+      window.location.href = item.href;
+      onClose();
+      return;
     }
-    onClose();
+
+    // Handle section scrolling (like #home, #about)
+    if (item.href.startsWith('#')) {
+      // If we're on blog page, navigate to home first
+      if (pathname !== '/') {
+        window.location.href = `/${item.href}`;
+        onClose();
+        return;
+      }
+
+      // If we're on home page, scroll to section
+      const element = document.getElementById(item.id);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+      onClose();
+    }
   };
 
   // Don't render if shouldn't be shown
@@ -126,15 +146,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   style={
                     { '--delay': `${index * 0.1}s` } as React.CSSProperties
                   }>
-                  <a
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.id);
-                    }}
+                  <button // Changed from <a> to <button>
+                    onClick={() => handleNavClick(item)}
                     className={styles.menuNavLink}>
                     <span className={styles.menuNavText}>{item.label}</span>
-                  </a>
+                  </button>
                 </div>
               ))}
             </nav>
@@ -143,7 +159,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             <div className={styles.menuFooter}>
               <button
                 className={styles.menuCta}
-                onClick={() => handleNavClick('contact')}>
+                onClick={() => {
+                  const contactItem = items.find(
+                    (item) => item.id === 'contact'
+                  );
+                  if (contactItem) {
+                    handleNavClick(contactItem);
+                  }
+                }}>
                 <span className={styles.menuCtaText}>Get Started</span>
               </button>
             </div>

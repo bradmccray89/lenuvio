@@ -168,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
                 <TwitterLogo fill='white' />
               </a>
               <a
-                href='mailto:hello@lenuvio.com'
+                href='mailto:hello@lenuv.io'
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.socialLink}
