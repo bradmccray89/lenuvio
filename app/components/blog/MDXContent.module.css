@@ -607,34 +607,3 @@
     border-radius: 0 12px 12px 0;
   }
 }
-
-/* Print Styles */
-@media print {
-  .mdxWrapper {
-    color: black;
-    background: white;
-  }
-
-  .mdxWrapper h1,
-  .mdxWrapper h2,
-  .mdxWrapper h3,
-  .mdxWrapper h4,
-  .mdxWrapper h5,
-  .mdxWrapper h6 {
-    color: black;
-    background: none;
-    -webkit-text-fill-color: initial;
-  }
-
-  .mdxWrapper a {
-    color: #0066cc;
-    text-decoration: underline;
-  }
-
-  .mdxWrapper pre,
-  .mdxWrapper code {
-    background: #f5f5f5;
-    color: black;
-    border: 1px solid #ccc;
-  }
-}

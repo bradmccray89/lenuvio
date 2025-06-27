@@ -1,4 +1,4 @@
-// app/blog/[slug]/BlogPostClient.tsx - Updated with professional styling
+// app/blog/[slug]/BlogPostClient.tsx - Fixed with proper unique keys
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -13,12 +13,13 @@ import {
   MdArrowBack,
   MdShare,
   MdBookmark,
-  MdPrint,
   MdLightbulb,
   MdCode,
   MdTrendingUp,
 } from 'react-icons/md';
 import { formatDate } from '@/app/lib/blog/utils';
+import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
+import { TwitterLogo } from '@/public/icons/TwitterLogo';
 
 interface BlogPostClientProps {
   post: BlogPost;
@@ -35,8 +36,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
   // Generate table of contents
   useEffect(() => {
     const headings = Array.from(document.querySelectorAll('h2, h3, h4')).map(
-      (heading) => ({
-        id: heading.id,
+      (heading, index) => ({
+        id: heading.id || `heading-${index}`,
         title: heading.textContent || '',
         level: parseInt(heading.tagName.charAt(1)),
       })
@@ -103,20 +104,16 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     }
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
       case 'development':
-        return <MdCode />;
+        return <MdCode key={`icon-${category}`} />;
       case 'design':
-        return <MdLightbulb />;
+        return <MdLightbulb key={`icon-${category}`} />;
       case 'technology':
-        return <MdTrendingUp />;
+        return <MdTrendingUp key={`icon-${category}`} />;
       default:
-        return <MdCode />;
+        return <MdCode key={`icon-default`} />;
     }
   };
 
@@ -162,7 +159,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
           <div className={styles.headerBackground}>
             <div className={styles.particles}>
               {Array.from({ length: 15 }, (_, i) => (
-                <div key={i} className={styles.particle} />
+                <div key={`particle-${i}`} className={styles.particle} />
               ))}
             </div>
             <div className={styles.geometricGrid} />
@@ -171,7 +168,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
           <div className={styles.headerContent}>
             <nav className={styles.breadcrumb}>
               <Link href='/blog' className={styles.backLink}>
-                <MdArrowBack />
+                <MdArrowBack key='back-arrow' />
                 Back to Blog
               </Link>
               <span className={styles.breadcrumbSeparator}>/</span>
@@ -184,10 +181,11 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 {post.category}
               </span>
               <span className={styles.readTime}>
-                <MdAccessTime /> {Math.ceil(post.readingTime)} min read
+                <MdAccessTime key='access-time' /> {Math.ceil(post.readingTime)}{' '}
+                min read
               </span>
               <span className={styles.publishDate}>
-                <MdCalendarToday />
+                <MdCalendarToday key='calendar' />
                 {formatDate(post.publishedAt)}
               </span>
             </div>
@@ -200,22 +198,15 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 onClick={handleShare}
                 className={styles.actionButton}
                 title='Share this post'>
-                <MdShare />
+                <MdShare key='share-icon' />
                 <span>Share</span>
               </button>
               <button
                 onClick={handleBookmark}
                 className={`${styles.actionButton} ${isBookmarked ? styles.bookmarked : ''}`}
                 title={isBookmarked ? 'Remove bookmark' : 'Bookmark this post'}>
-                <MdBookmark />
+                <MdBookmark key='bookmark-icon' />
                 <span>{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
-              </button>
-              <button
-                onClick={handlePrint}
-                className={styles.actionButton}
-                title='Print this post'>
-                <MdPrint />
-                <span>Print</span>
               </button>
             </div>
           </div>
@@ -233,13 +224,13 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 {post.tags.length > 0 && (
                   <section className={styles.tagsSection}>
                     <h3 className={styles.tagsSectionTitle}>
-                      <MdLightbulb />
+                      <MdLightbulb key='tags-icon' />
                       Related Topics
                     </h3>
                     <div className={styles.tags}>
-                      {post.tags.map((tag) => (
+                      {post.tags.map((tag, index) => (
                         <Link
-                          key={tag}
+                          key={`tag-${tag}-${index}`}
                           href={`/blog?tag=${encodeURIComponent(tag)}`}
                           className={styles.tag}>
                           #{tag}
@@ -296,9 +287,9 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                   <div className={styles.tocWidget}>
                     <h3 className={styles.tocTitle}>Contents</h3>
                     <nav className={styles.toc}>
-                      {tableOfContents.map(({ id, title, level }) => (
+                      {tableOfContents.map(({ id, title, level }, index) => (
                         <a
-                          key={id}
+                          key={`toc-${id}-${index}`}
                           href={`#${id}`}
                           className={`${styles.tocItem} ${styles[`tocLevel${level}`]} ${
                             activeHeading === id ? styles.tocActive : ''
@@ -349,7 +340,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     <button
                       onClick={handleShare}
                       className={styles.shareButton}>
-                      <MdShare /> Share
+                      <MdShare key='share-widget-icon' /> Share
                     </button>
                     <button
                       onClick={() => {
@@ -357,7 +348,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         window.open(twitterUrl, '_blank');
                       }}
                       className={styles.shareButton}>
-                      🐦 Twitter
+                      <TwitterLogo />
+                      Twitter
                     </button>
                     <button
                       onClick={() => {
@@ -365,7 +357,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         window.open(linkedinUrl, '_blank');
                       }}
                       className={styles.shareButton}>
-                      💼 LinkedIn
+                      <LinkedInLogo />
+                      LinkedIn
                     </button>
                   </div>
                 </div>
@@ -385,9 +378,9 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 </p>
               </div>
               <div className={styles.relatedGrid}>
-                {relatedPosts.map((relatedPost) => (
+                {relatedPosts.map((relatedPost, index) => (
                   <Link
-                    key={relatedPost.slug}
+                    key={`related-${relatedPost.slug}-${index}`}
                     href={`/blog/${relatedPost.slug}`}
                     className={styles.relatedCard}>
                     <div className={styles.relatedContent}>
@@ -397,8 +390,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                           {relatedPost.category}
                         </span>
                         <span className={styles.relatedReadTime}>
-                          <MdAccessTime /> {Math.ceil(relatedPost.readingTime)}{' '}
-                          min
+                          <MdAccessTime key={`related-time-${index}`} />{' '}
+                          {Math.ceil(relatedPost.readingTime)} min
                         </span>
                       </div>
                       <h3 className={styles.relatedPostTitle}>
@@ -408,8 +401,10 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         {relatedPost.excerpt}
                       </p>
                       <div className={styles.relatedTags}>
-                        {relatedPost.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className={styles.relatedTag}>
+                        {relatedPost.tags.slice(0, 3).map((tag, tagIndex) => (
+                          <span
+                            key={`related-tag-${tag}-${index}-${tagIndex}`}
+                            className={styles.relatedTag}>
                             #{tag}
                           </span>
                         ))}
