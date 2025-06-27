@@ -23,7 +23,7 @@ export async function generateMetadata({
     const { slug } = await params; // Await params here
     const post = getPostBySlug(slug);
 
-    return {
+    const item = {
       title: post.seo?.metaTitle || `${post.title} - Lenuvio Blog`,
       description: post.seo?.metaDescription || post.excerpt,
       keywords: [post.category, ...post.tags].join(', '),
@@ -56,6 +56,10 @@ export async function generateMetadata({
         canonical: `https://lenuv.io/blog/${post.slug}`,
       },
     };
+
+    console.log('Generated metadata for post:', item.openGraph.images[0].url);
+
+    return item;
   } catch {
     return {
       title: 'Post Not Found - Lenuvio Blog',

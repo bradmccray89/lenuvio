@@ -33,14 +33,31 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
   const [activeHeading, setActiveHeading] = useState<string>('');
   const [isBookmarked, setIsBookmarked] = useState(false);
 
+  // Helper: slugify (matches rehype-slug)
+  function slugify(text: string) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
   // Generate table of contents
   useEffect(() => {
     const headings = Array.from(document.querySelectorAll('h2, h3, h4')).map(
-      (heading, index) => ({
-        id: heading.id || `heading-${index}`,
-        title: heading.textContent || '',
-        level: parseInt(heading.tagName.charAt(1)),
-      })
+      (heading, index) => {
+        let id = heading.id;
+        if (!id) {
+          id = slugify(heading.textContent || '') || `heading-${index}`;
+          heading.id = id; // Set the id if missing
+        }
+        return {
+          id,
+          title: heading.textContent || '',
+          level: parseInt(heading.tagName.charAt(1)),
+        };
+      }
     );
     setTableOfContents(headings);
 
@@ -296,10 +313,15 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
-                            document.getElementById(id)?.scrollIntoView({
-                              behavior: 'smooth',
-                              block: 'start',
-                            });
+                            const el = document.getElementById(id);
+                            if (el) {
+                              el.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start',
+                              });
+                              // Update the URL hash without scrolling again
+                              history.replaceState(null, '', `#${id}`);
+                            }
                           }}>
                           {title}
                         </a>

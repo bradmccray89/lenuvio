@@ -1,19 +1,20 @@
-/* app/components/blog/MDXContent.module.css - Professional MDX Styling */
+/* app/components/blog/MDXContent.module.css - Improved responsive design */
 
 .mdxWrapper {
-  /* Container for the entire MDX content */
   max-width: none;
   color: #e2e8f0;
-  line-height: 1.8;
+  line-height: 1.7;
   font-size: 1.125rem;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
     Arial, sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Typography Hierarchy */
+/* Typography Hierarchy - Better responsive scaling */
 .mdxWrapper h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   color: #ffffff;
   margin: 0 0 2rem 0;
@@ -28,23 +29,23 @@
 .mdxWrapper h1::after {
   content: '';
   position: absolute;
-  bottom: -12px;
+  bottom: -8px;
   left: 0;
-  width: 80px;
-  height: 4px;
+  width: clamp(60px, 15vw, 80px);
+  height: 3px;
   background: linear-gradient(90deg, #22d3ee, #8b5cf6);
   border-radius: 2px;
 }
 
 .mdxWrapper h2 {
-  font-size: 2.25rem;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 700;
   color: #ffffff;
-  margin: 3rem 0 1.5rem 0;
+  margin: 2.5rem 0 1.5rem 0;
   line-height: 1.3;
   position: relative;
-  padding-left: 24px;
-  scroll-margin-top: 100px; /* For anchor links */
+  padding-left: 20px;
+  scroll-margin-top: 100px;
 }
 
 .mdxWrapper h2::before {
@@ -53,8 +54,8 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 4px;
-  height: 80%;
+  width: 3px;
+  height: 70%;
   background: linear-gradient(135deg, #22d3ee, #8b5cf6);
   border-radius: 2px;
 }
@@ -62,19 +63,19 @@
 .mdxWrapper h2::after {
   content: '';
   position: absolute;
-  bottom: -8px;
-  left: 24px;
-  width: 60px;
+  bottom: -6px;
+  left: 20px;
+  width: clamp(40px, 10vw, 60px);
   height: 2px;
   background: linear-gradient(90deg, #22d3ee, transparent);
   opacity: 0.6;
 }
 
 .mdxWrapper h3 {
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 600;
   color: #f1f5f9;
-  margin: 2.5rem 0 1rem 0;
+  margin: 2rem 0 1rem 0;
   line-height: 1.4;
   position: relative;
   scroll-margin-top: 100px;
@@ -83,16 +84,16 @@
 .mdxWrapper h3::before {
   content: '▶';
   color: #22d3ee;
-  font-size: 0.8em;
-  margin-right: 12px;
+  font-size: 0.7em;
+  margin-right: 8px;
   opacity: 0.7;
 }
 
 .mdxWrapper h4 {
-  font-size: 1.375rem;
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
   font-weight: 600;
   color: #f8fafc;
-  margin: 2rem 0 1rem 0;
+  margin: 1.5rem 0 0.75rem 0;
   line-height: 1.4;
   position: relative;
 }
@@ -101,45 +102,42 @@
   content: '●';
   color: #8b5cf6;
   font-size: 0.7em;
-  margin-right: 10px;
+  margin-right: 8px;
   opacity: 0.8;
 }
 
 .mdxWrapper h5,
 .mdxWrapper h6 {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2vw, 1.125rem);
   font-weight: 600;
   color: #cbd5e1;
-  margin: 1.5rem 0 0.75rem 0;
+  margin: 1.25rem 0 0.5rem 0;
   line-height: 1.4;
 }
 
-/* Paragraphs and Text */
+/* Improved paragraphs and text */
 .mdxWrapper p {
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   color: #cbd5e1;
-  line-height: 1.8;
-  font-size: 1.125rem;
+  line-height: 1.7;
+  font-size: clamp(1rem, 2vw, 1.125rem);
 }
 
 .mdxWrapper p:first-child {
-  font-size: 1.25rem;
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
   color: #e2e8f0;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 2rem;
-  padding-left: 4px;
+  padding: clamp(16px, 3vw, 20px);
   border-left: 3px solid rgba(6, 182, 212, 0.3);
-  padding-left: 20px;
+  border-radius: 0 8px 8px 0;
   background: rgba(6, 182, 212, 0.02);
-  padding: 20px;
-  border-radius: 0 12px 12px 0;
 }
 
 .mdxWrapper strong {
   color: #f1f5f9;
   font-weight: 600;
-  position: relative;
 }
 
 .mdxWrapper em {
@@ -147,41 +145,28 @@
   font-style: italic;
 }
 
-/* Links */
+/* Better responsive links */
 .mdxWrapper a {
   color: #22d3ee;
   text-decoration: none;
-  border-bottom: 1px solid rgba(34, 211, 238, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-weight: 500;
   position: relative;
   padding: 2px 4px;
-  border-radius: 4px;
+  border-radius: 3px;
+  word-break: break-word;
 }
 
 .mdxWrapper a:hover {
   color: #06b6d4;
   background: rgba(6, 182, 212, 0.1);
   border-bottom-color: rgba(6, 182, 212, 0.6);
-  transform: translateY(-1px);
 }
 
-.mdxWrapper a::before {
-  content: '🔗';
-  font-size: 0.8em;
-  margin-right: 4px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.mdxWrapper a:hover::before {
-  opacity: 1;
-}
-
-/* Lists */
+/* Improved lists with better mobile spacing */
 .mdxWrapper ul,
 .mdxWrapper ol {
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   padding-left: 0;
 }
 
@@ -191,27 +176,22 @@
 
 .mdxWrapper ul li {
   position: relative;
-  margin: 0.75rem 0;
-  padding-left: 32px;
+  margin: 0.5rem 0;
+  padding-left: clamp(24px, 5vw, 32px);
   color: #cbd5e1;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .mdxWrapper ul li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.7em;
-  width: 8px;
-  height: 8px;
+  top: 0.6em;
+  width: clamp(6px, 1.5vw, 8px);
+  height: clamp(6px, 1.5vw, 8px);
   background: linear-gradient(135deg, #22d3ee, #8b5cf6);
   border-radius: 50%;
   transform: translateY(-50%);
-}
-
-.mdxWrapper ul li:hover::before {
-  transform: translateY(-50%) scale(1.2);
-  box-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
 }
 
 .mdxWrapper ol {
@@ -221,10 +201,10 @@
 
 .mdxWrapper ol li {
   position: relative;
-  margin: 0.75rem 0;
-  padding-left: 40px;
+  margin: 0.5rem 0;
+  padding-left: clamp(32px, 6vw, 40px);
   color: #cbd5e1;
-  line-height: 1.7;
+  line-height: 1.6;
   counter-increment: custom-counter;
 }
 
@@ -233,40 +213,25 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 24px;
-  height: 24px;
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
   background: linear-gradient(135deg, #22d3ee, #8b5cf6);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   font-weight: 600;
 }
 
-/* Nested lists */
-.mdxWrapper ul ul,
-.mdxWrapper ol ol,
-.mdxWrapper ul ol,
-.mdxWrapper ol ul {
-  margin: 0.5rem 0;
-  padding-left: 24px;
-}
-
-.mdxWrapper ul ul li::before {
-  width: 6px;
-  height: 6px;
-  background: rgba(34, 211, 238, 0.6);
-}
-
-/* Blockquotes */
+/* Better responsive blockquotes */
 .mdxWrapper blockquote {
-  margin: 2rem 0;
-  padding: 1.5rem 2rem;
+  margin: clamp(1.5rem, 4vw, 2rem) 0;
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
   background: rgba(6, 182, 212, 0.05);
-  border-left: 4px solid #22d3ee;
-  border-radius: 0 16px 16px 0;
+  border-left: clamp(3px, 1vw, 4px) solid #22d3ee;
+  border-radius: 0 12px 12px 0;
   position: relative;
   overflow: hidden;
 }
@@ -274,89 +239,57 @@
 .mdxWrapper blockquote::before {
   content: '"';
   position: absolute;
-  top: -10px;
-  left: 20px;
-  font-size: 4rem;
+  top: -5px;
+  left: clamp(12px, 3vw, 20px);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   color: rgba(34, 211, 238, 0.2);
   font-family: Georgia, serif;
   line-height: 1;
-}
-
-.mdxWrapper blockquote::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
 }
 
 .mdxWrapper blockquote p {
   margin: 0;
   font-style: italic;
   color: #e2e8f0;
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   position: relative;
   z-index: 2;
 }
 
 .mdxWrapper blockquote cite {
   display: block;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: #94a3b8;
-  font-size: 0.9rem;
+  font-size: clamp(0.875rem, 2vw, 0.9rem);
   font-style: normal;
   font-weight: 500;
 }
 
-.mdxWrapper blockquote cite::before {
-  content: '— ';
-}
-
-/* Code Styling */
+/* Better responsive code styling */
 .mdxWrapper code {
   background: rgba(0, 0, 0, 0.6);
   color: #22d3ee;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: clamp(3px, 1vw, 4px) clamp(6px, 1.5vw, 8px);
+  border-radius: 4px;
   font-family:
     'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
     'Courier New', monospace;
-  font-size: 0.9em;
+  font-size: clamp(0.875rem, 2vw, 0.9em);
   font-weight: 500;
   border: 1px solid rgba(34, 211, 238, 0.2);
-  position: relative;
+  word-break: break-all;
 }
 
-.mdxWrapper code::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(34, 211, 238, 0.1),
-    rgba(139, 92, 246, 0.1)
-  );
-  border-radius: 6px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.mdxWrapper code:hover::before {
-  opacity: 1;
-}
-
-/* Pre and Code Blocks */
+/* Improved responsive pre blocks */
 .mdxWrapper pre {
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(71, 85, 105, 0.4);
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 2rem 0;
+  border-radius: clamp(8px, 2vw, 16px);
+  padding: clamp(1rem, 3vw, 2rem);
+  margin: clamp(1.5rem, 4vw, 2rem) 0;
   overflow-x: auto;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .mdxWrapper pre::before {
@@ -372,60 +305,39 @@
 .mdxWrapper pre::after {
   content: '';
   position: absolute;
-  top: 12px;
-  left: 20px;
-  width: 12px;
-  height: 12px;
+  top: clamp(8px, 2vw, 12px);
+  left: clamp(12px, 3vw, 20px);
+  width: clamp(8px, 2vw, 12px);
+  height: clamp(8px, 2vw, 12px);
   background: #ef4444;
   border-radius: 50%;
   box-shadow:
-    20px 0 0 #f59e0b,
-    40px 0 0 #22c55e;
+    clamp(16px, 4vw, 20px) 0 0 #f59e0b,
+    clamp(32px, 8vw, 40px) 0 0 #22c55e;
 }
 
 .mdxWrapper pre code {
   background: none;
   padding: 0;
   color: #e2e8f0;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   border: none;
-  line-height: 1.6;
+  line-height: 1.5;
   display: block;
+  word-break: normal;
 }
 
-/* Syntax highlighting improvements */
-.mdxWrapper pre code .token.comment {
-  color: #6b7280;
-  font-style: italic;
-}
-
-.mdxWrapper pre code .token.keyword {
-  color: #8b5cf6;
-  font-weight: 600;
-}
-
-.mdxWrapper pre code .token.string {
-  color: #22d3ee;
-}
-
-.mdxWrapper pre code .token.number {
-  color: #f59e0b;
-}
-
-.mdxWrapper pre code .token.function {
-  color: #06b6d4;
-}
-
-/* Tables */
+/* Better responsive tables */
 .mdxWrapper table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin: 2rem 0;
+  margin: clamp(1.5rem, 4vw, 2rem) 0;
   background: rgba(30, 41, 59, 0.6);
-  border-radius: 16px;
+  border-radius: clamp(8px, 2vw, 16px);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .mdxWrapper thead {
@@ -433,32 +345,21 @@
 }
 
 .mdxWrapper th {
-  padding: 1rem 1.5rem;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
   text-align: left;
   color: #f1f5f9;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 2px solid rgba(6, 182, 212, 0.3);
-  position: relative;
-}
-
-.mdxWrapper th::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
 }
 
 .mdxWrapper td {
-  padding: 1rem 1.5rem;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
   color: #cbd5e1;
   border-bottom: 1px solid rgba(71, 85, 105, 0.3);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .mdxWrapper tbody tr:hover td {
@@ -469,21 +370,16 @@
   border-bottom: none;
 }
 
-/* Images */
+/* Improved responsive images */
 .mdxWrapper img {
   width: 100%;
   height: auto;
-  border-radius: 16px;
-  margin: 2rem 0;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-radius: clamp(8px, 2vw, 16px);
+  margin: clamp(1.5rem, 4vw, 2rem) 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-}
-
-.mdxWrapper img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 /* Horizontal Rule */
@@ -497,113 +393,295 @@
     #8b5cf6,
     transparent
   );
-  margin: 3rem 0;
+  margin: clamp(2rem, 5vw, 3rem) 0;
   border-radius: 1px;
 }
 
-/* Callout Boxes (for special content) */
-.mdxWrapper .callout {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid;
-  position: relative;
-  overflow: hidden;
+/* Interactive Elements - Better touch targets on mobile */
+.mdxWrapper button {
+  min-height: 44px; /* Better touch target */
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  color: #cbd5e1;
+  border-radius: 6px;
+  padding: clamp(6px, 2vw, 8px) clamp(10px, 3vw, 12px);
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation; /* Better mobile interaction */
 }
 
-.mdxWrapper .callout::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  opacity: 0.6;
+.mdxWrapper button:hover {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: #22d3ee;
 }
 
-.mdxWrapper .callout-info {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
-  color: #dbeafe;
+.mdxWrapper button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.3);
 }
 
-.mdxWrapper .callout-info::before {
-  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-}
-
-.mdxWrapper .callout-warning {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.3);
-  color: #fef3c7;
-}
-
-.mdxWrapper .callout-warning::before {
-  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
-}
-
-.mdxWrapper .callout-success {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.3);
-  color: #dcfce7;
-}
-
-.mdxWrapper .callout-success::before {
-  background: linear-gradient(90deg, transparent, #22c55e, transparent);
-}
-
-.mdxWrapper .callout-error {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: #fee2e2;
-}
-
-.mdxWrapper .callout-error::before {
-  background: linear-gradient(90deg, transparent, #ef4444, transparent);
-}
-
-/* Responsive Design */
+/* Better mobile-specific styles */
 @media (max-width: 768px) {
   .mdxWrapper {
     font-size: 1rem;
-  }
-
-  .mdxWrapper h1 {
-    font-size: 2.25rem;
-    margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 
   .mdxWrapper h2 {
-    font-size: 1.875rem;
+    padding-left: 16px;
     margin: 2rem 0 1rem 0;
-    padding-left: 20px;
   }
 
-  .mdxWrapper h3 {
-    font-size: 1.5rem;
+  .mdxWrapper h2::before {
+    width: 2px;
   }
 
-  .mdxWrapper h4 {
-    font-size: 1.25rem;
+  .mdxWrapper h3::before {
+    font-size: 0.6em;
+    margin-right: 6px;
   }
 
   .mdxWrapper pre {
-    padding: 1rem;
-    margin: 1.5rem -1rem;
+    margin-left: -20px;
+    margin-right: -20px;
     border-radius: 0;
+    padding: 1rem;
   }
 
+  .mdxWrapper blockquote {
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .mdxWrapper code {
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
+
+  /* Better table handling on mobile */
   .mdxWrapper table {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 0;
   }
 
   .mdxWrapper th,
   .mdxWrapper td {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Stack table cells on very small screens */
+  @media (max-width: 480px) {
+    .mdxWrapper table,
+    .mdxWrapper thead,
+    .mdxWrapper tbody,
+    .mdxWrapper th,
+    .mdxWrapper td,
+    .mdxWrapper tr {
+      display: block;
+    }
+
+    .mdxWrapper thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    .mdxWrapper tr {
+      border: 1px solid rgba(71, 85, 105, 0.3);
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      padding: 0.75rem;
+      background: rgba(30, 41, 59, 0.6);
+    }
+
+    .mdxWrapper td {
+      border: none !important;
+      border-bottom: 1px solid rgba(71, 85, 105, 0.2) !important;
+      position: relative;
+      padding-left: 50% !important;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .mdxWrapper td:before {
+      content: attr(data-label) ':';
+      position: absolute;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+  }
+
+  /* Better button spacing on mobile */
+  .mdxWrapper button {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+  }
+
+  /* Ensure copy buttons are visible on mobile */
+  .mdxWrapper .group .opacity-0 {
+    opacity: 1 !important;
+    position: static !important;
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .mdxWrapper {
+    font-size: 1.0625rem;
+  }
+
+  .mdxWrapper pre {
+    padding: 1.5rem;
   }
 
   .mdxWrapper blockquote {
-    margin: 1.5rem -1rem;
-    padding: 1rem 1.5rem;
-    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.75rem;
   }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1400px) {
+  .mdxWrapper {
+    font-size: 1.1875rem;
+  }
+
+  .mdxWrapper h1 {
+    font-size: 3.25rem;
+  }
+
+  .mdxWrapper h2 {
+    font-size: 2.5rem;
+  }
+
+  .mdxWrapper pre {
+    padding: 2.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .mdxWrapper {
+    color: black;
+    background: white;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .mdxWrapper h1,
+  .mdxWrapper h2,
+  .mdxWrapper h3,
+  .mdxWrapper h4,
+  .mdxWrapper h5,
+  .mdxWrapper h6 {
+    color: black;
+    background: none;
+    -webkit-text-fill-color: initial;
+    page-break-after: avoid;
+  }
+
+  .mdxWrapper a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  .mdxWrapper pre,
+  .mdxWrapper code {
+    background: #f5f5f5;
+    color: black;
+    border: 1px solid #ccc;
+  }
+
+  .mdxWrapper button {
+    display: none;
+  }
+
+  .mdxWrapper blockquote {
+    border-left: 3px solid #666;
+    background: #f9f9f9;
+  }
+
+  .mdxWrapper img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .mdxWrapper * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .mdxWrapper {
+    color: #ffffff;
+  }
+
+  .mdxWrapper h1,
+  .mdxWrapper h2,
+  .mdxWrapper h3,
+  .mdxWrapper h4,
+  .mdxWrapper h5,
+  .mdxWrapper h6 {
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+
+  .mdxWrapper a {
+    color: #00ffff;
+    border-bottom: 2px solid #00ffff;
+  }
+
+  .mdxWrapper code {
+    background: #000000;
+    color: #00ffff;
+    border: 2px solid #ffffff;
+  }
+
+  .mdxWrapper button {
+    border: 2px solid #ffffff;
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+/* Focus styles for better accessibility */
+.mdxWrapper a:focus,
+.mdxWrapper button:focus {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for anchor links */
+.mdxWrapper [id] {
+  scroll-margin-top: 100px;
+}
+
+/* Better text selection */
+.mdxWrapper ::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #ffffff;
+}
+
+.mdxWrapper ::-moz-selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #ffffff;
 }
