@@ -3,6 +3,23 @@
   min-height: 100vh;
   background: #0f172a;
   color: #e5e5e5;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.blogPage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Hero Section */
@@ -31,8 +48,8 @@
 
 .particle {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 2px;
+  height: 2px;
   background: #22d3ee;
   border-radius: 50%;
   opacity: 0.6;
@@ -104,6 +121,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 32px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Featured Section */

@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { BlogPost } from '@/app/types/blog';
 import { Navigation } from '@/app/components';
+import { Footer } from '@/app/components/footer/Footer';
 import Link from 'next/link';
 import styles from './Blog.module.css';
 import { MdSearch, MdAccessTime, MdCalendarToday } from 'react-icons/md';
@@ -77,7 +78,15 @@ export function BlogClientPage({
         <div className={styles.heroBackground}>
           <div className={styles.particles}>
             {Array.from({ length: 20 }, (_, i) => (
-              <div key={i} className={styles.particle} />
+              <div 
+                key={i} 
+                className={styles.particle}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 8}s`,
+                  animationDuration: `${8 + Math.random() * 4}s`
+                }}
+              />
             ))}
           </div>
           <div className={styles.geometricGrid} />
@@ -305,6 +314,8 @@ export function BlogClientPage({
           </main>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }
