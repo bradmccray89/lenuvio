@@ -32,6 +32,14 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
   >([]);
   const [activeHeading, setActiveHeading] = useState<string>('');
   const [isBookmarked, setIsBookmarked] = useState(false);
+  type Particle = { id: number; left: number; delay: number; duration: number };
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isClient, setIsClient] = useState(false);
+
+  // Fix hydration by only rendering particles on client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Helper: slugify (matches rehype-slug)
   function slugify(text: string) {
@@ -43,24 +51,48 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
       .replace(/-+/g, '-');
   }
 
+  const generateParticles = () => {
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      const left = Math.random() * 100;
+      const delay = Math.random() * 8;
+      const duration = 8 + Math.random() * 4;
+
+      particles.push({
+        id: i,
+        left,
+        delay,
+        duration,
+      });
+    }
+    return particles;
+  };
+
+  useEffect(() => {
+    // Generate particles only once on client mount
+    if (isClient) {
+      setParticles(generateParticles());
+    }
+  }, [isClient]);
+
   // Generate table of contents
   useEffect(() => {
     // Wait for MDX content to render, then generate TOC
     const generateTOC = () => {
-      const headings = Array.from(document.querySelectorAll('article h2, article h3, article h4')).map(
-        (heading, index) => {
-          let id = heading.id;
-          if (!id) {
-            id = slugify(heading.textContent || '') || `heading-${index}`;
-            heading.id = id; // Set the id if missing
-          }
-          return {
-            id,
-            title: heading.textContent || '',
-            level: parseInt(heading.tagName.charAt(1)),
-          };
+      const headings = Array.from(
+        document.querySelectorAll('article h2, article h3, article h4')
+      ).map((heading, index) => {
+        let id = heading.id;
+        if (!id) {
+          id = slugify(heading.textContent || '') || `heading-${index}`;
+          heading.id = id; // Set the id if missing
         }
-      );
+        return {
+          id,
+          title: heading.textContent || '',
+          level: parseInt(heading.tagName.charAt(1)),
+        };
+      });
       setTableOfContents(headings);
     };
 
@@ -95,11 +127,12 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
           if (el) {
             const headerOffset = 120;
             const elementPosition = el.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
             window.scrollTo({
               top: offsetPosition,
-              behavior: 'smooth'
+              behavior: 'smooth',
             });
           }
         }, 200); // Wait a bit longer for content to fully render
@@ -142,9 +175,9 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
           }
         }
       },
-      { 
+      {
         rootMargin: '-120px 0% -70% 0%', // Account for fixed header
-        threshold: [0, 0.25, 0.5, 0.75, 1]
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
     );
 
@@ -241,11 +274,22 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
         {/* Enhanced Header */}
         <header className={styles.articleHeader}>
           <div className={styles.headerBackground}>
-            <div className={styles.particles}>
-              {Array.from({ length: 15 }, (_, i) => (
-                <div key={`particle-${i}`} className={styles.particle} />
-              ))}
-            </div>
+            {/* Floating Particles - Only render on client */}
+            {isClient && (
+              <div className={styles.particles}>
+                {particles.map((particle) => (
+                  <div
+                    key={particle.id}
+                    className={styles.particle}
+                    style={{
+                      left: `${particle.left}%`,
+                      animationDelay: `${particle.delay}s`,
+                      animationDuration: `${particle.duration}s`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
             <div className={styles.geometricGrid} />
           </div>
 
@@ -384,12 +428,16 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             if (el) {
                               // Calculate offset for fixed header (Navigation + some padding)
                               const headerOffset = 120; // Adjust based on your header height
-                              const elementPosition = el.getBoundingClientRect().top;
-                              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                              const elementPosition =
+                                el.getBoundingClientRect().top;
+                              const offsetPosition =
+                                elementPosition +
+                                window.pageYOffset -
+                                headerOffset;
 
                               window.scrollTo({
                                 top: offsetPosition,
-                                behavior: 'smooth'
+                                behavior: 'smooth',
                               });
 
                               // Update the URL hash without scrolling again

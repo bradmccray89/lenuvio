@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { BlogPost } from '@/app/types/blog';
 import { Navigation } from '@/app/components';
 import { Footer } from '@/app/components/footer/Footer';
@@ -26,7 +26,15 @@ export function BlogClientPage({
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedTag, setSelectedTag] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
+  type Particle = { id: number; left: number; delay: number; duration: number };
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isClient, setIsClient] = useState(false);
   const postsPerPage = 6;
+
+  // Fix hydration by only rendering particles on client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Filter posts based on search and filters
   const filteredPosts = useMemo(() => {
@@ -69,6 +77,30 @@ export function BlogClientPage({
     setCurrentPage(1);
   };
 
+  const generateParticles = () => {
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      const left = Math.random() * 100;
+      const delay = Math.random() * 8;
+      const duration = 8 + Math.random() * 4;
+
+      particles.push({
+        id: i,
+        left,
+        delay,
+        duration,
+      });
+    }
+    return particles;
+  };
+
+  useEffect(() => {
+    // Generate particles only once on client mount
+    if (isClient) {
+      setParticles(generateParticles());
+    }
+  }, [isClient]);
+
   return (
     <div className={styles.blogPage}>
       <Navigation />
@@ -76,19 +108,22 @@ export function BlogClientPage({
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBackground}>
-          <div className={styles.particles}>
-            {Array.from({ length: 20 }, (_, i) => (
-              <div 
-                key={i} 
-                className={styles.particle}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 8}s`,
-                  animationDuration: `${8 + Math.random() * 4}s`
-                }}
-              />
-            ))}
-          </div>
+          {/* Floating Particles - Only render on client */}
+          {isClient && (
+            <div className={styles.particles}>
+              {particles.map((particle) => (
+                <div
+                  key={particle.id}
+                  className={styles.particle}
+                  style={{
+                    left: `${particle.left}%`,
+                    animationDelay: `${particle.delay}s`,
+                    animationDuration: `${particle.duration}s`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
           <div className={styles.geometricGrid} />
         </div>
 
@@ -314,7 +349,7 @@ export function BlogClientPage({
           </main>
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

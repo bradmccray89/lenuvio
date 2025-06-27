@@ -16,7 +16,6 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
 
@@ -36,12 +35,16 @@
   border-radius: 50%;
   opacity: 0.8;
   animation: float-particle 8s linear infinite;
-  box-shadow: 0 0 6px #00ff88, 0 0 12px #00ff88;
+  box-shadow:
+    0 0 6px #00ff88,
+    0 0 12px #00ff88;
 }
 
 .particle:nth-child(2n) {
   background: #00d4ff;
-  box-shadow: 0 0 6px #00d4ff, 0 0 12px #00d4ff;
+  box-shadow:
+    0 0 6px #00d4ff,
+    0 0 12px #00d4ff;
   animation-duration: 12s;
   animation-delay: -2s;
   width: 1.5px;
@@ -50,7 +53,9 @@
 
 .particle:nth-child(3n) {
   background: #ff0080;
-  box-shadow: 0 0 6px #ff0080, 0 0 12px #ff0080;
+  box-shadow:
+    0 0 6px #ff0080,
+    0 0 12px #ff0080;
   animation-duration: 10s;
   animation-delay: -4s;
   width: 0.5px;
@@ -59,7 +64,9 @@
 
 .particle:nth-child(4n) {
   background: #ffffff;
-  box-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+  box-shadow:
+    0 0 4px #ffffff,
+    0 0 8px #ffffff;
   animation-duration: 15s;
   opacity: 0.4;
   width: 2px;
@@ -70,10 +77,8 @@
 .geometricGrid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
-      rgba(6, 182, 212, 0.03) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: grid-move 20s linear infinite;
