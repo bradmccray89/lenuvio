@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error('💥 Contact form API error:', error);
+    console.error('Contact form API error:', error);
 
     const errorResponse = {
       success: false,

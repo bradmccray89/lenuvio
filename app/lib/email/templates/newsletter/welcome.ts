@@ -17,8 +17,7 @@ export interface NewsletterData {
 export const newsletterWelcomeTemplate = (
   data: NewsletterData
 ): EmailTemplate => {
-  const { email, name } = data;
-  const displayName = name || 'there';
+  const { email } = data;
 
   const unsubscribeToken = generateUnsubscribeToken(email);
   const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://lenuv.io'}/api/unsubscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(unsubscribeToken)}`;
@@ -26,7 +25,7 @@ export const newsletterWelcomeTemplate = (
   return {
     to: email,
     from: 'hello@lenuv.io',
-    subject: `Welcome to Lenuvio Updates, ${displayName}! 🚀`,
+    subject: `Welcome to Lenuvio Updates! 🚀`,
     html: `
       <!DOCTYPE html>
       <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -59,7 +58,7 @@ export const newsletterWelcomeTemplate = (
                       <tr>
                         <td>
                           <p class="email-text">
-                            Hi ${displayName},<br><br>
+                            Hi,<br><br>
                             Welcome to Lenuvio Updates! I'm excited to have you join our community of innovators, creators, and tech enthusiasts.
                           </p>
                         </td>
@@ -156,7 +155,7 @@ export const newsletterWelcomeTemplate = (
       </html>
     `,
     text: `
-Hi ${displayName},
+Hi,
 
 Welcome to Lenuvio Updates! I'm excited to have you join our community.
 
