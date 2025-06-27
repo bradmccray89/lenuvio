@@ -45,40 +45,107 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
 
   // Generate table of contents
   useEffect(() => {
-    const headings = Array.from(document.querySelectorAll('h2, h3, h4')).map(
-      (heading, index) => {
-        let id = heading.id;
-        if (!id) {
-          id = slugify(heading.textContent || '') || `heading-${index}`;
-          heading.id = id; // Set the id if missing
+    // Wait for MDX content to render, then generate TOC
+    const generateTOC = () => {
+      const headings = Array.from(document.querySelectorAll('article h2, article h3, article h4')).map(
+        (heading, index) => {
+          let id = heading.id;
+          if (!id) {
+            id = slugify(heading.textContent || '') || `heading-${index}`;
+            heading.id = id; // Set the id if missing
+          }
+          return {
+            id,
+            title: heading.textContent || '',
+            level: parseInt(heading.tagName.charAt(1)),
+          };
         }
-        return {
-          id,
-          title: heading.textContent || '',
-          level: parseInt(heading.tagName.charAt(1)),
-        };
-      }
-    );
-    setTableOfContents(headings);
+      );
+      setTableOfContents(headings);
+    };
+
+    // Use a small delay to ensure MDX content is fully rendered
+    const timeoutId = setTimeout(generateTOC, 100);
+
+    // Also listen for when MDX content changes
+    const observer = new MutationObserver(() => {
+      generateTOC();
+    });
+
+    const articleElement = document.querySelector('article');
+    if (articleElement) {
+      observer.observe(articleElement, {
+        childList: true,
+        subtree: true,
+      });
+    }
 
     // Check if post is bookmarked
     const bookmarks = JSON.parse(
       localStorage.getItem('blog-bookmarks') || '[]'
     );
     setIsBookmarked(bookmarks.includes(post.slug));
+
+    // Handle initial hash navigation on page load
+    const handleInitialHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) {
+            const headerOffset = 120;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 200); // Wait a bit longer for content to fully render
+      }
+    };
+
+    // Handle initial load with hash
+    if (document.readyState === 'complete') {
+      handleInitialHash();
+    } else {
+      window.addEventListener('load', handleInitialHash);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+      window.removeEventListener('load', handleInitialHash);
+    };
   }, [post.slug]);
 
   // Track active heading for TOC
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Find the heading that's most visible in the viewport
+        let mostVisible: Element | null = null;
+        let maxRatio = 0;
+
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveHeading(entry.target.id);
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            mostVisible = entry.target;
+            maxRatio = entry.intersectionRatio;
           }
         });
+
+        if (mostVisible) {
+          const htmlElement = mostVisible as HTMLElement;
+          if (htmlElement.id) {
+            setActiveHeading(htmlElement.id);
+          }
+        }
       },
-      { rootMargin: '-100px 0% -80% 0%' }
+      { 
+        rootMargin: '-120px 0% -70% 0%', // Account for fixed header
+        threshold: [0, 0.25, 0.5, 0.75, 1]
+      }
     );
 
     tableOfContents.forEach(({ id }) => {
@@ -315,12 +382,20 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             e.preventDefault();
                             const el = document.getElementById(id);
                             if (el) {
-                              el.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start',
+                              // Calculate offset for fixed header (Navigation + some padding)
+                              const headerOffset = 120; // Adjust based on your header height
+                              const elementPosition = el.getBoundingClientRect().top;
+                              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                              window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
                               });
+
                               // Update the URL hash without scrolling again
-                              history.replaceState(null, '', `#${id}`);
+                              setTimeout(() => {
+                                history.replaceState(null, '', `#${id}`);
+                              }, 100);
                             }
                           }}>
                           {title}
