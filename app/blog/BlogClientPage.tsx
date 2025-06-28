@@ -8,8 +8,7 @@ import Link from 'next/link';
 import styles from './Blog.module.css';
 import { MdSearch, MdAccessTime, MdCalendarToday } from 'react-icons/md';
 import { formatDate } from '@/app/lib/blog/utils';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation'; // Fixed import
 
 interface BlogClientPageProps {
   initialPosts: BlogPost[];
@@ -25,7 +24,7 @@ export function BlogClientPage({
   tags,
 }: BlogClientPageProps) {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const router = useRouter(); // This is now the correct App Router hook
 
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get('search') || ''
@@ -48,25 +47,39 @@ export function BlogClientPage({
     category?: string;
     tag?: string;
   }) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams);
 
-    if (newFilters.search || searchTerm) {
-      params.set('search', newFilters.search ?? searchTerm);
-    }
-    if (newFilters.category || selectedCategory) {
-      params.set('category', newFilters.category ?? selectedCategory);
-    }
-    if (newFilters.tag || selectedTag) {
-      params.set('tag', newFilters.tag ?? selectedTag);
+    // Update or remove search param
+    if (newFilters.search !== undefined) {
+      if (newFilters.search) {
+        params.set('search', newFilters.search);
+      } else {
+        params.delete('search');
+      }
     }
 
-    // Remove empty parameters
-    if (!newFilters.search && !searchTerm) params.delete('search');
-    if (!newFilters.category && !selectedCategory) params.delete('category');
-    if (!newFilters.tag && !selectedTag) params.delete('tag');
+    // Update or remove category param
+    if (newFilters.category !== undefined) {
+      if (newFilters.category) {
+        params.set('category', newFilters.category);
+      } else {
+        params.delete('category');
+      }
+    }
+
+    // Update or remove tag param
+    if (newFilters.tag !== undefined) {
+      if (newFilters.tag) {
+        params.set('tag', newFilters.tag);
+      } else {
+        params.delete('tag');
+      }
+    }
 
     const newURL = params.toString() ? `?${params.toString()}` : '/blog';
-    router.replace(newURL);
+
+    // Use replace to avoid adding to history and maintain scroll position
+    router.replace(newURL, { scroll: false });
   };
 
   // Fix hydration by only rendering particles on client
@@ -130,7 +143,7 @@ export function BlogClientPage({
     setSelectedCategory('');
     setSelectedTag('');
     setCurrentPage(1);
-    router.replace('/blog');
+    router.replace('/blog', { scroll: false });
   };
 
   const generateParticles = () => {
@@ -307,20 +320,31 @@ export function BlogClientPage({
             {/* Active Filters */}
             {(selectedCategory || selectedTag || searchTerm) && (
               <div className={styles.activeFilters}>
-                <span className={styles.filterLabel}>Active filters:</span>
-                {searchTerm && (
-                  <span className={styles.filterTag}>
-                    Search: &quot;{searchTerm}&quot;
-                  </span>
-                )}
-                {selectedCategory && (
-                  <span className={styles.filterTag}>
-                    Category: {selectedCategory}
-                  </span>
-                )}
-                {selectedTag && (
-                  <span className={styles.filterTag}>Tag: {selectedTag}</span>
-                )}
+                <div className={styles.activeFiltersContent}>
+                  <span className={styles.filterLabel}>Active filters:</span>
+                  <div className={styles.filterTagsContainer}>
+                    {searchTerm && (
+                      <span className={styles.filterTag}>
+                        Search: &quot;{searchTerm}&quot;
+                      </span>
+                    )}
+                    {selectedCategory && (
+                      <span className={styles.filterTag}>
+                        Category: {selectedCategory}
+                      </span>
+                    )}
+                    {selectedTag && (
+                      <span className={styles.filterTag}>
+                        Tag: {selectedTag}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <button
+                  onClick={clearFilters}
+                  className={styles.clearFiltersTop}>
+                  Clear All
+                </button>
               </div>
             )}
 

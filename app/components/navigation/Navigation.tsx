@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation'; // Add this import
+import { usePathname, useRouter } from 'next/navigation'; // Fixed import
 import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 import { MobileMenu } from './MobileMenu';
@@ -21,7 +21,8 @@ export const Navigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScrollPosition();
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
+  const router = useRouter(); // This is now the correct App Router hook
 
   // Track mouse position for glow effects
   useEffect(() => {
@@ -107,7 +108,7 @@ export const Navigation: React.FC = () => {
   const handleNavClick = (item: NavItem) => {
     // Handle external routes (like /blog)
     if (item.href.startsWith('/')) {
-      window.location.href = item.href;
+      router.push(item.href);
       return;
     }
 
@@ -115,7 +116,7 @@ export const Navigation: React.FC = () => {
     if (item.href.startsWith('#')) {
       // If we're on blog page, navigate to home first
       if (pathname !== '/') {
-        window.location.href = `/${item.href}`;
+        router.push(`/${item.href}`);
         return;
       }
 
@@ -128,6 +129,9 @@ export const Navigation: React.FC = () => {
           behavior: 'smooth',
         });
         setActiveSection(item.id);
+
+        // Update URL without affecting scroll
+        window.history.replaceState(null, '', `#${item.id}`);
       }
     }
   };

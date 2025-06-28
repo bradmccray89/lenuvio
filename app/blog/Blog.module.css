@@ -416,9 +416,10 @@
 /* Active Filters */
 .activeFilters {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: 32px;
   padding: 20px;
   background: rgba(6, 182, 212, 0.1);
@@ -426,9 +427,26 @@
   border-radius: 16px;
 }
 
+.activeFiltersContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.filterTagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
 .filterLabel {
   font-weight: 600;
   color: #22d3ee;
+  white-space: nowrap;
 }
 
 .filterTag {
@@ -437,6 +455,28 @@
   border-radius: 20px;
   font-size: 0.875rem;
   color: #ffffff;
+  white-space: nowrap;
+}
+
+.clearFiltersTop {
+  padding: 8px 16px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  color: #fca5a5;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.clearFiltersTop:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* Posts Grid */
@@ -752,6 +792,30 @@
     width: 100%;
     justify-content: center;
     margin-bottom: 16px;
+  }
+
+  .activeFilters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .activeFiltersContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .filterTagsContainer {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .clearFiltersTop {
+    align-self: center;
+    width: fit-content;
+    min-width: 120px;
   }
 }
 

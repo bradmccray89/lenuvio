@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation'; // Add this import
+import { usePathname, useRouter } from 'next/navigation'; // Fixed import
 import { NavItem } from '@/app/types/navigation';
 import styles from './MobileMenu.module.css';
 import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
@@ -19,7 +19,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
+  const router = useRouter(); // This is now the correct App Router hook
 
   // Handle mounting/unmounting with animation
   useEffect(() => {
@@ -51,7 +52,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   const handleNavClick = (item: NavItem) => {
     // Handle external routes (like /blog)
     if (item.href.startsWith('/')) {
-      window.location.href = item.href;
+      router.push(item.href);
       onClose();
       return;
     }
@@ -60,7 +61,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     if (item.href.startsWith('#')) {
       // If we're on blog page, navigate to home first
       if (pathname !== '/') {
-        window.location.href = `/${item.href}`;
+        router.push(`/${item.href}`);
         onClose();
         return;
       }
@@ -68,10 +69,16 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       // If we're on home page, scroll to section
       const element = document.getElementById(item.id);
       if (element) {
+        // // Prevent default scroll behavior when navigating
+        // const currentScrollY = window.scrollY;
+
         element.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
+
+        // Update URL without affecting scroll
+        window.history.replaceState(null, '', `#${item.id}`);
       }
       onClose();
     }
