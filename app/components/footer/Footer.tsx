@@ -9,6 +9,8 @@ import { MdEmail } from 'react-icons/md';
 import { TwitterLogo } from '@/public/icons/TwitterLogo';
 import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 import { ToastFunctions } from '@/app/types/toast';
+import { NavItem } from '@/app/types/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface FooterProps {
   onShowToast?: ToastFunctions;
@@ -17,6 +19,16 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const navigationItems: NavItem[] = [
+    { label: 'Home', href: '#home', id: 'home' },
+    { label: 'About', href: '#about', id: 'about' },
+    { label: 'Blog', href: '/blog', id: 'blog' },
+    { label: 'Services', href: '#services', id: 'services' },
+    { label: 'Contact', href: '#contact', id: 'contact' },
+  ];
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,16 +120,34 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
     }
   };
 
-  const handleNavClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.offsetTop - navbarHeight;
+  const handleNavClick = (item: NavItem) => {
+    // Handle external routes (like /blog)
+    if (item.href.startsWith('/')) {
+      router.push(item.href);
+      return;
+    }
 
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth',
-      });
+    // Handle section scrolling (like #home, #about)
+    if (item.href.startsWith('#')) {
+      // If we're on blog page, navigate to home first
+      if (pathname !== '/') {
+        router.push(`/${item.href}`);
+        return;
+      }
+
+      // If we're on home page, scroll to section
+      const element = document.getElementById(item.id);
+      if (element) {
+        const elementPosition = element.offsetTop;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth',
+        });
+        // setActiveSection(item.id);
+
+        // Update URL without affecting scroll
+        window.history.replaceState(null, '', `#${item.id}`);
+      }
     }
   };
 
@@ -182,34 +212,15 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
           <div className={styles.footerSection}>
             <h4 className={styles.sectionTitle}>Navigation</h4>
             <ul className={styles.footerLinks}>
-              <li>
-                <button
-                  onClick={() => handleNavClick('home')}
-                  className={styles.footerLink}>
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick('about')}
-                  className={styles.footerLink}>
-                  About
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className={styles.footerLink}>
-                  Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick('contact')}
-                  className={styles.footerLink}>
-                  Contact
-                </button>
-              </li>
+              {navigationItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => handleNavClick(item)}
+                    className={styles.footerLink}>
+                    {item.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -223,7 +234,12 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
                     const url = new URL(window.location.href);
                     url.searchParams.set('service', 'full-stack');
                     window.history.pushState({}, '', url.toString());
-                    handleNavClick('contact');
+                    const contactItem = navigationItems.find(
+                      (item) => item.id === 'contact'
+                    );
+                    if (contactItem) {
+                      handleNavClick(contactItem);
+                    }
                   }}
                   className={styles.footerLink}>
                   Full-Stack Development
@@ -235,7 +251,12 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
                     const url = new URL(window.location.href);
                     url.searchParams.set('service', 'cloud');
                     window.history.pushState({}, '', url.toString());
-                    handleNavClick('contact');
+                    const contactItem = navigationItems.find(
+                      (item) => item.id === 'contact'
+                    );
+                    if (contactItem) {
+                      handleNavClick(contactItem);
+                    }
                   }}
                   className={styles.footerLink}>
                   Cloud & DevOps
@@ -247,7 +268,12 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
                     const url = new URL(window.location.href);
                     url.searchParams.set('service', 'ui-ux');
                     window.history.pushState({}, '', url.toString());
-                    handleNavClick('contact');
+                    const contactItem = navigationItems.find(
+                      (item) => item.id === 'contact'
+                    );
+                    if (contactItem) {
+                      handleNavClick(contactItem);
+                    }
                   }}
                   className={styles.footerLink}>
                   UI/UX Architecture
@@ -259,7 +285,12 @@ export const Footer: React.FC<FooterProps> = ({ onShowToast }) => {
                     const url = new URL(window.location.href);
                     url.searchParams.set('service', 'transformation');
                     window.history.pushState({}, '', url.toString());
-                    handleNavClick('contact');
+                    const contactItem = navigationItems.find(
+                      (item) => item.id === 'contact'
+                    );
+                    if (contactItem) {
+                      handleNavClick(contactItem);
+                    }
                   }}
                   className={styles.footerLink}>
                   Digital Transformation

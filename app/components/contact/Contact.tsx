@@ -144,11 +144,11 @@ export const Contact: React.FC<ContactProps> = ({
         );
       }
 
-      // Reset form
+      // Reset form and service selection
       setFormData({
         name: '',
         email: '',
-        service: formData.service,
+        service: '',
         message: '',
       });
     } catch (err) {

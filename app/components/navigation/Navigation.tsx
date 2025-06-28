@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation'; // Fixed import
+import { usePathname, useRouter } from 'next/navigation';
 import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 import { MobileMenu } from './MobileMenu';
