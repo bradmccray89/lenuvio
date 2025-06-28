@@ -38,6 +38,8 @@
   box-shadow:
     0 0 6px #00ff88,
     0 0 12px #00ff88;
+  animation-fill-mode: both;
+  animation-play-state: running;
 }
 
 .particle:nth-child(2n) {

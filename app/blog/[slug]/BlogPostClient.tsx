@@ -79,8 +79,11 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
   useEffect(() => {
     // Wait for MDX content to render, then generate TOC
     const generateTOC = () => {
+      const mdxContent = document.querySelector('[data-mdx-content]');
+      if (!mdxContent) return;
+
       const headings = Array.from(
-        document.querySelectorAll('article h2, article h3, article h4')
+        mdxContent.querySelectorAll('h2, h3, h4')
       ).map((heading, index) => {
         let id = heading.id;
         if (!id) {
@@ -89,7 +92,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
         }
         return {
           id,
-          title: heading.textContent || '',
+          title: (heading.textContent || '').replace(/\s*#\s*$/, ''),
           level: parseInt(heading.tagName.charAt(1)),
         };
       });

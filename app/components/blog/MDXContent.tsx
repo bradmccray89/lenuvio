@@ -429,7 +429,7 @@ export function MDXContent({ content, className = '' }: MDXContentProps) {
   }
 
   return (
-    <div className={`${styles.mdxWrapper} ${className}`}>
+    <div className={`${styles.mdxWrapper} ${className}`} data-mdx-content>
       <MDXRemote {...mdxSource} components={components} />
     </div>
   );

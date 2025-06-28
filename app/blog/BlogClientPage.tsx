@@ -8,6 +8,8 @@ import Link from 'next/link';
 import styles from './Blog.module.css';
 import { MdSearch, MdAccessTime, MdCalendarToday } from 'react-icons/md';
 import { formatDate } from '@/app/lib/blog/utils';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 interface BlogClientPageProps {
   initialPosts: BlogPost[];
@@ -22,19 +24,59 @@ export function BlogClientPage({
   categories,
   tags,
 }: BlogClientPageProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedTag, setSelectedTag] = useState<string>('');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get('search') || ''
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get('category') || ''
+  );
+  const [selectedTag, setSelectedTag] = useState<string>(
+    searchParams.get('tag') || ''
+  );
   const [currentPage, setCurrentPage] = useState(1);
   type Particle = { id: number; left: number; delay: number; duration: number };
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isClient, setIsClient] = useState(false);
   const postsPerPage = 6;
 
+  // Update URL when filters change
+  const updateURL = (newFilters: {
+    search?: string;
+    category?: string;
+    tag?: string;
+  }) => {
+    const params = new URLSearchParams();
+
+    if (newFilters.search || searchTerm) {
+      params.set('search', newFilters.search ?? searchTerm);
+    }
+    if (newFilters.category || selectedCategory) {
+      params.set('category', newFilters.category ?? selectedCategory);
+    }
+    if (newFilters.tag || selectedTag) {
+      params.set('tag', newFilters.tag ?? selectedTag);
+    }
+
+    // Remove empty parameters
+    if (!newFilters.search && !searchTerm) params.delete('search');
+    if (!newFilters.category && !selectedCategory) params.delete('category');
+    if (!newFilters.tag && !selectedTag) params.delete('tag');
+
+    const newURL = params.toString() ? `?${params.toString()}` : '/blog';
+    router.replace(newURL);
+  };
+
   // Fix hydration by only rendering particles on client
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    setSearchTerm(searchParams.get('search') || '');
+    setSelectedCategory(searchParams.get('category') || '');
+    setSelectedTag(searchParams.get('tag') || '');
+    setCurrentPage(1);
+  }, [searchParams]);
 
   // Filter posts based on search and filters
   const filteredPosts = useMemo(() => {
@@ -68,6 +110,19 @@ export function BlogClientPage({
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setCurrentPage(1);
+    updateURL({ search: searchTerm });
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+    updateURL({ category });
+  };
+
+  const handleTagChange = (tag: string) => {
+    setSelectedTag(tag);
+    setCurrentPage(1);
+    updateURL({ tag });
   };
 
   const clearFilters = () => {
@@ -75,6 +130,7 @@ export function BlogClientPage({
     setSelectedCategory('');
     setSelectedTag('');
     setCurrentPage(1);
+    router.replace('/blog');
   };
 
   const generateParticles = () => {
@@ -201,8 +257,7 @@ export function BlogClientPage({
               <div className={styles.categoryList}>
                 <button
                   onClick={() => {
-                    setSelectedCategory('');
-                    setCurrentPage(1);
+                    handleCategoryChange('');
                   }}
                   className={`${styles.categoryItem} ${!selectedCategory ? styles.active : ''}`}>
                   All Posts
@@ -211,8 +266,7 @@ export function BlogClientPage({
                   <button
                     key={category}
                     onClick={() => {
-                      setSelectedCategory(category);
-                      setCurrentPage(1);
+                      handleCategoryChange(category);
                     }}
                     className={`${styles.categoryItem} ${selectedCategory === category ? styles.active : ''}`}>
                     {category}
@@ -230,8 +284,7 @@ export function BlogClientPage({
                     <button
                       key={tag}
                       onClick={() => {
-                        setSelectedTag(tag);
-                        setCurrentPage(1);
+                        handleTagChange(tag);
                       }}
                       className={`${styles.tagItem} ${selectedTag === tag ? styles.active : ''}`}>
                       {tag}

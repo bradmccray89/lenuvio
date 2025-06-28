@@ -71,6 +71,8 @@
   border-radius: 50%;
   opacity: 0.6;
   animation: float-particle 8s linear infinite;
+  animation-fill-mode: both;
+  animation-play-state: running;
 }
 
 .particle:nth-child(odd) {

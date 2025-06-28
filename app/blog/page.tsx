@@ -7,6 +7,7 @@ import {
 } from '@/app/lib/blog/mdx';
 // Ensure BlogClientPage.tsx exists in the same directory, or update the path below if it's elsewhere
 import { BlogClientPage } from './BlogClientPage';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Engineering Insights - Lenuvio Blog',
@@ -55,11 +56,13 @@ export default function BlogPage() {
   const tags = getAllTags();
 
   return (
-    <BlogClientPage
-      initialPosts={allPosts}
-      featuredPosts={featuredPosts}
-      categories={categories}
-      tags={tags}
-    />
+    <Suspense fallback={<div>Loading blog...</div>}>
+      <BlogClientPage
+        initialPosts={allPosts}
+        featuredPosts={featuredPosts}
+        categories={categories}
+        tags={tags}
+      />
+    </Suspense>
   );
 }
