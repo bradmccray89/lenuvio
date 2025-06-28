@@ -252,8 +252,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
             headline: post.title,
             description: post.excerpt,
             author: {
-              '@type': 'Person',
-              name: 'Brandon McCray',
+              '@type': 'Organization',
+              name: 'Lenuvio',
               url: 'https://lenuv.io',
             },
             publisher: {
@@ -371,44 +371,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                   </section>
                 )}
 
-                {/* Enhanced Author Bio */}
-                <section className={styles.authorBio}>
-                  <div className={styles.authorBioHeader}>
-                    <div className={styles.authorAvatar}>
-                      <span>BM</span>
-                    </div>
-                    <div className={styles.authorInfo}>
-                      <h3>Brandon McCray</h3>
-                      <p className={styles.authorTitle}>
-                        Founder & Lead Developer at Lenuvio
-                      </p>
-                    </div>
-                  </div>
-                  <div className={styles.authorBioContent}>
-                    <p>
-                      Full-stack developer and founder of Lenuvio, passionate
-                      about creating innovative digital solutions and sharing
-                      insights from years of experience in modern web
-                      development. Specializing in React, Next.js, and cloud
-                      architecture.
-                    </p>
-                    <div className={styles.authorLinks}>
-                      <a
-                        href='https://github.com/bradmccray89'
-                        target='_blank'
-                        rel='noopener noreferrer'>
-                        GitHub
-                      </a>
-                      <a
-                        href='https://linkedin.com/company/lenuvio'
-                        target='_blank'
-                        rel='noopener noreferrer'>
-                        LinkedIn
-                      </a>
-                      <a href='mailto:hello@lenuv.io'>Email</a>
-                    </div>
-                  </div>
-                </section>
+                {/* Removed Author Bio section completely */}
               </main>
 
               {/* Enhanced Sidebar */}

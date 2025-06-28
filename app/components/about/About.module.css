@@ -53,32 +53,27 @@
   line-height: 1.7;
 }
 
-/* Main Content Grid */
-.aboutGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+/* New Hero Statement Section */
+.heroStatement {
   margin-bottom: 100px;
-}
-
-/* Profile Section */
-.profileSection {
-  animation: fade-in-left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fade-in-up 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.profileCard {
-  position: relative;
+.heroCard {
+  max-width: 800px;
+  margin: 0 auto;
   background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(71, 85, 105, 0.3);
   border-radius: 24px;
-  padding: 40px;
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
   overflow: hidden;
 }
 
-.profileCard::before {
+.heroCard::before {
   content: '';
   position: absolute;
   top: 0;
@@ -88,78 +83,217 @@
   background: linear-gradient(90deg, transparent, #22d3ee, transparent);
 }
 
-.profileAvatar {
-  border-radius: 20px;
-  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+.heroImage {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  border-radius: 16px;
   margin: 0 auto 32px;
+  overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  font-weight: 800;
-  color: white;
   box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
 }
 
-.profileAvatar::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
-  border-radius: 24px;
-  z-index: -1;
-  opacity: 0.3;
-  animation: pulse-glow 3s ease-in-out infinite;
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
 }
 
-.profileName {
-  font-size: 1.5rem;
+.heroCard:hover .heroImg {
+  transform: scale(1.05);
+}
+
+.colorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.15) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.heroTitle {
+  font-size: 2rem;
   font-weight: 700;
   color: #ffffff;
-  text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-.profileRole {
-  font-size: 1rem;
+.heroRole {
+  font-size: 1.125rem;
   color: #22d3ee;
-  text-align: center;
   margin-bottom: 24px;
   font-weight: 500;
 }
 
-.profileDescription {
+.heroDescription {
   color: #cbd5e1;
   line-height: 1.7;
-  text-align: center;
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Story Section */
-.storySection {
-  animation: fade-in-right 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+/* New Highlights Section */
+.highlightsSection {
+  margin-bottom: 100px;
+  animation: fade-in-up 1.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.storyContent h3 {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 24px;
-  position: relative;
-  padding-left: 20px;
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.storyContent h3::before {
+.highlightCard {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.highlightCard::before {
   content: '';
   position: absolute;
+  top: 0;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 80%;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.5),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.highlightCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+}
+
+.highlightCard:hover::before {
+  transform: translateX(100%);
+}
+
+.highlightIcon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.highlightNumber {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.highlightLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.highlightDescription {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Updated Story Section - Now Single Column */
+.storySection {
+  margin-bottom: 120px;
+  animation: fade-in-up 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.storyContent {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 24px;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.storyContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+}
+
+.storyContent h3 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.storyContent h3::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #8b5cf6);
   border-radius: 2px;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.storyColumn {
+  /* No additional styles needed */
+}
+
+.storyFull {
+  /* Full width section */
 }
 
 .storyText {
@@ -167,6 +301,10 @@
   line-height: 1.8;
   font-size: 1.125rem;
   margin-bottom: 24px;
+}
+
+.storyText:last-child {
+  margin-bottom: 0;
 }
 
 .storyHighlight {
@@ -353,15 +491,19 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .aboutGrid {
+  .storyGrid {
     grid-template-columns: 1fr;
-    gap: 60px;
-    text-align: center;
+    gap: 24px;
   }
 
   .techGrid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
+  }
+
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
@@ -374,12 +516,17 @@
     margin-bottom: 60px;
   }
 
-  .profileCard {
-    padding: 32px 24px;
+  .heroCard {
+    padding: 40px 24px;
   }
 
-  .profileAvatar {
-    font-size: 40px;
+  .heroImage {
+    max-width: 100%;
+    height: 250px;
+  }
+
+  .storyContent {
+    padding: 40px 24px;
   }
 
   .techStack,
@@ -397,8 +544,8 @@
     margin-bottom: 16px;
   }
 
-  .codeElements {
-    display: none;
+  .highlightsSection {
+    margin-bottom: 80px;
   }
 }
 
@@ -411,79 +558,6 @@
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes fade-in-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fade-in-right {
-  0% {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes float-code {
-  0% {
-    transform: translateY(100vh) translateX(0px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) translateX(50px);
-    opacity: 0;
-  }
-}
-
-@keyframes grid-pulse {
-  0%,
-  100% {
-    opacity: 0.05;
-  }
-  50% {
-    opacity: 0.15;
-  }
-}
-
-@keyframes circuit-flow {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scaleX(0.5);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scaleX(1.5);
-  }
-}
-
-@keyframes circuit-flow-vertical {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scaleY(0.5);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scaleY(1.5);
   }
 }
 
