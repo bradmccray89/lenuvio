@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description:
       'Technical tutorials, development insights, and expert analysis from the world of modern software engineering.',
     images: ['/images/blog-twitter-card.jpg'],
-    creator: '@lenuvio19335',
+    creator: '@lenuviotech',
   },
   alternates: {
     canonical: 'https://lenuv.io/blog',

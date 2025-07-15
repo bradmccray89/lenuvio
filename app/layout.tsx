@@ -104,8 +104,8 @@ export const metadata: Metadata = {
   // Twitter Card configuration
   twitter: {
     card: 'summary_large_image',
-    site: '@lenuvio19335',
-    creator: '@lenuvio19335',
+    site: '@lenuviotech',
+    creator: '@lenuviotech',
     title: 'Lenuvio - Full-Stack Development & Digital Innovation',
     description:
       'Transform bold ideas into impactful digital experiences. Expert development services that deliver results.',

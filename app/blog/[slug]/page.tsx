@@ -73,7 +73,7 @@ export async function generateMetadata({
         title: post.title,
         description: post.excerpt,
         images: [`/api/og?title=${encodeURIComponent(post.title)}`],
-        creator: '@lenuvio19335',
+        creator: '@lenuviotech',
       },
 
       alternates: {
