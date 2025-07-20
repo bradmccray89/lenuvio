@@ -44,10 +44,10 @@ export async function POST(req: Request) {
     const notificationEmail = contactNotificationTemplate(formData);
 
     // Send notification email to you
-    console.log('Sending notification email to brandon@lenuv.io');
+    console.log('Sending notification email to hello@lenuv.io');
     const notificationResult = await resend.emails.send({
       ...notificationEmail,
-      to: 'brandon@lenuv.io', // Override the template's default
+      to: 'hello@lenuv.io', // Override the template's default
     });
 
     if (notificationResult.error) {
@@ -129,7 +129,7 @@ export async function GET() {
     // Test Resend connection
     const testResult = await resend.emails.send({
       from: 'Lenuvio <info@lenuv.io>',
-      to: 'brandon@lenuv.io',
+      to: 'hello@lenuv.io',
       subject: 'API Health Check',
       text: 'This is a health check email from your contact form API.',
     });
