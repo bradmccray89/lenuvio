@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
@@ -40,12 +41,12 @@ export async function GET(request: NextRequest) {
               alignItems: 'center',
               marginBottom: '40px',
             }}>
-            <div
+            <img
+              src='https://lenuv.io/images/logo.png'
+              alt='Lenuvio Logo'
+              width='60'
+              height='60'
               style={{
-                width: '60px',
-                height: '60px',
-                background: 'linear-gradient(135deg, #22d3ee, #8b5cf6)',
-                borderRadius: '12px',
                 marginRight: '20px',
               }}
             />
