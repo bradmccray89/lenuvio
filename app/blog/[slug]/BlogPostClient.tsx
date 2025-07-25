@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { BlogPost } from '@/app/types/blog';
 import { Navigation } from '@/app/components';
+import { NewsletterStickyBar } from '@/app/components/newsletter/NewsletterHero';
 import { MDXContent, ReadingProgress } from '@/app/components/blog/MDXContent';
 import Link from 'next/link';
 import styles from './BlogPost.module.css';
@@ -528,6 +529,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
           </section>
         )}
       </article>
+      <NewsletterStickyBar />
     </div>
   );
 }

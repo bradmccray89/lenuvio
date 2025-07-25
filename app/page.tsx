@@ -8,23 +8,16 @@ import { Services } from './components/services/Services';
 import { Contact } from './components/contact/Contact';
 import { Footer } from './components/footer/Footer';
 import styles from './page.module.css';
-import ToastContainer from './components/toast/ToastContainer';
-import { useToast } from './hooks/useToast';
+import { NewsletterHero } from './components/newsletter';
 
 export default function Home() {
-  const { toasts, removeToast, success, error, warning, info } = useToast();
-
   return (
     <main className={styles.mainContainer}>
-      <ToastContainer
-        toasts={toasts}
-        onClose={removeToast}
-        position='bottomRight'
-      />
       <Navigation />
       <section id='home'>
         <Hero />
       </section>
+      <NewsletterHero />
       <section id='about'>
         <About />
       </section>
@@ -32,9 +25,9 @@ export default function Home() {
         <Services />
       </section>
       <section id='contact'>
-        <Contact onShowToast={{ success, error, warning, info }} />
+        <Contact />
       </section>
-      <Footer onShowToast={{ success, error, warning, info }} />
+      <Footer />
     </main>
   );
 }

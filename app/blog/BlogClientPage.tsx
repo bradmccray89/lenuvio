@@ -8,7 +8,7 @@ import Link from 'next/link';
 import styles from './Blog.module.css';
 import { MdSearch, MdAccessTime, MdCalendarToday } from 'react-icons/md';
 import { formatDate } from '@/app/lib/blog/utils';
-import { useSearchParams, useRouter } from 'next/navigation'; // Fixed import
+import { useSearchParams, useRouter } from 'next/navigation';
 
 interface BlogClientPageProps {
   initialPosts: BlogPost[];
@@ -24,7 +24,7 @@ export function BlogClientPage({
   tags,
 }: BlogClientPageProps) {
   const searchParams = useSearchParams();
-  const router = useRouter(); // This is now the correct App Router hook
+  const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get('search') || ''

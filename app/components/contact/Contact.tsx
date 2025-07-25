@@ -5,17 +5,13 @@ import styles from './Contact.module.css';
 import { MdEmail } from 'react-icons/md';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { GithubLogo } from '@/public/icons/GithubLogo';
-import { ToastFunctions } from '@/app/types/toast';
+import { useGlobalToast } from '@/app/contexts/ToastContext';
 
 interface ContactProps {
   selectedService?: string;
-  onShowToast?: ToastFunctions;
 }
 
-export const Contact: React.FC<ContactProps> = ({
-  selectedService,
-  onShowToast,
-}) => {
+export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,6 +23,7 @@ export const Contact: React.FC<ContactProps> = ({
   const [isServicePreSelected, setIsServicePreSelected] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { success, error } = useGlobalToast();
 
   // Check for service parameter in URL or passed prop
   useEffect(() => {
@@ -136,8 +133,8 @@ export const Contact: React.FC<ContactProps> = ({
       console.log('Contact form result:', result);
 
       // Show success toast with tracking info
-      if (onShowToast && result.success) {
-        onShowToast.success(
+      if (result.success) {
+        success(
           'Message Sent Successfully!',
           `Thanks for reaching out! I'll get back to you within 48 hours. Reference: ${result.tracking?.notificationId?.slice(-6) || 'N/A'}`,
           6000
@@ -154,16 +151,13 @@ export const Contact: React.FC<ContactProps> = ({
     } catch (err) {
       console.error('Contact form error:', err);
 
-      // Show error toast
-      if (onShowToast) {
-        onShowToast.error(
-          'Failed to Send Message',
-          err instanceof Error
-            ? err.message
-            : 'Something went wrong. Please try again or contact me directly.',
-          8000
-        );
-      }
+      error(
+        'Failed to Send Message',
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong. Please try again or contact me directly.',
+        8000
+      );
     } finally {
       setIsSubmitting(false);
     }
