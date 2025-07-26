@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   const phrases = React.useMemo(
-    () => ['Innovation', 'Technology', 'Excellence', 'Vision'],
+    () => ['AI Solutions', 'Automation', 'Integrations', 'Innovation'],
     []
   );
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -145,51 +145,40 @@ export const Hero: React.FC = () => {
 
         {/* Subtitle */}
         <p className={styles.heroSubtitle}>
-          Empowering your vision with cutting-edge technology and creative
-          solutions. Turning bold ideas into impactful digital products that
-          inspire and deliver results.
+          Specialists in artificial intelligence and automation solutions that
+          transform business operations. From intelligent workflows to custom AI
+          development, we engineer systems that work smarter.
         </p>
 
         {/* CTA Buttons */}
         <div className={styles.heroActions}>
           <button
-            onClick={() => handleCtaClick('contact')}
-            className={styles.primaryCta}>
-            Let&apos;s Build Something
-            <svg
-              className={styles.ctaIcon}
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M13 7l5 5m0 0l-5 5m5-5H6'
-              />
-            </svg>
+            className={styles.primaryCta}
+            onClick={() => handleCtaClick('contact')}>
+            Start AI Project
           </button>
-
           <button
-            onClick={() => handleCtaClick('about')}
-            className={styles.secondaryCta}>
-            Learn More
+            className={styles.secondaryCta}
+            onClick={() => handleCtaClick('services')}>
+            View AI Solutions
           </button>
         </div>
 
-        {/* Stats */}
-        <div className={styles.heroStats}>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>8+</span>
-            <span className={styles.statLabel}>Years Crafting Code</span>
+        {/* Trust Indicators */}
+        <div className={styles.trustIndicators}>
+          <div className={styles.trustItem}>
+            <span className={styles.trustNumber}>AI-First</span>
+            <span className={styles.trustLabel}>Development Approach</span>
           </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>15+</span>
-            <span className={styles.statLabel}>Tech Stacks Explored</span>
+          <div className={styles.trustItem}>
+            <span className={styles.trustNumber}>7+</span>
+            <span className={styles.trustLabel}>
+              Years Technology Expertise
+            </span>
           </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>∞</span>
-            <span className={styles.statLabel}>Ideas Engineered</span>
+          <div className={styles.trustItem}>
+            <span className={styles.trustNumber}>Custom</span>
+            <span className={styles.trustLabel}>Intelligent Solutions</span>
           </div>
         </div>
       </div>

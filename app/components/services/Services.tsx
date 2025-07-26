@@ -5,83 +5,101 @@ import styles from './Services.module.css';
 export const Services: React.FC = () => {
   const services = [
     {
-      icon: '🚀',
-      title: 'Full-Stack Development',
+      icon: '🤖',
+      title: 'AI & Machine Learning Solutions',
       description:
-        'End-to-end web application development using modern frameworks and best practices. From concept to deployment, creating scalable solutions that grow with your business.',
+        'Custom artificial intelligence implementations that solve real business problems. From predictive analytics to intelligent decision systems, we build AI that delivers measurable value.',
       features: [
-        'React, Angular & Next.js Applications',
-        '.NET & Node.js Backend Development',
-        'Database Design & Optimization',
-        'API Development & Integration',
+        'Custom AI Model Development',
+        'Machine Learning Integration',
+        'Predictive Analytics Systems',
+        'Natural Language Processing',
       ],
-      cta: 'Explore Development',
-    },
-    {
-      icon: '☁️',
-      title: 'Cloud Solutions & DevOps',
-      description:
-        'Modern cloud infrastructure and deployment strategies that ensure your applications are scalable, secure, and performant across all environments.',
-      features: [
-        'AWS, Azure & Vercel Deployment',
-        'Docker Containerization',
-        'CI/CD Pipeline Setup',
-        'Performance Monitoring',
-      ],
-      cta: 'Learn About Cloud',
-    },
-    {
-      icon: '🎨',
-      title: 'UI/UX & Frontend Architecture',
-      description:
-        'Creating intuitive, responsive user interfaces with focus on user experience, accessibility, and maintainable component architecture.',
-      features: [
-        'Responsive Design Systems',
-        'Component Architecture',
-        'User-Centered Design',
-        'Performance Optimization',
-      ],
-      cta: 'See Design Work',
+      cta: 'Explore AI Development',
+      isPrimary: true,
     },
     {
       icon: '⚡',
-      title: 'Digital Transformation',
+      title: 'Intelligent Automation',
       description:
-        'Modernizing legacy systems and processes with cutting-edge technology solutions that improve efficiency and user satisfaction.',
+        'Streamline operations with smart automation that adapts and learns. We design systems that eliminate repetitive tasks and optimize workflows using AI-driven processes.',
       features: [
-        'Legacy System Migration',
-        'Process Automation',
-        'Technology Consulting',
-        'Strategic Planning',
+        'Process Automation Design',
+        'Workflow Optimization',
+        'System Integration',
+        'Performance Analytics',
       ],
-      cta: 'Start Transformation',
+      cta: 'Automate Operations',
+    },
+    {
+      icon: '🚀',
+      title: 'Custom Software Development',
+      description:
+        "Modern applications built with scalable architecture and intelligent features. When existing solutions don't fit, we create custom software that grows with your business.",
+      features: [
+        'Full-Stack Web Applications',
+        'API Development & Integration',
+        'Cloud-Native Architecture',
+        'Modern React/Next.js Interfaces',
+      ],
+      cta: 'Build Custom Solution',
     },
   ];
 
   const processSteps = [
     {
       number: '01',
-      title: 'Discovery',
+      title: 'Discovery & Analysis',
       description:
-        'Deep dive into your vision, goals, and challenges to understand exactly what success looks like for your project.',
+        'Deep dive into your processes to identify automation opportunities and AI implementation strategies that deliver maximum value.',
     },
     {
       number: '02',
-      title: 'Strategy',
+      title: 'Solution Architecture',
       description:
-        'Craft a comprehensive plan with technology choices, architecture decisions, and development roadmap.',
+        'Design intelligent systems with clear implementation roadmap, technology choices, and measurable success criteria.',
     },
     {
       number: '03',
-      title: 'Development',
+      title: 'Development & Integration',
       description:
-        'Build your solution with clean, scalable code, regular updates, and continuous collaboration.',
+        'Build and deploy AI solutions with minimal disruption, comprehensive testing, and seamless integration with existing systems.',
     },
     {
       number: '04',
-      title: 'Launch',
+      title: 'Optimization & Growth',
       description:
-        'Deploy, test, and optimize your application with ongoing support and performance monitoring.',
+        'Monitor performance, refine algorithms, and continuously improve system intelligence based on real-world data and feedback.',
+    },
+  ];
+
+  const capabilities = [
+    {
+      category: 'AI & Machine Learning',
+      items: [
+        'TensorFlow & PyTorch',
+        'OpenAI API Integration',
+        'Computer Vision',
+        'Predictive Modeling',
+      ],
+    },
+    {
+      category: 'Automation Technologies',
+      items: [
+        'Workflow Orchestration',
+        'API-First Integration',
+        'Event-Driven Systems',
+        'Process Optimization',
+      ],
+    },
+    {
+      category: 'Development Stack',
+      items: [
+        'React, Next.js, TypeScript',
+        '.NET, Node.js, Python',
+        'PostgreSQL, MongoDB',
+        'AWS, Azure, Vercel',
+      ],
     },
   ];
 
@@ -114,9 +132,6 @@ export const Services: React.FC = () => {
         behavior: 'smooth',
       });
     }
-
-    // Optional: Track analytics or trigger specific actions based on service
-    // analytics.track('service_cta_clicked', { service });
   };
 
   return (
@@ -125,10 +140,10 @@ export const Services: React.FC = () => {
       <div className={styles.servicesContent}>
         {/* Section Header */}
         <div className={styles.servicesHeader}>
-          <h2 className={styles.servicesTitle}>Creative Solutions</h2>
+          <h2 className={styles.servicesTitle}>AI-Powered Solutions</h2>
           <p className={styles.servicesSubtitle}>
-            Transforming bold ideas into powerful digital experiences through
-            cutting-edge technology and innovative problem-solving
+            Specialized in artificial intelligence and automation technologies
+            that transform how businesses operate and make decisions.
           </p>
         </div>
 
@@ -166,23 +181,52 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
+        {/* Future Platform Teaser */}
+        <div className={styles.comingSoonSection}>
+          <div className={styles.comingSoonCard}>
+            <h3 className={styles.comingSoonTitle}>🚀 EchoForge Platform</h3>
+            <p className={styles.comingSoonDescription}>
+              We&apos;re developing an enterprise AI automation platform that
+              will make intelligent workflows accessible to businesses of all
+              sizes.
+              <strong> Coming Soon.</strong>
+            </p>
+            <button className={styles.comingSoonCta}>
+              Get Early Access Updates
+            </button>
+          </div>
+        </div>
+
+        {/* Capabilities Section */}
+        <div className={styles.capabilitiesSection}>
+          <h3 className={styles.capabilitiesTitle}>Technical Expertise</h3>
+          <div className={styles.capabilitiesGrid}>
+            {capabilities.map((capability, index) => (
+              <div key={index} className={styles.capabilityCard}>
+                <h4 className={styles.capabilityCategory}>
+                  {capability.category}
+                </h4>
+                <ul className={styles.capabilityList}>
+                  {capability.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className={styles.capabilityItem}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Process Section */}
         <div className={styles.processSection}>
-          <div className={styles.processHeader}>
-            <h3 className={styles.processTitle}>How We Create Together</h3>
-            <p className={styles.processSubtitle}>
-              A collaborative approach that ensures your vision becomes reality
-            </p>
-          </div>
-
-          <div className={styles.processSteps}>
+          <h3 className={styles.processTitle}>Our AI Development Process</h3>
+          <div className={styles.processGrid}>
             {processSteps.map((step, index) => (
               <div key={index} className={styles.processStep}>
-                <div className={styles.processNumber}>{step.number}</div>
-                <h4 className={styles.processStepTitle}>{step.title}</h4>
-                <p className={styles.processStepDescription}>
-                  {step.description}
-                </p>
+                <div className={styles.stepNumber}>{step.number}</div>
+                <h4 className={styles.stepTitle}>{step.title}</h4>
+                <p className={styles.stepDescription}>{step.description}</p>
               </div>
             ))}
           </div>
@@ -195,13 +239,13 @@ export const Services: React.FC = () => {
               Ready to Build Something Amazing?
             </h3>
             <p className={styles.ctaDescription}>
-              Let&apos;s transform your bold idea into an impactful digital
-              experience that inspires and delivers exceptional results.
+              Let&apos;s discuss how artificial intelligence and automation can
+              drive measurable results for your business.
             </p>
             <button
               onClick={() => handleCtaClick('contact')}
               className={styles.ctaButton}>
-              Start Your Project
+              Schedule a Consulation
               <svg
                 className={styles.ctaIcon}
                 fill='none'
