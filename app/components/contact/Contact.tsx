@@ -36,7 +36,7 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
           ...prev,
           service: serviceParam || selectedService || '',
         }));
-        setIsServicePreSelected(true); // Mark as pre-selected
+        setIsServicePreSelected(true);
       }
     };
 
