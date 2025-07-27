@@ -9,6 +9,28 @@ export const Hero: React.FC = () => {
   type Particle = { id: number; left: number; delay: number; duration: number };
   const [particles, setParticles] = useState<Particle[]>([]);
 
+  const heroTitle = "Building Tomorrow's";
+  const heroSubtitle =
+    'Turning ambitious ideas into impactful products using AI, automation, and custom software.';
+  const heroActions = [
+    {
+      label: "Let's Build Something",
+      target: 'contact',
+      primary: true,
+    },
+    {
+      label: 'Learn More',
+      target: 'about',
+      primary: false,
+    },
+  ];
+
+  const heroDifferentiators = [
+    { label: 'Build Fast. Iterate Faster.' },
+    { label: 'Tech-Agnostic. Results-Obsessed.' },
+    { label: 'AI That Actually Works.' },
+  ];
+
   const phrases = React.useMemo(
     () => ['Innovation', 'Technology', 'Excellence', 'Vision'],
     []
@@ -93,13 +115,6 @@ export const Hero: React.FC = () => {
     }
   };
 
-  const handleScrollDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <div className={styles.hero}>
       {/* Animated Background */}
@@ -136,7 +151,7 @@ export const Hero: React.FC = () => {
       <div className={styles.heroContent}>
         {/* Main Title */}
         <h1 className={styles.heroTitle}>
-          <span className={styles.titleLine1}>Building Tomorrow&apos;s</span>
+          <span className={styles.titleLine1}>{heroTitle}</span>
           <span className={styles.titleLine2}>
             {typedText}
             {isClient && <span className={styles.typingCursor} />}
@@ -144,70 +159,46 @@ export const Hero: React.FC = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className={styles.heroSubtitle}>
-          Empowering your vision with cutting-edge technology and creative
-          solutions. Turning bold ideas into impactful digital products that
-          inspire and deliver results.
-        </p>
+        <p className={styles.heroSubtitle}>{heroSubtitle}</p>
 
         {/* CTA Buttons */}
         <div className={styles.heroActions}>
-          <button
-            onClick={() => handleCtaClick('contact')}
-            className={styles.primaryCta}>
-            Let&apos;s Build Something
-            <svg
-              className={styles.ctaIcon}
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M13 7l5 5m0 0l-5 5m5-5H6'
-              />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => handleCtaClick('about')}
-            className={styles.secondaryCta}>
-            Learn More
-          </button>
+          {heroActions.map((action, index) => (
+            <button
+              key={index}
+              onClick={() => handleCtaClick(action.target)}
+              className={
+                action.primary ? styles.primaryCta : styles.secondaryCta
+              }>
+              {action.label}
+              {action.primary && (
+                <svg
+                  className={styles.ctaIcon}
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M13 7l5 5m0 0l-5 5m5-5H6'
+                  />
+                </svg>
+              )}
+            </button>
+          ))}
         </div>
 
         {/* Stats */}
-        <div className={styles.heroStats}>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>8+</span>
-            <span className={styles.statLabel}>Years Crafting Code</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>15+</span>
-            <span className={styles.statLabel}>Tech Stacks Explored</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>∞</span>
-            <span className={styles.statLabel}>Ideas Engineered</span>
-          </div>
+        <div className={styles.heroDifferentiators}>
+          {heroDifferentiators.map((differentiator, index) => (
+            <div key={index} className={styles.differentiatorItem}>
+              <span className={styles.differentiatorLabel}>
+                {differentiator.label}
+              </span>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className={styles.scrollIndicator} onClick={handleScrollDown}>
-        <svg
-          className={styles.scrollArrow}
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'>
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M19 14l-7 7m0 0l-7-7m7 7V3'
-          />
-        </svg>
       </div>
     </div>
   );

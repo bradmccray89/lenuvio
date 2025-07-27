@@ -16,12 +16,22 @@ export const About: React.FC = () => {
     return experience;
   };
 
+  const aboutTitle = 'About Lenuvio';
+  const aboutSubtitle =
+    "Where AI, automation, and code come together to build what's next";
+  const heroTitle = 'Problem Solvers. Builders. Innovators.';
+  const heroRole = 'AI and Full-Stack Product Engineering';
+  const heroDescription =
+    'We help founders and teams bring ambitious ideas to life with practical AI, automation, and modern software. Our focus is on building products that work, save time, and actually get used.';
+  const storyTitle = 'The Journey';
+
+  const stackTitle = 'Our Stack';
+  const stackSubtitle = 'Tools we use to build, automate, and scale.';
   const techCategories = [
     {
       icon: '⚡',
       title: 'Frontend',
-      technologies:
-        'Angular, React, Next.js, JavaScript, TypeScript, HTML, SCSS, Tailwind CSS, RxJS',
+      technologies: 'Angular, React, Next.js, TypeScript, Tailwind CSS',
     },
     {
       icon: '🚀',
@@ -34,10 +44,9 @@ export const About: React.FC = () => {
       technologies: 'Vercel, Azure, AWS, Docker, GitHub Actions',
     },
     {
-      icon: '🎨',
-      title: 'UI/UX & Frontend Architecture',
-      technologies:
-        'Responsive Design, Tailwind CSS, Theming, Component Architecture, User-Centered Debugging',
+      icon: '🤖',
+      title: 'AI & Automation',
+      technologies: 'N8N, Custom AI agents, API integration, Task automation',
     },
   ];
 
@@ -45,48 +54,48 @@ export const About: React.FC = () => {
     {
       icon: '🎓',
       year: '2017',
-      title: 'The Spark',
+      title: 'Getting Started',
       description:
-        'Discovered the magic of turning creative ideas into digital reality through code. The journey of endless exploration began.',
+        'Started turning ideas into products and learning what it takes to deliver real software.',
     },
     {
       icon: '🔍',
       year: '2017-Present',
-      title: 'Continuous Exploration',
-      description:
-        'Never-ending discovery of new technologies, frameworks, and creative solutions. Always learning, always evolving.',
+      title: 'Always Exploring',
+      description: 'Constantly picking up new tech and sharpening our skills.',
     },
     {
       icon: '💡',
       year: '2024',
-      title: 'Lenuvio Born',
+      title: 'Lenuvio Launched',
       description:
-        'Launched our creative practice to empower bold visions and transform ambitious ideas into inspiring digital products.',
+        'Founded Lenuvio to help teams build faster with AI and automation.',
     },
     {
       icon: '∞',
-      year: 'Forever',
-      title: 'The Journey Continues',
+      year: 'Next',
+      title: "What's Next?",
       description:
-        'Ready to engineer your next bold idea while continuously exploring new frontiers in technology and creativity.',
+        'Working with founders to shape the future of digital products.',
     },
   ];
 
   const highlights = [
     {
-      number: `${yearsOfExperience()}+`,
-      label: 'Years Crafting Code',
-      description: 'From concept to deployment, creating solutions that scale',
+      icon: '🤔',
+      label: 'Curiosity is Required',
+      description: 'We ask "why" until we hit something worth building.',
     },
     {
-      number: '15+',
-      label: 'Tech Stacks Explored',
-      description: 'Always evolving with the latest technologies',
+      icon: '⚡',
+      label: 'Build Something Real',
+      description:
+        'We ship fast and break our own stuff before anyone else can.',
     },
     {
-      number: 'Unlimited',
-      label: 'Ideas Engineered',
-      description: 'Turning bold visions into digital reality',
+      icon: '🧑‍💻',
+      label: 'Direct Access',
+      description: 'Talk to the actual builders, not a sales rep or bot.',
     },
   ];
 
@@ -96,11 +105,8 @@ export const About: React.FC = () => {
       <div className={styles.aboutContent}>
         {/* Section Header */}
         <div className={styles.aboutHeader}>
-          <h2 className={styles.aboutTitle}>About Lenuvio</h2>
-          <p className={styles.aboutSubtitle}>
-            Where bold vision meets technical mastery to create digital
-            experiences that inspire
-          </p>
+          <h2 className={styles.aboutTitle}>{aboutTitle}</h2>
+          <p className={styles.aboutSubtitle}>{aboutSubtitle}</p>
         </div>
 
         {/* Hero Statement Section - New design */}
@@ -117,25 +123,18 @@ export const About: React.FC = () => {
               />
               <div className={styles.colorOverlay}></div>
             </div>{' '}
-            <h3 className={styles.heroTitle}>Your Creative Catalyst</h3>
-            <p className={styles.heroRole}>
-              Full-Stack Development & Digital Innovation
-            </p>
-            <p className={styles.heroDescription}>
-              Passionate about empowering bold visions through cutting-edge
-              technology. We specialize in transforming ambitious ideas into
-              impactful digital products that not only deliver results but
-              inspire and captivate users.
-            </p>
+            <h3 className={styles.heroTitle}>{heroTitle}</h3>
+            <p className={styles.heroRole}>{heroRole}</p>
+            <p className={styles.heroDescription}>{heroDescription}</p>
           </div>
         </div>
 
-        {/* Highlights Grid - New section */}
+        {/* Highlights Grid */}
         <div className={styles.highlightsSection}>
           <div className={styles.highlightsGrid}>
             {highlights.map((highlight, index) => (
               <div key={index} className={styles.highlightCard}>
-                <div className={styles.highlightNumber}>{highlight.number}</div>
+                <div className={styles.highlightIcon}>{highlight.icon}</div>
                 <div className={styles.highlightLabel}>{highlight.label}</div>
                 <div className={styles.highlightDescription}>
                   {highlight.description}
@@ -145,48 +144,40 @@ export const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Story Section - Now full width */}
+        {/* Story Section */}
         <div className={styles.storySection}>
           <div className={styles.storyContent}>
-            <h3>The Creative Journey</h3>
+            <h3>{storyTitle}</h3>
             <div className={styles.storyGrid}>
               <div className={styles.storyColumn}>
                 <p className={styles.storyText}>
                   With{' '}
                   <span className={styles.storyHighlight}>
-                    {yearsOfExperience()}+ years of crafting code
+                    {yearsOfExperience()}+ years pushing the limits of what code
+                    can do
                   </span>
-                  , we&apos;ve discovered that the most impactful digital
-                  products are born when creative vision meets technical
-                  excellence. What drives us is the{' '}
-                  <span className={styles.storyHighlight}>
-                    continuous exploration
-                  </span>{' '}
-                  of new technologies and the endless engineering of innovative
-                  solutions.
+                  , we have learned one thing: innovation favors the bold. The
+                  future belongs to those who challenge the way things are done
+                  and build something better.
                 </p>
               </div>
               <div className={styles.storyColumn}>
                 <p className={styles.storyText}>
-                  We believe in the power of{' '}
-                  <span className={styles.storyHighlight}>
-                    empowering your vision
-                  </span>{' '}
-                  – taking your boldest ideas and transforming them into digital
-                  experiences that not only function flawlessly but captivate
-                  and engage users on an emotional level.
+                  Lenuvio is built on that spirit. We are not here to recycle
+                  tired solutions or slap AI on top of old workflows. We are
+                  here to design smarter systems where automation is the
+                  backbone and artificial intelligence is the real advantage,
+                  not just a buzzword.
                 </p>
               </div>
             </div>
             <div className={styles.storyFull}>
               <p className={styles.storyText}>
-                This journey of exploration never truly ends. Every project,
-                every new technology, every challenge is an opportunity to{' '}
-                <span className={styles.storyHighlight}>
-                  push creative boundaries
-                </span>{' '}
-                and engineer solutions that inspire and deliver exceptional
-                results.
+                The playbook is open, the ceiling does not exist, and the only
+                rule is never settle. We help people and teams reclaim their
+                time, focus on what matters, and build digital products that
+                actually move the needle. If you are ready to build what&apos;s
+                next, welcome to Lenuvio.
               </p>
             </div>
           </div>
@@ -195,10 +186,8 @@ export const About: React.FC = () => {
         {/* Tech Stack Section */}
         <div className={styles.techStack}>
           <div className={styles.techStackHeader}>
-            <h3 className={styles.techStackTitle}>Creative Technology Stack</h3>
-            <p className={styles.techStackSubtitle}>
-              The cutting-edge tools that bring bold ideas to life
-            </p>
+            <h3 className={styles.techStackTitle}>{stackTitle}</h3>
+            <p className={styles.techStackSubtitle}>{stackSubtitle}</p>
           </div>
 
           <div className={styles.techGrid}>

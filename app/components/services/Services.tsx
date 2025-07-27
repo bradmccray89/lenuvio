@@ -3,88 +3,98 @@
 import styles from './Services.module.css';
 
 export const Services: React.FC = () => {
+  const servicesTitle = 'What We Build';
+  const servicesSubtitle =
+    'AI-powered automation, product engineering, and modern cloud solutions built for teams that want to work smarter, not harder.';
+  const processTitle = 'How We Work';
+  const processSubtitle =
+    'From kickoff to launch, every step is designed for speed, transparency, and results.';
+  const ctaTitle = 'Ready to Build Smarter?';
+  const ctaDescription =
+    "Let's turn your ideas into reality. Bring us your toughest challenge. If you're ready to automate, accelerate, or launch something new, we want to help.";
+  const ctaButtonText = 'Start Your Project';
+
   const services = [
     {
-      icon: '🚀',
-      title: 'Full-Stack Development',
+      icon: '🤖',
+      title: 'AI & Automation Systems',
       description:
-        'End-to-end web application development using modern frameworks and best practices. From concept to deployment, creating scalable solutions that grow with your business.',
+        'Designing custom AI agents and smart automation that cut busywork, eliminate manual errors, and scale with your ambition.',
       features: [
-        'React, Angular & Next.js Applications',
-        '.NET & Node.js Backend Development',
-        'Database Design & Optimization',
-        'API Development & Integration',
+        'Process Automation & Orchestration',
+        'AI Assistant & Chatbot Development',
+        'RAG (Retrieval-Augmented Generation) Solutions',
+        'Intelligent API Integrations',
       ],
-      cta: 'Explore Development',
-    },
-    {
-      icon: '☁️',
-      title: 'Cloud Solutions & DevOps',
-      description:
-        'Modern cloud infrastructure and deployment strategies that ensure your applications are scalable, secure, and performant across all environments.',
-      features: [
-        'AWS, Azure & Vercel Deployment',
-        'Docker Containerization',
-        'CI/CD Pipeline Setup',
-        'Performance Monitoring',
-      ],
-      cta: 'Learn About Cloud',
-    },
-    {
-      icon: '🎨',
-      title: 'UI/UX & Frontend Architecture',
-      description:
-        'Creating intuitive, responsive user interfaces with focus on user experience, accessibility, and maintainable component architecture.',
-      features: [
-        'Responsive Design Systems',
-        'Component Architecture',
-        'User-Centered Design',
-        'Performance Optimization',
-      ],
-      cta: 'See Design Work',
+      cta: 'See AI in Action',
     },
     {
       icon: '⚡',
-      title: 'Digital Transformation',
+      title: 'Product Engineering',
       description:
-        'Modernizing legacy systems and processes with cutting-edge technology solutions that improve efficiency and user satisfaction.',
+        'Full-stack product design and engineering, focused on shipping fast and learning faster. We take bold ideas from zero to real users.',
       features: [
-        'Legacy System Migration',
-        'Process Automation',
-        'Technology Consulting',
-        'Strategic Planning',
+        'React, Angular, and Next.js Apps',
+        'Custom .NET & Node.js Backends',
+        'Rapid Prototyping',
+        'End-to-End Product Delivery',
       ],
-      cta: 'Start Transformation',
+      cta: 'Build Your Product',
+    },
+    {
+      icon: '☁️',
+      title: 'Cloud & DevOps',
+      description:
+        'Modern cloud architecture that keeps your business running at top speed—secure, scalable, and built to grow.',
+      features: [
+        'AWS, Azure, and Vercel Deployments',
+        'Containerization & Docker',
+        'CI/CD Pipeline Automation',
+        'Performance & Security Monitoring',
+      ],
+      cta: 'Upgrade Your Cloud',
+    },
+    {
+      icon: '🧠',
+      title: 'AI Readiness & Strategy',
+      description:
+        'Not sure where AI or automation fits? We help you identify high-leverage use cases, pick the right tools, and avoid the buzzword trap.',
+      features: [
+        'AI Readiness Audits',
+        'Workflow Analysis',
+        'Strategic Consulting',
+        'Practical Training for Teams',
+      ],
+      cta: 'Start With Strategy',
     },
   ];
 
   const processSteps = [
     {
       number: '01',
-      title: 'Discovery',
+      title: 'Discover & Plan',
       description:
-        'Deep dive into your vision, goals, and challenges to understand exactly what success looks like for your project.',
+        'We dig in to understand your needs, map out real opportunities, and set ambitious goals together.',
     },
     {
       number: '02',
-      title: 'Strategy',
+      title: 'Design & Prototype',
       description:
-        'Craft a comprehensive plan with technology choices, architecture decisions, and development roadmap.',
+        'Move fast and break nothing—get an interactive prototype or proof of concept in your hands early.',
     },
     {
       number: '03',
-      title: 'Development',
+      title: 'Build & Automate',
       description:
-        'Build your solution with clean, scalable code, regular updates, and continuous collaboration.',
+        'We develop, integrate, and automate, with real progress updates and room to adapt as we go.',
     },
     {
       number: '04',
-      title: 'Launch',
+      title: 'Launch & Learn',
       description:
-        'Deploy, test, and optimize your application with ongoing support and performance monitoring.',
+        'Your product goes live, but we stick around for fine-tuning, data-driven improvement, and next steps.',
     },
   ];
-
   const handleCtaClick = (service: string) => {
     console.log('CTA clicked for:', service);
 
@@ -125,11 +135,8 @@ export const Services: React.FC = () => {
       <div className={styles.servicesContent}>
         {/* Section Header */}
         <div className={styles.servicesHeader}>
-          <h2 className={styles.servicesTitle}>Creative Solutions</h2>
-          <p className={styles.servicesSubtitle}>
-            Transforming bold ideas into powerful digital experiences through
-            cutting-edge technology and innovative problem-solving
-          </p>
+          <h2 className={styles.servicesTitle}>{servicesTitle}</h2>
+          <p className={styles.servicesSubtitle}>{servicesSubtitle}</p>
         </div>
 
         {/* Services Grid */}
@@ -169,10 +176,8 @@ export const Services: React.FC = () => {
         {/* Process Section */}
         <div className={styles.processSection}>
           <div className={styles.processHeader}>
-            <h3 className={styles.processTitle}>How We Create Together</h3>
-            <p className={styles.processSubtitle}>
-              A collaborative approach that ensures your vision becomes reality
-            </p>
+            <h3 className={styles.processTitle}>{processTitle}</h3>
+            <p className={styles.processSubtitle}>{processSubtitle}</p>
           </div>
 
           <div className={styles.processSteps}>
@@ -191,17 +196,12 @@ export const Services: React.FC = () => {
         {/* CTA Section */}
         <div className={styles.ctaSection}>
           <div className={styles.ctaCard}>
-            <h3 className={styles.ctaTitle}>
-              Ready to Build Something Amazing?
-            </h3>
-            <p className={styles.ctaDescription}>
-              Let&apos;s transform your bold idea into an impactful digital
-              experience that inspires and delivers exceptional results.
-            </p>
+            <h3 className={styles.ctaTitle}>{ctaTitle}</h3>
+            <p className={styles.ctaDescription}>{ctaDescription}</p>
             <button
               onClick={() => handleCtaClick('contact')}
               className={styles.ctaButton}>
-              Start Your Project
+              {ctaButtonText}
               <svg
                 className={styles.ctaIcon}
                 fill='none'

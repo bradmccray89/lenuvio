@@ -4,74 +4,64 @@
 import React, { useState } from 'react';
 import { useGlobalToast } from '@/app/contexts/ToastContext';
 import styles from './NewsletterHero.module.css';
-import {
-  MdArrowUpward,
-  MdCheck,
-  MdCheckCircle,
-  MdCheckCircleOutline,
-  MdClose,
-  MdOutlineCheckCircleOutline,
-  MdTrendingUp,
-} from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import { LuCircleCheck, LuTrendingUp } from 'react-icons/lu';
 
 // Centralized text variables
 const newsletterTexts = {
   badge: 'Join our growing community',
-  title: 'Get Weekly Insights That',
-  highlight: 'Help You Build Better Products',
+  title: 'Weekly AI Insights',
+  highlight: 'Build Smarter, Not Harder',
   description:
-    'Actionable tips, architecture ideas, and development strategies for modern teams including practical AI and automation. Delivered every Tuesday.',
+    'Get actionable tips and real-world strategies for using AI, automation, and better product development. New ideas every Tuesday.',
   features: [
-    'AI & automation strategies',
-    'Product tips',
-    'Architecture ideas',
+    'Practical AI tips',
+    'Automation Strategies',
+    'Product Development Ideas',
     'No spam, unsubscribe anytime',
   ],
   socialProof:
-    'Be among the first to get exclusive insights on AI, automation, and more!',
+    'Join others getting early insights on AI, automation, and EchoForge updates.',
 
   // Toasts and subscription
   toastRequiredTitle: 'Email Required',
   toastRequiredMsg: 'Please enter your email address.',
   toastWelcomeBackTitle: 'Welcome Back!',
-  toastWelcomeBackMsg:
-    'You have been successfully resubscribed to our newsletter.',
+  toastWelcomeBackMsg: 'You are back on the list. Thanks for staying with us.',
   toastAlreadyTitle: 'Already Subscribed!',
-  toastAlreadyMsg:
-    'This email is already actively subscribed to our newsletter.',
-  toastSubscribedTitle: 'Successfully Subscribed!',
+  toastAlreadyMsg: 'This email is already signed up for our newsletter.',
+  toastSubscribedTitle: 'Subscription Confirmed!',
   toastSubscribedMsg:
-    'Thanks for joining! You’ll get your first insight next Tuesday.',
+    'Thanks for joining! Your first insight arrives next Tuesday.',
   toastSubscribedShortMsg: 'Thanks for joining!',
   toastFailedTitle: 'Subscription Failed',
   toastFailedMsg: 'Please try again later.',
 
   // Inline CTA
-  inlineTitle: 'Enjoying this content?',
+  inlineTitle: 'Like this content?',
   inlineSubtitle:
-    'Get more insights on AI, automation, and product development delivered weekly. Be among the first to join our newsletter and help shape the conversation.',
+    'Sign up to get more practical AI, automation, and product tips every week. Be first to know when EchoForge launches.',
   inlineFeatures: [
-    'AI & automation',
+    'Practical AI insights',
     'No spam',
-    'Unsubscribe anytime',
-    'Weekly insights',
+    'Unsubscribe any time',
+    'Weekly updates',
   ],
 
   // Sticky Bar
-  stickyStrong: 'Join our newsletter',
+  stickyStrong: 'Sign up for our weekly insights',
   stickySpan:
-    'Get weekly insights on AI, automation, and building scalable digital products',
+    'Get the latest on AI, automation, and product strategies straight to your inbox.',
 
   // Footer
-  footerTitle: 'Stay Ahead of the Curve',
+  footerTitle: 'Stay Ahead',
   footerDescription:
-    'Get weekly insights on AI, automation, and building scalable digital products. Actionable tips, architecture ideas, and strategies for modern teams.',
+    'Subscribe for weekly updates on AI, automation, and smarter product development. Simple, useful tips every Tuesday.',
   footerBenefits: [
-    'AI & automation',
-    'Product tips',
-    'Architecture ideas',
-    'Development strategies',
+    'AI tips you can use',
+    'Automation strategies',
+    'Fresh product ideas',
+    'No spam, just value',
   ],
 };
 
