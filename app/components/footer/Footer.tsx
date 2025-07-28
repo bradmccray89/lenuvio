@@ -4,7 +4,6 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
-import { GithubLogo } from '@/public/icons/GithubLogo';
 import { MdEmail } from 'react-icons/md';
 import { TwitterLogo } from '@/public/icons/TwitterLogo';
 import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
