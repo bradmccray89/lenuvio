@@ -69,18 +69,18 @@ export const Contact: React.FC<ContactProps> = ({ selectedService }) => {
 
   const serviceOptions = [
     { value: '', label: 'Select a service...' },
-    { value: 'full-stack', label: 'Full-Stack Development' },
-    { value: 'cloud', label: 'Cloud Solutions & DevOps' },
-    { value: 'ui-ux', label: 'UI/UX & Frontend Architecture' },
-    { value: 'transformation', label: 'Digital Transformation' },
+    { value: 'ai-automation', label: 'AI & Automation Systems' },
+    { value: 'product-engineering', label: 'Product Engineering' },
+    { value: 'cloud-devops', label: 'Cloud & DevOps' },
+    { value: 'ai-readiness', label: 'AI Readiness & Strategy' },
     { value: 'other', label: 'Other / Consultation' },
   ];
 
   const serviceIcons: { [key: string]: string } = {
-    'full-stack': '🚀',
-    cloud: '☁️',
-    'ui-ux': '🎨',
-    transformation: '⚡',
+    'ai-automation': '🤖',
+    'product-engineering': '⚡',
+    'cloud-devops': '☁️',
+    'ai-readiness': '🧠',
     other: '💡',
   };
 

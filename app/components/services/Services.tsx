@@ -100,10 +100,10 @@ export const Services: React.FC = () => {
 
     // Map service names to URL-friendly values
     const serviceMap: { [key: string]: string } = {
-      'Explore Development': 'full-stack',
-      'Learn About Cloud': 'cloud',
-      'See Design Work': 'ui-ux',
-      'Start Transformation': 'transformation',
+      'See AI in Action': 'ai-automation',
+      'Build Your Product': 'product-engineering',
+      'Upgrade Your Cloud': 'cloud-devops',
+      'Start With Strategy': 'ai-readiness',
     };
 
     const serviceParam = serviceMap[service] || 'other';

@@ -11,10 +11,15 @@ import { LenuvioLogo } from '@/public/branding/LenuvioLogo';
 import { NavItem } from '@/app/types/navigation';
 import { usePathname, useRouter } from 'next/navigation';
 import { NewsletterFooterEnhanced } from '../newsletter/NewsletterHero';
+import { TikTokLogo } from '@/public/icons/TikTokLogo';
+import { InstagramLogo } from '@/public/icons/InstagramLogo';
 
 export const Footer: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
+
+  const brandDescription =
+    'We help ambitious teams build what comes next. AI and automation are our foundation. Every product we create is designed to eliminate busywork, spark innovation, and move the needle for your business.';
 
   const navigationItems: NavItem[] = [
     { label: 'Home', href: '#home', id: 'home' },
@@ -22,6 +27,29 @@ export const Footer: React.FC = () => {
     { label: 'Blog', href: '/blog', id: 'blog' },
     { label: 'Services', href: '#services', id: 'services' },
     { label: 'Contact', href: '#contact', id: 'contact' },
+  ];
+
+  const services: NavItem[] = [
+    {
+      label: 'AI & Automation Systems',
+      href: 'See AI in Action',
+      id: 'ai-automation',
+    },
+    {
+      label: 'Product Engineering',
+      href: 'Build Your Product',
+      id: 'product-engineering',
+    },
+    {
+      label: 'Cloud & DevOps',
+      href: 'Upgrade Your Cloud',
+      id: 'cloud-devops',
+    },
+    {
+      label: 'AI Readiness & Strategy',
+      href: 'Start With Strategy',
+      id: 'ai-readiness',
+    },
   ];
 
   const handleNavClick = (item: NavItem) => {
@@ -55,6 +83,34 @@ export const Footer: React.FC = () => {
     }
   };
 
+  const handleServiceClick = (service: NavItem) => {
+    // Map service names to URL-friendly values
+    const serviceMap: { [key: string]: string } = {
+      'AI & Automation Systems': 'ai-automation',
+      'Product Engineering': 'product-engineering',
+      'Cloud & DevOps': 'cloud-devops',
+      'AI Readiness & Strategy': 'ai-readiness',
+    };
+
+    // Get the service parameter from the map or default to 'other'
+    const serviceParam = serviceMap[service.label] || 'other';
+
+    // Update URL with service parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('service', serviceParam);
+    window.history.pushState({}, '', url.toString());
+
+    // Scroll to contact section
+    const element = document.getElementById('contact');
+    if (element) {
+      const elementPosition = element.offsetTop;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -69,11 +125,7 @@ export const Footer: React.FC = () => {
               <div className={styles.logoText}>Lenuvio</div>
             </div>
 
-            <p className={styles.brandDescription}>
-              Empowering bold visions through cutting-edge technology and
-              creative solutions. Transforming ambitious ideas into impactful
-              digital experiences that inspire and deliver results.
-            </p>
+            <p className={styles.brandDescription}>{brandDescription}</p>
 
             {/* Social Links */}
             <div className={styles.socialLinks}>
@@ -85,13 +137,22 @@ export const Footer: React.FC = () => {
                 aria-label='LinkedIn'>
                 <LinkedInLogo />
               </a>
+              {/* Create links for tiktok and instagram */}
               <a
-                href='https://github.com/bradmccray89'
+                href='https://www.tiktok.com/@lenuviohq'
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.socialLink}
-                aria-label='GitHub'>
-                <GithubLogo fill='white' />
+                aria-label='TikTok'>
+                <TikTokLogo />
+              </a>
+              <a
+                href='https://www.instagram.com/lenuviohq/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className={styles.socialLink}
+                aria-label='Instagram'>
+                <InstagramLogo />
               </a>
               <a
                 href='https://x.com/lenuvio19335'
@@ -132,74 +193,15 @@ export const Footer: React.FC = () => {
           <div className={styles.footerSection}>
             <h4 className={styles.sectionTitle}>Services</h4>
             <ul className={styles.footerLinks}>
-              <li>
-                <button
-                  onClick={() => {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('service', 'full-stack');
-                    window.history.pushState({}, '', url.toString());
-                    const contactItem = navigationItems.find(
-                      (item) => item.id === 'contact'
-                    );
-                    if (contactItem) {
-                      handleNavClick(contactItem);
-                    }
-                  }}
-                  className={styles.footerLink}>
-                  Full-Stack Development
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('service', 'cloud');
-                    window.history.pushState({}, '', url.toString());
-                    const contactItem = navigationItems.find(
-                      (item) => item.id === 'contact'
-                    );
-                    if (contactItem) {
-                      handleNavClick(contactItem);
-                    }
-                  }}
-                  className={styles.footerLink}>
-                  Cloud & DevOps
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('service', 'ui-ux');
-                    window.history.pushState({}, '', url.toString());
-                    const contactItem = navigationItems.find(
-                      (item) => item.id === 'contact'
-                    );
-                    if (contactItem) {
-                      handleNavClick(contactItem);
-                    }
-                  }}
-                  className={styles.footerLink}>
-                  UI/UX Architecture
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('service', 'transformation');
-                    window.history.pushState({}, '', url.toString());
-                    const contactItem = navigationItems.find(
-                      (item) => item.id === 'contact'
-                    );
-                    if (contactItem) {
-                      handleNavClick(contactItem);
-                    }
-                  }}
-                  className={styles.footerLink}>
-                  Digital Transformation
-                </button>
-              </li>
+              {services.map((service) => (
+                <li key={service.id}>
+                  <button
+                    onClick={() => handleServiceClick(service)}
+                    className={styles.footerLink}>
+                    {service.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
