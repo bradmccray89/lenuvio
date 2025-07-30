@@ -137,10 +137,10 @@ export const NewsletterHero: React.FC = () => {
           {newsletterTexts.badge}
         </div>
 
-        <h3 className={styles.title}>
+        <h1 className={styles.title}>
           {newsletterTexts.title}{' '}
           <span className={styles.highlight}>{newsletterTexts.highlight}</span>
-        </h3>
+        </h1>
 
         <p className={styles.description}>{newsletterTexts.description}</p>
 
