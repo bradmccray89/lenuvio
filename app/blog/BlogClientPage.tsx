@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { BlogPost } from '@/app/types/blog';
 import { Navigation } from '@/app/components';
 import { Footer } from '@/app/components/footer/Footer';

@@ -9,21 +9,9 @@
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navScrolled {
-  margin: 16px;
-}
-
-.navDefault {
-  margin: 0;
-}
-
 /* Navigation Background */
 .navBackground {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  @apply relative overflow-hidden transition-all duration-500 ease-in-out backdrop-blur-sm;
 }
 
 .backgroundScrolled {
@@ -56,12 +44,6 @@
     rgba(168, 85, 247, 0.1) 50%,
     rgba(59, 130, 246, 0.1) 100%
   );
-}
-
-.mouseGlow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
 }
 
 /* Navigation Content */
@@ -118,22 +100,6 @@
   justify-content: center;
 }
 
-.logoIconDot {
-  width: 16px;
-  height: 16px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-.logoPulse {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  opacity: 0.2;
-}
-
 .logoText {
   display: flex;
   flex-direction: column;
@@ -147,13 +113,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.025em;
-}
-
-.logoUnderline {
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(90deg, #22d3ee 0%, transparent 100%);
-  opacity: 0.6;
 }
 
 /* Desktop Navigation */
@@ -274,18 +233,6 @@
 
 .hamburgerLine:nth-child(3) {
   margin-top: 4px;
-}
-
-.hamburgerLineOpen:nth-child(1) {
-  @apply rotate-[45deg] translate-y-[8px];
-}
-
-.hamburgerLineOpen:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburgerLineOpen:nth-child(3) {
-  @apply rotate-[-45deg] translate-y-[-8px];
 }
 
 /* Bottom Border */

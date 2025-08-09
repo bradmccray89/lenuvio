@@ -89,58 +89,74 @@
 
 .form {
   margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
 }
 
-.inputGroup {
+.inputWrapper {
   display: flex;
+  flex: 1;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 4px;
-  max-width: 500px;
-  margin: 0 auto;
   position: relative;
   transition: all 0.3s ease;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-.inputGroup:focus-within {
+.inputWrapper:focus-within {
   border-color: #06b6d4;
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(6, 182, 212, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 20px;
+  pointer-events: none;
 }
 
 .input {
   flex: 1;
   background: transparent;
   border: none;
-  padding: 16px 16px 16px 48px;
+  padding: 18px 18px 18px 52px;
   color: #ffffff;
   font-size: 16px;
   outline: none;
-  border-radius: 8px;
 }
 
 .input::placeholder {
   color: #64748b;
 }
 
-.button {
-  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-  color: #ffffff;
+.submitButton {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  color: white;
   border: none;
-  padding: 16px 24px;
-  font-size: 16px;
+  padding: 16px 32px;
+  border-radius: 12px;
   font-weight: 600;
-  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.button:hover:not(:disabled) {
-  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+.submitButton:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
 }
 
-.button:disabled {
+.submitButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
@@ -445,6 +461,8 @@
 }
 
 .footerForm {
+  display: flex;
+  gap: 16px;
   margin-bottom: 32px;
 }
 
@@ -584,6 +602,10 @@
     gap: 16px;
   }
 
+  .form {
+    flex-direction: column;
+  }
+
   .inputGroup,
   .footerInputGroup {
     flex-direction: column;
@@ -642,6 +664,10 @@
 
   .footerTitle {
     font-size: 1.5rem;
+  }
+
+  .footerForm {
+    flex-direction: column;
   }
 
   .footerBenefits {

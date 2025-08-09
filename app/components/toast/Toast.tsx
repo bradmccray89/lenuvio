@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './Toast.module.css';
 import {
   MdCheckCircle,

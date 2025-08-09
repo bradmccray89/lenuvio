@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useGlobalToast } from '@/app/contexts/ToastContext';
 import styles from './NewsletterHero.module.css';
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdEmail } from 'react-icons/md';
 import { LuCircleCheck, LuTrendingUp } from 'react-icons/lu';
 
 // Centralized text variables
@@ -154,22 +154,23 @@ export const NewsletterHero: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
+          <div className={styles.inputWrapper}>
+            <MdEmail className={styles.inputIcon} />
             <input
               type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder='Enter your email address'
+              placeholder='Enter your email'
               className={styles.input}
               disabled={isSubmitting}
             />
-            <button
-              type='submit'
-              className={styles.button}
-              disabled={isSubmitting}>
-              {isSubmitting ? 'Subscribing...' : 'Get Free Insights →'}
-            </button>
           </div>
+          <button
+            type='submit'
+            className={styles.submitButton}
+            disabled={isSubmitting}>
+            {isSubmitting ? 'Subscribing...' : 'Get Free Access →'}
+          </button>
         </form>
 
         <div className={styles.socialProof}>{newsletterTexts.socialProof}</div>
@@ -441,22 +442,23 @@ export const NewsletterFooterEnhanced: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.footerForm}>
-          <div className={styles.footerInputGroup}>
+          <div className={styles.inputWrapper}>
+            <MdEmail className={styles.inputIcon} />
             <input
               type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder='Enter your email address'
-              className={styles.footerInput}
+              placeholder='Enter your business email'
+              className={styles.input}
               disabled={isSubmitting}
             />
-            <button
-              type='submit'
-              className={styles.footerButton}
-              disabled={isSubmitting}>
-              {isSubmitting ? 'Subscribing...' : 'Subscribe Free'}
-            </button>
           </div>
+          <button
+            type='submit'
+            className={styles.submitButton}
+            disabled={isSubmitting}>
+            {isSubmitting ? 'Subscribing...' : 'Get Free Access →'}
+          </button>
         </form>
 
         <div className={styles.footerBenefits}>

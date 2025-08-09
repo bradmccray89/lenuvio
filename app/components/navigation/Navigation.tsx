@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { NavItem } from '@/app/types/navigation';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
@@ -19,20 +19,9 @@ const navigationItems: NavItem[] = [
 export const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScrollPosition();
   const pathname = usePathname();
   const router = useRouter(); // This is now the correct App Router hook
-
-  // Track mouse position for glow effects
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   // Set active section based on current page
   useEffect(() => {
@@ -148,21 +137,9 @@ export const Navigation: React.FC = () => {
           className={`${styles.navBackground} ${
             isScrolled ? styles.backgroundScrolled : styles.backgroundDefault
           }`}>
-          {/* Animated background pattern */}
-          <div className={styles.animatedBackground}>
-            <div className={styles.gradientOverlay} />
-            <div
-              className={styles.mouseGlow}
-              style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(14, 165, 233, 0.05), transparent 40%)`,
-              }}
-            />
-          </div>
-
           {/* Navigation content */}
           <div className={styles.navContent}>
             <div className={styles.navInner}>
-              {/* Logo with tech effect */}
               <div className={styles.logoContainer}>
                 <div className={styles.logoIcon}>
                   <LenuvioLogo />
@@ -184,11 +161,6 @@ export const Navigation: React.FC = () => {
                         activeSection === item.id ? styles.navLinkActive : ''
                       }`}>
                       <span className={styles.navLinkText}>{item.label}</span>
-
-                      {/* Active indicator */}
-                      {activeSection === item.id && (
-                        <div className={styles.activeIndicator} />
-                      )}
                     </button>
                   </div>
                 ))}

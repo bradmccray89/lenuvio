@@ -334,21 +334,6 @@
 }
 
 /* Status Indicator */
-.statusIndicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #94a3b8;
-  font-size: 0.85rem;
-}
-
-.statusDot {
-  width: 8px;
-  height: 8px;
-  background: #22c55e;
-  border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
-}
 
 /* Responsive Design */
 @media (max-width: 1024px) {

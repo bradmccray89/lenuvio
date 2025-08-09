@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Navigation } from '@/app/components';
 import { Hero } from './components/hero/Hero';
 import { About } from './components/about/About';
@@ -17,7 +16,9 @@ export default function Home() {
       <section id='home'>
         <Hero />
       </section>
-      <NewsletterHero />
+      <section id='newsletter'>
+        <NewsletterHero />
+      </section>
       <section id='about'>
         <About />
       </section>

@@ -306,29 +306,6 @@
 }
 
 /* Positioning Classes */
-.topRight {
-  /* Applied by ToastContainer */
-}
-
-.topLeft {
-  /* Applied by ToastContainer */
-}
-
-.bottomRight {
-  /* Applied by ToastContainer */
-}
-
-.bottomLeft {
-  /* Applied by ToastContainer */
-}
-
-.topCenter {
-  /* Applied by ToastContainer */
-}
-
-.bottomCenter {
-  /* Applied by ToastContainer */
-}
 
 /* Enhanced Animations */
 @keyframes slideInToast {

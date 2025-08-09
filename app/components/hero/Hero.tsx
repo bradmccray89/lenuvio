@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styles from './Hero.module.css';
 
 export const Hero: React.FC = () => {
@@ -31,7 +31,7 @@ export const Hero: React.FC = () => {
     { label: 'AI That Actually Works.' },
   ];
 
-  const phrases = React.useMemo(
+  const phrases = useMemo(
     () => ['Innovation', 'Technology', 'Excellence', 'Vision'],
     []
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation'; // Fixed import
 import { NavItem } from '@/app/types/navigation';
 import styles from './MobileMenu.module.css';

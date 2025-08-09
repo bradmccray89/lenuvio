@@ -7,8 +7,15 @@ import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { useState, useEffect, useCallback } from 'react';
-import React from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  isValidElement,
+  Children,
+  useMemo,
+} from 'react';
+import { MouseEvent } from 'react';
 import styles from './MDXContent.module.css';
 import Image from 'next/image';
 
@@ -30,7 +37,7 @@ const createComponents = () => {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = useCallback(
-      async (e: React.MouseEvent) => {
+      async (e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -230,7 +237,7 @@ const createComponents = () => {
       const getCodeContent = (children: any): string => {
         if (typeof children === 'string') return children;
         if (
-          React.isValidElement(children) &&
+          isValidElement(children) &&
           typeof children.props === 'object' &&
           children.props !== null &&
           'children' in children.props
@@ -268,12 +275,12 @@ const createComponents = () => {
 
     // Enhanced blockquotes
     blockquote: (props: any) => {
-      const children = React.Children.toArray(props.children);
+      const children = Children.toArray(props.children);
       const lastChild = children[children.length - 1];
 
       // Handle attribution (text starting with —)
       if (
-        React.isValidElement(lastChild) &&
+        isValidElement(lastChild) &&
         typeof (lastChild.props as any)?.children === 'string' &&
         (lastChild.props as any).children.startsWith('—')
       ) {
@@ -371,7 +378,7 @@ export function MDXContent({ content, className = '' }: MDXContentProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Memoize components to prevent recreation
-  const components = React.useMemo(() => createComponents(), []);
+  const components = useMemo(() => createComponents(), []);
 
   useEffect(() => {
     const serializeContent = async () => {

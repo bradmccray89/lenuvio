@@ -1,7 +1,7 @@
 // app/blog/[slug]/BlogPostClient.tsx - Fixed with proper unique keys
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BlogPost } from '@/app/types/blog';
 import { Navigation } from '@/app/components';
 import { NewsletterStickyBar } from '@/app/components/newsletter/NewsletterHero';

@@ -1,7 +1,6 @@
 // app/components/footer/Footer.tsx - Updated with proper newsletter integration
 'use client';
 
-import React from 'react';
 import styles from './Footer.module.css';
 import { LinkedInLogo } from '@/public/icons/LinkedInLogo';
 import { MdEmail } from 'react-icons/md';

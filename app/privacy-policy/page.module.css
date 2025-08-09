@@ -70,22 +70,6 @@
   color: #d4d4d8;
 }
 
-.contactInfo {
-  background: rgba(103, 126, 234, 0.1);
-  border: 1px solid rgba(103, 126, 234, 0.2);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
-}
-
-.contactInfo p {
-  margin-bottom: 0.5rem;
-}
-
-.contactInfo p:last-child {
-  margin-bottom: 0;
-}
-
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
