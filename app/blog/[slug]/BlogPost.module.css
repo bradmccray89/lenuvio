@@ -2,8 +2,6 @@
 
 .blogPostPage {
   min-height: 100vh;
-  background: #0f172a;
-  color: #e5e5e5;
 }
 
 /* Enhanced Header */
@@ -24,33 +22,6 @@
   bottom: 0;
   inset: 0;
   z-index: 1;
-}
-
-.particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: #22d3ee;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: float-particle 12s linear infinite;
-  box-shadow: 0 0 4px #22d3ee;
-  animation-fill-mode: both;
-  animation-play-state: running;
-}
-
-.particle:nth-child(odd) {
-  background: #8b5cf6;
-  box-shadow: 0 0 4px #8b5cf6;
-  animation-duration: 18s;
-  animation-delay: -3s;
 }
 
 .headerContent {

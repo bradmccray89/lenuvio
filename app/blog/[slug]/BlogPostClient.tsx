@@ -13,7 +13,6 @@ import {
   MdCalendarToday,
   MdArrowBack,
   MdShare,
-  MdBookmark,
   MdLightbulb,
   MdCode,
   MdTrendingUp,
@@ -32,7 +31,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     Array<{ id: string; title: string; level: number }>
   >([]);
   const [activeHeading, setActiveHeading] = useState<string>('');
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [isBookmarked, setIsBookmarked] = useState(false);
   type Particle = { id: number; left: number; delay: number; duration: number };
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -117,10 +116,10 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     }
 
     // Check if post is bookmarked
-    const bookmarks = JSON.parse(
-      localStorage.getItem('blog-bookmarks') || '[]'
-    );
-    setIsBookmarked(bookmarks.includes(post.slug));
+    // const bookmarks = JSON.parse(
+    //   localStorage.getItem('blog-bookmarks') || '[]'
+    // );
+    // setIsBookmarked(bookmarks.includes(post.slug));
 
     // Handle initial hash navigation on page load
     const handleInitialHash = () => {
@@ -210,20 +209,20 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     }
   };
 
-  const handleBookmark = () => {
-    const bookmarks = JSON.parse(
-      localStorage.getItem('blog-bookmarks') || '[]'
-    );
-    if (isBookmarked) {
-      const updated = bookmarks.filter((slug: string) => slug !== post.slug);
-      localStorage.setItem('blog-bookmarks', JSON.stringify(updated));
-      setIsBookmarked(false);
-    } else {
-      bookmarks.push(post.slug);
-      localStorage.setItem('blog-bookmarks', JSON.stringify(bookmarks));
-      setIsBookmarked(true);
-    }
-  };
+  // const handleBookmark = () => {
+  //   const bookmarks = JSON.parse(
+  //     localStorage.getItem('blog-bookmarks') || '[]'
+  //   );
+  //   if (isBookmarked) {
+  //     const updated = bookmarks.filter((slug: string) => slug !== post.slug);
+  //     localStorage.setItem('blog-bookmarks', JSON.stringify(updated));
+  //     setIsBookmarked(false);
+  //   } else {
+  //     bookmarks.push(post.slug);
+  //     localStorage.setItem('blog-bookmarks', JSON.stringify(bookmarks));
+  //     setIsBookmarked(true);
+  //   }
+  // };
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
@@ -333,13 +332,13 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 <MdShare key='share-icon' />
                 <span>Share</span>
               </button>
-              <button
+              {/* <button
                 onClick={handleBookmark}
                 className={`${styles.actionButton} ${isBookmarked ? styles.bookmarked : ''}`}
                 title={isBookmarked ? 'Remove bookmark' : 'Bookmark this post'}>
                 <MdBookmark key='bookmark-icon' />
                 <span>{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
-              </button>
+              </button> */}
             </div>
           </div>
         </header>
