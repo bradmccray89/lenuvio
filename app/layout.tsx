@@ -31,145 +31,94 @@ export const viewport: Viewport = {
   colorScheme: 'dark light',
 };
 
-// Professional metadata configuration
 export const metadata: Metadata = {
   metadataBase: new URL('https://lenuv.io'),
 
-  // Basic metadata
   title: {
-    default: 'Lenuvio - Full-Stack Development & Digital Innovation',
+    default: 'Lenuvio | AI, Automation, and Product Engineering',
     template: '%s | Lenuvio',
   },
   description:
-    'Transform your bold ideas into impactful digital experiences. Expert full-stack development, cloud solutions, and digital transformation services that deliver results.',
+    'We help teams ship fast with practical AI, automation, and modern product engineering. Build smarter products, reduce busywork, and move the needle.',
 
-  // Keywords for SEO
   keywords: [
-    'full-stack development',
-    'digital innovation',
-    'web development',
-    'cloud solutions',
-    'React development',
+    'AI',
+    'automation',
+    'product engineering',
+    'RAG',
+    'AI assistants',
+    'workflow automation',
     'Next.js',
-    'TypeScript',
-    'UI/UX design',
-    'digital transformation',
-    'software consulting',
-    'startup development',
-    'enterprise solutions',
-    'modern web applications',
-    'scalable architecture',
-    'technical consulting',
+    'React',
+    'Angular',
+    '.NET',
+    'Node.js',
+    'cloud',
+    'DevOps',
+    'Vercel',
+    'Azure',
+    'AWS',
   ],
 
-  // Author and creator information
   authors: [{ name: 'Lenuvio', url: 'https://lenuv.io' }],
   creator: 'Lenuvio',
   publisher: 'Lenuvio',
 
-  // Language and locale
   alternates: {
     canonical: 'https://lenuv.io',
-    languages: {
-      'en-US': 'https://lenuv.io',
-    },
+    languages: { 'en-US': 'https://lenuv.io' },
   },
 
-  // Open Graph for social sharing
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://lenuv.io',
     siteName: 'Lenuvio',
-    title: 'Lenuvio - Where Bold Vision Meets Technical Mastery',
+    title: 'Lenuvio | Build with AI and automation',
     description:
-      'Transform ambitious ideas into impactful digital products that inspire and deliver exceptional results. Expert full-stack development and digital innovation services.',
+      'AI and automation systems, full‑stack product engineering, and modern cloud ops for teams that want to build smarter.',
     images: [
       {
-        url: '/images/og-image-main.jpg',
+        url: '/images/og/lenuvio-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Lenuvio - Full-Stack Development & Digital Innovation',
-        type: 'image/jpeg',
-      },
-      {
-        url: '/images/og-image-square.jpg',
-        width: 1200,
-        height: 1200,
-        alt: 'Lenuvio Logo',
+        alt: 'Lenuvio — AI, automation, and product engineering',
         type: 'image/jpeg',
       },
     ],
   },
 
-  // Twitter Card configuration
   twitter: {
     card: 'summary_large_image',
-    site: '@lenuviotech',
-    creator: '@lenuviotech',
-    title: 'Lenuvio - Full-Stack Development & Digital Innovation',
+    site: '@lenuvio19335', // matches site link
+    creator: '@lenuvio19335',
+    title: 'Lenuvio | AI, automation, and product engineering',
     description:
-      'Transform bold ideas into impactful digital experiences. Expert development services that deliver results.',
-    images: ['/images/twitter-card.jpg'],
+      'Build faster with practical AI, automation, and modern product engineering.',
+    images: ['/images/og/lenuvio-og.jpg'],
   },
 
-  // Additional social platforms
   other: {
-    // LinkedIn specific
-    'linkedin:owner': 'lenuvio',
-
-    // Facebook specific
-    'fb:app_id': 'your-facebook-app-id', // Replace with actual if you have one
-
-    // Pinterest
-    'pinterest-rich-pin': 'true',
-
-    // Additional branding
     'application-name': 'Lenuvio',
     'apple-mobile-web-app-title': 'Lenuvio',
     'msapplication-TileColor': '#0f172a',
     'msapplication-TileImage': '/images/ms-tile-150x150.png',
-
-    // Rich snippets
-    'article:author': 'Lenuvio',
-    'article:publisher': 'https://lenuv.io',
   },
 
-  // App icons and manifests
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180' },
-      { url: '/apple-touch-icon-152x152.png', sizes: '152x152' },
-      { url: '/apple-touch-icon-144x144.png', sizes: '144x144' },
-      { url: '/apple-touch-icon-120x120.png', sizes: '120x120' },
-      { url: '/apple-touch-icon-114x114.png', sizes: '114x114' },
-      { url: '/apple-touch-icon-76x76.png', sizes: '76x76' },
-      { url: '/apple-touch-icon-72x72.png', sizes: '72x72' },
-      { url: '/apple-touch-icon-60x60.png', sizes: '60x60' },
-      { url: '/apple-touch-icon-57x57.png', sizes: '57x57' },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
     other: [
-      {
-        rel: 'apple-touch-icon-precomposed',
-        url: '/apple-touch-icon-precomposed.png',
-      },
-      {
-        rel: 'mask-icon',
-        url: '/safari-pinned-tab.svg',
-        color: '#06b6d4',
-      },
+      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#06b6d4' },
     ],
   },
 
-  // Web app manifest
   manifest: '/manifest.json',
 
-  // Robots and indexing
   robots: {
     index: true,
     follow: true,
@@ -182,27 +131,15 @@ export const metadata: Metadata = {
     },
   },
 
-  // Verification codes (add your actual verification codes)
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
-    other: {
-      'msvalidate.01': 'your-bing-verification-code',
-    },
+    google: '',
+    other: { 'msvalidate.01': '' },
   },
 
-  // Additional metadata
   category: 'technology',
   classification: 'business',
 
-  // App links for mobile
-  appLinks: {
-    web: {
-      url: 'https://lenuv.io',
-      should_fallback: true,
-    },
-  },
+  appLinks: { web: { url: 'https://lenuv.io', should_fallback: true } },
 };
 
 export default function RootLayout({
@@ -247,55 +184,56 @@ export default function RootLayout({
               url: 'https://lenuv.io',
               logo: 'https://lenuv.io/images/logo-structured-data.png',
               description:
-                'Full-stack development and digital innovation services transforming bold ideas into impactful digital experiences.',
+                'AI and automation systems, full-stack product engineering, and modern cloud solutions.',
               foundingDate: '2024',
               sameAs: [
                 'https://linkedin.com/company/lenuvio',
                 'https://github.com/bradmccray89',
                 'https://twitter.com/lenuvio19335',
               ],
-              contactPoint: {
-                '@type': 'ContactPoint',
-                telephone: '+1-XXX-XXX-XXXX', // Add your phone if you want
-                contactType: 'customer service',
-                email: 'hello@lenuv.io',
-                availableLanguage: 'English',
-              },
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Remote',
-                addressCountry: 'US',
-              },
-              serviceArea: {
-                '@type': 'Place',
-                name: 'Worldwide',
-              },
+              contactPoint: [
+                {
+                  '@type': 'ContactPoint',
+                  contactType: 'customer service',
+                  email: 'hello@lenuv.io',
+                  availableLanguage: ['English'],
+                },
+              ],
               makesOffer: [
                 {
                   '@type': 'Offer',
                   itemOffered: {
                     '@type': 'Service',
-                    name: 'Full-Stack Development',
+                    name: 'AI & Automation Systems',
                     description:
-                      'End-to-end web application development using modern frameworks and best practices.',
+                      'Custom AI agents, RAG, chat assistants, and workflow automation.',
                   },
                 },
                 {
                   '@type': 'Offer',
                   itemOffered: {
                     '@type': 'Service',
-                    name: 'Cloud Solutions & DevOps',
+                    name: 'Product Engineering',
                     description:
-                      'Modern cloud infrastructure and deployment strategies for scalable applications.',
+                      'React, Angular, and Next apps with .NET or Node backends. From prototype to launch.',
                   },
                 },
                 {
                   '@type': 'Offer',
                   itemOffered: {
                     '@type': 'Service',
-                    name: 'Digital Transformation',
+                    name: 'Cloud & DevOps',
                     description:
-                      'Modernizing legacy systems and processes with cutting-edge technology solutions.',
+                      'AWS, Azure, and Vercel deployments, Docker, CI/CD, and performance monitoring.',
+                  },
+                },
+                {
+                  '@type': 'Offer',
+                  itemOffered: {
+                    '@type': 'Service',
+                    name: 'AI Readiness & Strategy',
+                    description:
+                      'Use-case discovery, audits, and practical training for teams.',
                   },
                 },
               ],
